@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Viết chương trình hiển thị thay đổi 10 màu sắc ngẫu nhiên khi hiển thị console.log()
+    for (let i = 0; i < 10; i++) {
+        let randomColor = `rgb(${Math.floor(Math.random() * 256)},
+                            ${Math.floor(Math.random() * 256)},
+                            ${Math.floor(Math.random() * 256)})`;
+
+        console.log(`%cHello helloooo`, `color: ${randomColor}`);
+    }
+</script>
+</body>
+</html>
