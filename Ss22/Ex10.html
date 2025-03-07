@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <script>
+    // INPUT
+    // 1 Mảng các phần tử ngẫu nhiê
+    // PROCESS:
+    //        B1: Tạo 1 biến arr = [];
+    // Tạo 1 biến choice;
+    // B2: Hiển thị ra menu để từ đó người dùng có thể nhập được các sự lựa chọn thông qua menu
+    // B4: Kiểm tra xem choice == case nao trong menu
+    // B5: Case 1: Cho người dùng nhập vào số phần tử muốn thêm (count)
+    //             Dùng vòng lặp for (0 - count - 1)
+    //             Lặp đi lặp lại quá trình hỏi giá trị muốn nhập (input)
+    //             Và thêm input (phần tử đó) vào trong mảng (Sử dụng push
+    // B6: Case 2: Sử dụng vòng lặp for(0 - length - 1)
+    //             In ra toàn bộ phần tử trong mảng
+    // B7: Case 3:
+    // Tạo ra 1 biến gọi là addNumber cho người dùng nhập vào số lượng phần tử muốn thêm
+    // Tạo ra 1 biến gọi là addIndex cho người dùng nhập vào vị trí của phần tử muốn thêm
+    // Tạo ra 1 biến gọi là addValue cho người dùng nhập vào phần tử muốn thêm
+    // B8:
+    // Sử dụng 1 vòng lặp for(i = 0 -> addNumber)
+    // Cho người dùng nhập vào phần tử muốn thêm addValue)
+    // splice(addIndex, 0, addValue)
+    // OUTPUT: Tuỳ theo yêu cầu của từng chức năng trong menu
+    let arr = [];
+    let choice;
+    let loop = true;
+    let menu = `
+------ MENU -----
+1. Nhập vào mảng
+2. Hiển thị mảng
+3. Thêm phần tử
+4. Sửa phần tử
+5. Xóa phần tử
+6. Exit
+
+Your choice:
+`;
+    while (loop) {
+      choice = +prompt(menu);
+      // B3: Validate
+      switch (choice) {
+        case 1:
+          let count = +prompt("Input the numbers of element to push_arr: ");
+          for (let i = 0; i < count; i++) {
+            let input = prompt("Input the element to push: ");
+            arr.push(input);
+          }
+          console.log(arr);
+          break;
+        case 2:
+          if(arr.length >0){
+            for (let i in arr) {
+              console.log(`${i}. ${arr[i]}`);
+            }
+          }else{
+            alert(`Arr empty`);
+        }
+          break;
+        case 3:
+          let addNumber = +prompt("Input the numbers of the element to add: ");
+          let addIndex = +prompt("Input the position to add: ");
+          for (let i = 0; i < addNumber; i++) {
+            let addValue = +prompt("Input the element to add: ");
+            arr.splice(addIndex, 0, addValue);
+          }
+          break;
+        case 4:
+          let pos=+prompt(`Input position repair: `);
+          if(!isNaN(pos) && pos >= 0 && pos < arr.length){
+            arr[pos]=+prompt(`Input new element: `)
+          }else{
+            alert(`Invalid`);
+          }
+          break;
+        case 5:
+          let pos1=+prompt(`Input position delete: `);
+          if(!isNaN(pos1) && pos1 >= 0 && pos1 < arr.length){
+            arr.splice(pos1,1);
+            alert(arr);
+          }else{
+            alert(`Invalid`);
+          }
+          break;
+        case 6:
+          console.log("Exit program");
+          loop = false;
+          break;
+      }
+    }
+    </script>
+</body>
+</html>
