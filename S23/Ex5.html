@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//Viết chương trình nhập vào n với n là số phần tử trong mảng,
+//nhập vào ký tự vào mảng, thực hiện tính tổng các ký tự là số
+let check = true;
+let n;
+do {
+    n = +prompt("Input the number of elements in the array: ");
+
+    if (Number.isInteger(n)) {
+        check = false;
+    }
+
+} while (check);
+
+if (n === 0) {
+    alert(`Array empty: `);
+
+} else if (n < 0) {
+    alert(`Element not negative`);
+
+} else {
+    let input = [];
+    for (let i = 0; i < n; i++) {
+        do {
+            input[i] = prompt(`Input element ${i + 1}: `);
+
+            check = input[i].length === 1 ? false : true;
+
+        } while (check);
+    }
+
+    let result = 0;
+    for (let i = 0; i < n; i++) {
+        if (Number.isInteger(+input[i])) {
+            result += +input[i];
+        }
+    }
+
+    if (result.length === 0) {
+        console.log(`Not element is number`);
+
+    } else {
+        console.log(`Sum element of an array: ${result}`);
+
+    }
+}
+</script>
+</body>
+</html>

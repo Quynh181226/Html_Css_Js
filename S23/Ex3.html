@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//Viết chương trình nhập vào n là số phần tử của mảng,
+//thực hiện nhập các phần tử vào mảng và đếm số nguyên âm
+//trong một mảng và in kết quả ra màn hình
+//Array: [${arr.join(", ")}]
+//In-Out: n=5
+//        [1,2,3,-2,-5]  -  2
+//        n=0
+//        []             - Array not element
+//        n=-2
+//        []             - Invalid
+// let arr=[];
+// let num=+prompt("Enter number");
+// if(isNaN(num)||num<0){
+//     alert(`Invalid`);
+// }else if(num===0){
+//     alert(`Array not character`);
+// }else{
+//     for(let i=0;i<num;i++){
+//         arr.push(`Element ${i+1}`);
+//     }
+//     alert(`${num}`);
+// }
+//C2
+let num = +prompt("Input the number of elements in the array:");
+
+if (isNaN(num) || num < 0) {
+    alert("Invalid");
+} else if (num === 0) {
+    alert("Array has no elements");
+} else {
+    let arr = [];
+    let count = 0;
+    for (let i = 0; i < num; i++) {
+        let input = +prompt(`Input element ${i + 1}:`);
+        arr.push(input);
+        if (input < 0) {
+            count++;
+        }
+    }
+    alert(`Negative numbers: ${count}`);
+}
+</script>
+</body>
+</html>

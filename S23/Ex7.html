@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let check = true;
+    let n;
+    do {
+        n = +prompt("Input the number of elements in the array: ");
+
+        if (Number.isInteger(n)) {
+            check = false;
+        }
+    } while (check);
+    if (n === 0) {
+        alert(`Array empty`);
+    } else if (n < 0) {
+        alert(`The number of elements must not be smaller 0`);
+    } else {
+        let input = [];
+        for (let i = 0; i < n; i++) {
+            do {
+                input[i] = +prompt(`Input element ${i + 1}: `);
+                check = Number.isInteger(input[i]) ? false : true;
+            } while (check);
+        }
+        let max = input[0];
+        for (let i = 0; i < n; i++) {
+            if (+input[i] > max) {
+                max = +input[i];
+            }
+        }
+        let max2 = input[0];
+        for (let i = 0; i < n; i++) {
+            if (+input[i] >= max2 && +input[i] < max) {
+                max2 = +input[i];
+            }
+        }
+        console.log(input);
+        console.log("max2: ", max2);
+    }
+</script>
+</body>
+</html>
