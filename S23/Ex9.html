@@ -7,7 +7,7 @@
 <body>
 <script>
     let arr = [];
-
+    let choice;
     while (true) {
         let menu = +prompt(`
         =============== MENU ===============
@@ -20,8 +20,8 @@
         7. Thêm một phần tử vào vị trí chỉ định
         8. Exit
         ====================================
-        Your choice is: `);
-        switch (menu) {
+        Your choice is: ${choice} `);
+        switch (choice) {
             case 1:
                 let n = parseInt(prompt("Enter the number of elements in the array:"));
                 if (n < 0) {
