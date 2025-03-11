@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  //In ra một tam giác vuông theo các hình a, b, c, d dưới đây.
+  //Gợi ý: - Có thể vẽ trên console thông qua console.log()
+  //- Có thể vẽ trực tiếp trên trình duyệt thông qua document.write()
+  let n = +prompt("Input n: ");
+  if (Number.isInteger(n)) {
+      //H1
+      for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+              if (i >= j) {
+                  document.write(`*`);
+              }
+          }
+          document.write(` <br/> `);
+      }
+      document.write(` <br/> `);
+      //H2......
+  }else{
+      document.write(`Invalid`);
+  }
+</script>
+</body>
+</html>

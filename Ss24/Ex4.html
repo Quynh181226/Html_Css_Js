@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        let arr = [];
+        let choice,numA, numB;
+        do {
+            let menu = (`
+======MENU======
+1. Nhập mảng 2 chiều
+2. Hiển thị mảng 2 chiều
+3. Tính tổng các phần tử trong mảng
+4. Tìm phần tử lớn nhất trong mảng và chỉ số của nó
+5. Tính trung bình cộng các phần tử của một hàng cụ thể
+6. Đảo ngược các hàng trong mảng
+7. Exit
+================
+Your choice is: `);
+            choice = parseInt(prompt(menu));
+            switch (choice) {
+                case 1:
+                    numA=+prompt(`Input numbers row: `);
+                    numB=+prompt(`Input numbers column: `);
+                    for(let i=0;i<numA;i++){
+                        arr[i]=[];
+                        for(let j=0;j<numB;j++){
+                            arr[i][j]=+prompt(`Input row ${i+1} col ${j+1}`);
+                        }
+                    }
+                    break;
+                case 2:
+                    if (arr.length === 0) {
+                        alert(`Array empty`);
+                    } else {
+                        for(let i=0;i<numA;i++){
+                            for(let j=0;j<numB;j++){
+                                alert(`Elements of array is: ${arr[i][j]}`);
+                            }
+                        }
+                        // alert(`Elements of array is: ${arr.join(' ')}`);
+                    }
+                    break;
+                case 3:
+                    if (arr.length === 0) {
+                        alert(`Array empty`);
+                    } else {
+                        let sum=0;
+                        for(let i=0;i<numA;i++){
+                            for(let j=0;j<numB;j++){
+                                sum+=arr[i][j];
+                            }
+                        }
+                        alert(`Total is: ${sum}`);
+                    }
+                    break;
+                case 4:
+                    if (arr.length === 0) {
+                        alert(`Array empty`);
+                    } else {
+                       let max=arr[0][0];
+                       let index1=0, index2=0;
+                       for(let i=0;i<numA;i++){
+                           for(let j=0;j<numB;j++){
+                               if(max<arr[i][j]){
+                                   max=arr[i][j];
+                                   index1=i+1;
+                                   index2=j+1;
+                               }
+                           }
+                       }
+                       alert(`Max element is: ${max}`);
+                       alert(`Position rows is: ${index1} - Position cols is: ${index2}`);
+                    }
+                    break;
+                case 5:
+                    if (arr.length === 0) {
+                        alert(`Array empty`);
+                    } else {
+                        for(let i=0;i<numA;i++){
+                            let total=0;
+                            for(let j=0;j<numB;j++){
+                                total+=arr[i][j];
+                            }
+                            let avg=total/numB;
+                            alert(`Total average: ${avg}`);
+                        }
+                    }
+                    break;
+                case 6:
+                    if (arr.length === 0) {
+                        alert(`Array empty`);
+                    } else {
+                        //
+                        for(let i=0;i<numA;i++){
+                            let temp=[];
+                            for(let j=0;j<numB;j++){
+                                temp[j]=arr[i][j];
+                            }
+                            let count=b-1;
+                            for(let j=0;j<numB;j++){
+                                arr[i][j]=temp[count];
+                                count--;
+                            }
+                        }
+                        for(let i=0;i<numA;i++){
+                            alert(`${arr[i].join(' ')}`);
+                        }
+                        //
+
+                    }
+                    break;
+                case 7:
+                    alert(`Exit program`);
+                    break;
+                default:
+                    alert(`Invalid`);
+                    break;
+            }
+        } while (choice !== 7)
+    </script>
+</body>
+</html>

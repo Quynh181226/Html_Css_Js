@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Password Checker</title>
+</head>
+
+<body>
+    <script>
+        //Viết một hàm isStrongPassword(password) kiểm tra mật khẩu có đáp ứng tiêu chí sau không:
+        // Ít nhất 8 ký tự
+        // Có ít nhất một chữ hoa
+        // Có ít nhất một chữ thường
+        // Có ít nhất một số
+        function isStrongPassword(password) {
+            let check1 = false;
+            let check2 = false;
+            let check3 = false;
+
+            if (password.length >= 8) {
+                for (let i = 0; i < password.length; i++) {
+                    let char = password[i];
+                    if (char >= 'A' && char <= 'Z') {
+                        check1 = true;
+                    } else if (char >= 'a' && char <= 'z') {
+                        check2 = true;
+                    } else if (char >= '0' && char <= '9') {
+                        check3 = true;
+                    }
+                }
+            } else {
+                return false;
+            }
+            return check1 && check2 && check3;
+        }
+
+        let input = prompt("Input Password:");
+        console.log("Check password: " + input + "  " + isStrongPassword(input));
+    </script>
+</body>
+
+</html>

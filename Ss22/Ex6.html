@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Viết chương trình khai báo mảng số nguyên gồm 10 phần tử có sẵn.
+    //Thực hiện nhập vào một số nguyên bất kì, đếm số lần xuất hiện
+    //của số nguyên đó trong mảng và hiển thị kết quả ra màn hình
+    //In-Out: 2 - So 2 x.hien 2 lan 2 lan trong mang
+    let arr=[1,2,3,10,5,6,10,8,9,10];
+    let numbers=+prompt("Input numbers: ");
+    let count=0;
+    let max;
+    for(let i=0;i<arr.length;i++) {
+        if (numbers === arr[i]) {
+            count++;
+        }
+    }
+    if(count > max) {
+        max=count;
+    }
+    if(max>count){
+        alert(`Max`);
+    }else{
+        alert(`Not element`);
+    }
+</script>
+</body>
+</html>
