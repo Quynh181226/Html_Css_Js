@@ -6,7 +6,27 @@
 </head>
 <body>
 <script>
-
+//Cho danh sách email, viết hàm lọc ra các email hợp lệ (có chứa ký tự "@" và không có khoảng trắng)
+//Input: ["john.doe@gmail.com", "invalidemail.com", "hello@domain.net", "space@out.com"]
+//       []
+//       "abc"
+//Output: ["john.doe@gmail.com", "hello@domain.net"]
+//        Mảng không có phần tử nào
+//        Dữ liệu không hợp lệ
+function Email(value){
+    if(!Array.isArray(value)){
+        return`Invalid`;
+    }
+    let char=value.filter(email=>email.includes("@")&&!email.includes(" "));
+    if(char.length===0){
+        return `Array empty`
+    }else{
+        return char;
+    }
+}
+console.log(Email(["john.doe@gmail.com", "invalidemail.com", "hello@domain.net", "space@out.com"]));
+console.log(Email([]));
+console.log(Email("abc"));
 </script>
 </body>
 </html>

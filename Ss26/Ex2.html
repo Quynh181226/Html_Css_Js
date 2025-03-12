@@ -6,6 +6,49 @@
 </head>
 <body>
 <script>
+//Viết một hàm nhận vào một mảng chuỗi và trả về một mảng chỉ chứa những chuỗi có độ dài lớn hơn 5 ký tự.
+//Input
+//         ["apple", "banana", "cat", "elephant", "dog"]
+//         []
+//         “abc”
+//Output
+//         ["banana", "elephant"]
+//         Mảng không có phần tử nào
+function Str(){
+    let str=arr.filter(item=>item.length>5);
+    if(str.length===0){
+       console.log(`Array empty`);
+    }else{
+        console.log(str.join(' '));
+    }
+}
+let arr=[]
+for(let i=0;i<5;i++){
+    let input=prompt(`Input ${i+1}`);
+    arr.push(input);
+}
+Str();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>

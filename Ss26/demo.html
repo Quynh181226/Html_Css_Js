@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//HOF:
+//    1. Tái sử dụng mã : Giảm lặp lại code = cách đóng gói logic chung
+//    2. Trừu tượng hóa: Tách biệt logic xử lý tổng quát khỏi chi tiết cụ thế
+
+
+
+
+
+//forEach-pthuc cua doi tg array
+//Dung de duyet qua cach phan tu cua mang va thuc thi 1 ham callback tren moi phan tu
+
+//Cu phap: array.forEach(callback(currentValue[, index[, array]])[, thisArg])
+
+//+ callback: Ham duoc goi cho moi phan tu trong mang (Ham nay nhan 3 tham so)
+//  - currentValue : Gia tri cua phan tu htai(bat buoc)
+//  - index(tùy chọn-optional): Chi so cua phan tu hien tai
+//  - array(optional): Mang goc ma forEach dg lap qua
+//+ thisArg(optional) : Gia tri dung lam this trg ham callback
+
+//Gia tri tra ve : undefined
+
+//Map: Pthuc de tao 1 mang ms = cach ap dung ham callback len "tung phan tu" cua mang "goc"
+
+//Cu phap: array.map(callback(element[, index[, array]])[, thisArg])
+
+//+ callback: Ham duoc goi cho moi phan tu trong mang, tra ve gtri ms cho ptu do
+//  - currentValue : Gia tri cua phan tu htai(bat buoc)
+//  - index(tùy chọn-optional): Chi so cua phan tu hien tai
+//  - array(optional): Mang goc ma map dg lap qua
+//+ thisArg(optional) : Gia tri dung lam this trg ham callback
+
+//Gia tri tra ve : Gia tri tra ve cua callback se tro thanh ptu tuong ung trg mang moi
+
+//eg:
+let numbers=[1,23,5,6];
+// let double=numbers.map(num)
+
+
+//Filter
+
+//Reduce
+//Duoc sdung de duyet qua cac ptu cua mang va rut gon chung thanh 1 gtri duy nhat thong qua ham callback
+//Gtri nay co the la bat ky kieu du lieu nao
+//Cu phap: array.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+
+//callback: Hàm được gọi cho từng phần tử trong mảng, nhận các tham số:
+// accumulator: Giá trị tích lũy (kết quả của lần tính toán trước đó).
+// currentValue: Phần tử hiện tại đang xử lý.
+//index (tùy chọn): Chỉ số của phần tử hiện tại.
+// array (tùy chọn): Mảng gốc mà reduce được gọi.
+// initialValue (tùy chọn): Giá trị khởi tạo cho accumulator. Nếu không cung cấp, accumulator sẽ là phần tử đầu tiên của mảng và reduce bắt đầu từ phần tử thứ hai.
+
+//Giá trị trả về: Giá trị cuối cùng của accumulator sau khi duyệt hết mảng.
+//Ko lam thay doi mang ban dau, chi tra ve 1 gtri ms
+
+// Cách hoạt động của reduce
+//     - reduce duyệt qua mảng từ trái sang phải.
+//     Mỗi lần gọi callback, giá trị trả về của callback được gán lại cho accumulator.
+//     Giá trị cuối cùng của accumulator là kết quả của reduce.
+// Với initialValue:
+//     Bắt đầu từ phần tử đầu tiên, accumulator được gán giá trị initialValue.
+//     Không có initialValue:
+//     accumulator lấy giá trị của phần tử đầu tiên, và bắt đầu xử lý từ phần tử thứ hai.
+
+//eg1: Tinh tong cac phan tu cua mang
+let number=[1,23,5,2];
+let sum=number.reduce((accumulator, currentValue)=>accumulator + currentValue, 0);
+console.log(sum);
+console.log(number);
+console.log("Array is: "+number);
+// initialValue là 0.
+// Lần 1: accumulator = 0, currentValue = 1 → 0 + 1 = 1.
+// Lần 2: accumulator = 1, currentValue = 2 → 1 + 2 = 3.
+// Lần 3: accumulator = 3, currentValue = 3 → 3 + 3 = 6.
+// Lần 4: accumulator = 6, currentValue = 4 → 6 + 4 = 10.
+
+//eg2: Nhan tat ca cac phan tu trg mang
+let number1 = [2, 3, 4];
+let product = number1.reduce((accumulator, currentValue) => accumulator + currentValue, 1);
+let product1= number1.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
+console.log(product);
+console.log(product1);
+
+//eg3:
+// Bài 6:
+// Nhập mảng phần tử:
+//     Yêu cầu người dùng nhập vào mảng các chuỗi ngày (ví dụ: ["2025-03-10", "2024-12-25", "2023-07-01"]).
+// Dùng vòng lặp hoặc phương thức prompt() để nhập dữ liệu từ người dùng.
+//     Kiểm tra mảng rỗng:
+//     Nếu mảng rỗng, trả về thông báo: "Mảng không có phần tử nào".
+//     Nếu mảng có phần tử, tiếp tục xử lý các phần tử trong mảng.
+//     Sử dụng map() để xử lý mảng:
+//     Dùng map() để lặp qua từng phần tử trong mảng.
+//     Mỗi phần tử là một chuỗi ngày tháng (ví dụ: "2025-03-10").
+// Chuyển chuỗi thành đối tượng Date bằng cách sử dụng new Date(dateStr).
+//     Kiểm tra tính hợp lệ của ngày:
+//     Sau khi chuyển chuỗi thành Date, kiểm tra xem đối tượng Date có hợp lệ không. Nếu hợp lệ, Date không phải là NaN.
+//     Nếu không hợp lệ, trả về "Dữ liệu không hợp lệ" cho phần tử đó.
+//     Chuyển đổi ngày hợp lệ thành định dạng DD/MM/YYYY:
+// Nếu ngày hợp lệ, lấy ngày, tháng và năm từ đối tượng Date:
+//     Ngày: Dùng getDate() để lấy ngày, nếu chỉ có một chữ số thì dùng padStart(2, '0') để đảm bảo có 2 chữ số.
+//     Tháng: Dùng getMonth() + 1 (vì tháng bắt đầu từ 0) và sử dụng padStart(2, '0').
+//     Năm: Dùng getFullYear() để lấy năm.
+//     Trả về chuỗi ngày theo định dạng DD/MM/YYYY.
+//     Trả về mảng kết quả:
+//     Mảng mới sẽ chứa các chuỗi ngày đã được chuyển sang định dạng DD/MM/YYYY nếu ngày hợp lệ.
+//     Nếu có phần tử không hợp lệ, trả về thông báo "Dữ liệu không hợp lệ" cho phần tử đó
+
+</script>
+</body>
+</html>
