@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //Xây dựng hàm nhận vào một tham số là một mảng chứa các phần tử bất kì.
+        //Xây dựng hàm đếm số lượng các số nguyên dương trong mảng.
+        //In - Out: 4,5.4,6,-2 - 2
+        //          1.2,-2,-9,-8 - There are no positive integer in the array
+        function Positive(arr) {
+            if (!Array.isArray(arr)) {
+                return;
+            }
+            let count = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (Number.isInteger(arr[i]) && arr[i] > 0) {
+                    count++;
+                }
+            }
+            if (count === 0) {
+                return "There are no positive integer in the array";
+            }
+            return count;
+        }
+        let n = [4, 5.4, 6, -2];
+        let m = [1.2, -2, -9, -8];
+        console.log(Positive(n));
+        console.log(Positive(m));
+    </script>
+</body>
+
+</html>

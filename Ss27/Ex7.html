@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //Viết một function nhận vào một mảng số nguyên
+        //liên tiếp nhưng bị thiếu một số, và tìm số đó.
+        //In-Out: [1,2,3,5]-4
+        //        [1,2,4,5]-3
+        //        "abc"-Invalid
+        let arr = [1, 2, 3, 4, 5, 7];
+
+        const findNumber = (array) => {
+            if (Array.isArray(array)) {
+                let desired = (array[0] + array[array.length - 1]) * (array.length + 1) / 2;
+                let actual = array.reduce((previous, current) => previous + current, 0);
+
+                return desired - actual;
+
+            } else {
+                return false;
+            }
+        }
+        let result = findNumber(arr);
+        result ? console.log("Result: ", result) : console.log("Invalid");
+    </script>
+</body>
+
+</html>

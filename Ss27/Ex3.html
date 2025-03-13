@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        let choice;
+        var a, b, r;
+        const PI = 3.14;
+        do {
+            choice = +prompt(`
+    1. Tính diện tích hình tròn.
+    2. Tính chu vi hình tròn.
+    3. Tính diện tích hình chữ nhật.
+    4. Tính chu vi hình chữ nhật.
+    5. Thoát.`);
+            switch (choice) {
+                case 1:
+                    r = +prompt(`Input r: `);
+                    if (isNaN(r) || r <= 0) {
+                        console.log(`Invalid`);
+                    } else {
+                        console.log(`S: ${PI * r * r.toFixed(2)} `);
+                    }
+                    break;
+                case 2:
+                    r = +prompt(`Input r: `);
+                    if (isNaN(r) || r <= 0) {
+                        console.log(`Invalid`);
+                    } else {
+                        console.log(`C: ${2 * PI * r.toFixed(2)} `);
+                    }
+                    break;
+                case 3:
+                    a = +prompt(`Input a:`);
+                    b = +prompt(`Input b:`);
+                    if (isNaN(a) || a <= 0 || isNaN(b) || b <= 0) {
+                        console.log(`Invalid`);
+                    } else {
+                        console.log(`S: ${a * b.toFixed(2)} `);
+                    }
+                    break;
+                case 4:
+                    a = +prompt(`Input a:`);
+                    b = +prompt(`Input b:`);
+                    if (isNaN(r) || r <= 0) {
+                        console.log(`Invalid`);
+                    } else {
+                        console.log(`C: ${2 * (a + b).toFixed(2)} `);
+                    }
+                    break;
+                case 5:
+                    console.log(`Exit program`);
+                    break;
+                default:
+                    console.log(`Invalid`);
+                    break;
+            }
+        } while (choice !== 5);
+    </script>
+</body>
+
+</html>

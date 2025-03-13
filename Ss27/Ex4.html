@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        let choice, n;
+        let arr = [];
+        let check = true;
+        function input(arr) {
+            n = +prompt(`Input integer:`);
+            check = Number.isInteger(n) && n > 0;
+            if (!check) {
+                console.log(`Invalid`);
+            }
+            for (let i = 0; i < n; i++) {
+                arr[i] = +prompt(`Input element ${i + 1}:`);
+            }
+            return arr;
+        }
+        function average(arr) {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            let avg = sum / arr.length;
+        }
+        function evenMax(arr) {
+            let arrEven = arr.filter(item => item % 2 === 0);
+            let max = Math.max(...arrEven);
+            return max;
+        }
+        // function minOdd(arr)
+        do {
+            choice = +prompt(`
+    1. Nhập danh sách số nguyên.
+    2. Tính trung bình các số.
+    3. Tìm số chẵn lớn nhất.
+    4. Tìm số lẻ nhỏ nhất.
+    5. Thoát.`);
+            switch (choice) {
+                case 1:
+                    // let n=+prompt(`Input number is integer:`);
+                    // for (let i=0;i<n.length;i++){
+                    //     let m=+prompt(`Input integer:`);
+                    //     arr.push(m);
+                    // }
+                    input(arr);
+                    break;
+                case 2:
+                    if (arr.length === 0) {
+                        console.log(`Array is empty`);
+
+                    } else {
+                        let result = average(arr);
+                        console.log(result);
+                    }
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    console.log(`Exit program`);
+                    break;
+                default:
+                    console.log(`Invalid`);
+                    break;
+            }
+        } while (choice !== 5);
+    </script>
+</body>
+
+</html>

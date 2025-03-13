@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //Khai báo một hàm nhận vào hai tham số,
+        //tham số đầu tiên là một mảng, tham số
+        //thứ hai là số n (kích thước mảng con).
+        //Tiến hành chia mảng thành các mảng
+        //con có kích thước n
+        //In-Out: [1,2,3,4,5,6,7,8],3-[[1,2,3],[4,5,6],[7,8,9]]
+        //        [1,2,3,4,5,6,7,8],2-[[1,2,3,4],[5,6,7,8]
+        //        "a,b,c"            -Invalid
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+        const splitArray = (array, n) => {
+            if (Array.isArray(array)) {
+                let newArr = [];
+                for (let i = 0; i < array.length; i += n) {
+                    let tempArr = array.slice(i, i + n);
+                    newArr.push(tempArr);
+                }
+                return newArr;
+
+            } else {
+                return false;
+            }
+        }
+
+        let result = splitArray(arr, 3);
+        result ? console.log("Result: ", result) : console.log("Dữ liệu không hợp lệ");
+    </script>
+</body>
+
+</html>

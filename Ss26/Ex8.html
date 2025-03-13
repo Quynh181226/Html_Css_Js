@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Viết chương trình nhập vào mảng số nguyên 10 -> 20 phần tử.
+    //thực hiện lọc và các số nguyên tố là số lẻ và hiển thị lên màn hình.
+    //I-O:
+        //[ 10, 2, 3, 5, 7, 9 ]-[ 3, 5, 7 ]
+        //[ ]-Mảng không có dữ liệu
+        //“abc”-Dữ liệu không hợp lệ
+    const checkNumber = (number) => {
+        if (number < 2) {
+            return false;
+
+        } else {
+            for (let i = 2; i < number; i++) {
+                if (number % i === 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    const checkElement = (arr) => {
+        return arr.filter((item) => checkNumber(item)).filter((item) => item % 2 !== 0);
+    }
+
+    const result = (array) => {
+        if (array.length === 0) {
+            console.log("Array is empty");
+
+        } else if (!Array.isArray(array)) {
+            console.log("Invalid");
+
+        } else {
+            let result = checkElement(array);
+            console.log("Result: ", result);
+        }
+    };
+    let arr = [10, 2, 3, 5, 7, 9];
+    let arr1 = [];
+    let arr2 = "abc";
+    result(arr);
+    result(arr1);
+    result(arr2);
+</script>
+</body>
+</html>

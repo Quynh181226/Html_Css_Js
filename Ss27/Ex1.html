@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <script>
+    function sum(a, b) {
+      return a + b;
+    }
+    const substrate = (a, b) => {
+      return a - b;
+    }
+    function multiplication(a, b) {
+      return a * b;
+    }
+    const divide = (a, b) => {
+      return a / b;
+    }
+    let num1 = Number.parseFloat(prompt(`Input a:`));
+    let num2 = parseFloat(prompt(`Input b:`));
+    if (isNaN(num1) || isNaN(num2)) {
+      console.log(`Invalid`);
+    } else {
+      let choice;
+      do {
+        choice = +prompt(`
+            1. Cộng hai số.
+            2. Trừ hai số.
+            3. Nhân hai số.
+            4. Chia hai số.
+            5. Thoát.
+            Your choice:`);
+        switch (choice) {
+          case 1:
+            console.log("Sum is: " + sum(num1, num2));
+            break;
+          case 2:
+            console.log("Substrate is: " + substrate(num1, num2));
+            break;
+          case 3:
+            console.log("Multiplication is: " + multiplication(num1, num2));
+            break;
+          case 4:
+            console.log("Divide is: " + divide(num1, num2));
+            break;
+          case 5:
+            console.log(`Exit program`);
+            break;
+          default:
+            console.log(`Invalid`);
+            break;
+        }
+      } while (choice !== 5);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let choice;
+    let str ='';
+    do {
+        choice = prompt(`
+       1. Nhập chuỗi
+       2. Hiển thị chuỗi
+       3. Tính độ dài của chuỗi
+       4. Đếm số lần xuất hiện của một ký tự (Người dùng nhập) trong chuỗi
+       5. Kiểm tra chuỗi có phải là chuỗi đối xứng không
+       6. Chuyển đổi chuỗi thành chữ in hoa các ký tự đầu tiên của từ
+       7. Exit`);
+        switch (choice) {
+            case 1:
+                str = prompt("Input string:");
+                break;
+            case 2:
+                console.log("String current:", str);
+                break;
+            case 3:
+                console.log("Length string is:", str.length);
+                break;
+            case 4:
+                let search = prompt("Input:");
+                let count = 0;
+                for (let i = 0; i < str.length; i++) {
+                    if (str[i] === search) {
+                        count++;
+                    }
+                }
+                console.log(`'${search}' is: ${count}`);
+                break;
+            case 5:
+                let strDx = str.split("").reverse().join("");
+                if (str === str) {
+                    console.log("String opposite");
+                } else {
+                    console.log("Not string opposite");
+                }
+                break;
+            case 6:
+                str=str.toLowerCase();
+                str.trim();
+                let space=str.split(" ");
+                for (let i=0; i<space.length ; i++) {
+                    space[i]=space[i].charAt(0).toUpperCase() + space[i].slice(1);
+                }
+                str=space.join(' ');
+                console.log(`String after change ${str}`);
+                break;
+            case 7:
+                break;
+            default:
+                alert("Invalid");
+        }
+    } while (choice !== "7");
+</script>
+</body>
+</html>

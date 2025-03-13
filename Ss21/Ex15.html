@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  //Mô phỏng 1 máy ATM trong thực tế.
+//Cho người dùng nhập vào số tiền cần rút (Số tiền nhập vào phải chia hết cho 1000)
+//→ Output ra các tờ tiền theo từng mệnh giá và số lượng của chúng
+//Biết trong cây ATM có các loại tiền với mệnh giá sau: (500.000, 200.000, 100.000, 50.000, 20.000, 10.000, 5.000, 2.000, 1.000)
+// → Khi rút tiền thì ưu tiên rút các tờ tiền có mệnh giá lớn trước
+//   Ví dụ:
+//Input: 3450000
+//   Output: 500.000 - 6 tờ
+//   200.000 - 2 tờ
+//   50.000 - 1 tờ
+//   Input: 3.552.000
+//   Output: 500.000 - 7 tờ
+//   50.000 - 1 tờ
+//   2.000 - 1 tờ
+  let money = +prompt("Input money: ");
+  let max = 500000;
+  let count;
+
+  if (Number.isInteger(money) && (money % 1000 === 0)) {
+      while (money !== 0) {
+          count = Math.floor(money / max);
+
+          if (count > 0) {
+              document.write(`${max.toLocaleString()} - ${count} to <br/>`);
+              money = money - max * count;
+          }
+          if (max === 500000) {
+              max = 200000;
+          } else if (max === 200000) {
+              max = 100000;
+          } else if (max === 100000) {
+              max = 50000;
+          } else if (max === 50000) {
+              max = 20000;
+          } else if (max === 20000) {
+              max = 10000;
+          } else if (max === 10000) {
+              max = 5000;
+          } else if (max === 5000) {
+              max = 2000;
+          } else if (max === 2000) {
+              max = 1000;
+          }
+      }
+  } else {
+      alert(`Invalid`);
+  }
+</script>
+</body>
+</html>

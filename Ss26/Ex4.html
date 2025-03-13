@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//Viết một hàm nhận vào một mảng số và trả về một mảng chỉ chứa các số nguyên tố.
+//Input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+//       []
+//       "abc"
+//Output: [2, 3, 5, 7]
+//        Mảng không có phần tử nào
+//        Dữ liệu không hợp lệ
+function isPrime(value) {
+    if(!Array.isArray(value)){
+        return `Invalid`;
+    }
+    if(value.length === 0){
+        return `Invalid`;
+    }
+    let check =value.filter(num=>{
+        if(num<2) return false;
+        for(let i=2; i<=Math.sqrt(num); i++){
+            if(num%i===0){
+                return false;
+            }
+        }
+        return true;
+    });
+    if(check.length === 0){
+        return `Invalid`;
+    }else{
+        return check;
+    }
+}
+let arr=[];
+let n=+prompt(`Input number element: `);
+for(let i=0;i<n;i++){
+    let m=+prompt(`Input element ${i+1}: `);
+    arr.push(m);
+}
+console.log(isPrime(arr));
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+//Viết chương trình khởi tạo nhập vào một mảng số nguyên gồm 10 phần tử.
+//Chương trình thực hiện hiển thị các số nguyên lớn hơn hoặc bằng 10 ra màn hình.
+//Input:  [1, 22, 10, 9, 8]
+//        []
+//        “abc”
+//Output: [ 22, 10]
+//        Mảng không có phần tử nào
+//        Dữ liệu không hợp lệ
+function Integer(){
+  let num=arr.filter(item => item>=10);
+  if(num.length===0){
+    console.log(`Array empty`);
+  }else{
+    console.log(num.join(" "));
+  }
+}
+let arr=[];
+for(let i=0;i<10;i++){
+  let n=+prompt(`Input element ${i+1}:`);
+  arr.push(n);
+}
+Integer();
+
+</script>
+</body>
+</html>

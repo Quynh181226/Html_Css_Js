@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr = [];
+    let choice;
+    while (true) {
+        let menu = +prompt(`
+        =============== MENU ===============
+        1. Nhập số phần tử cần nhập và giá trị các phần tử
+        2. In ra giá trị các phần tử đang quản lý
+        3. In ra giá trị các phần tử chẵn và tính tổng
+        4. In ra giá trị lớn nhất và nhỏ nhất trong mảng
+        5. In ra các phần tử là số nguyên tố trong mảng và tính tổng
+        6. Nhập vào một số và thống kê trong mảng có bao nhiêu phần tử đó
+        7. Thêm một phần tử vào vị trí chỉ định
+        8. Exit
+        ====================================
+        Your choice is: ${choice} `);
+        switch (choice) {
+            case 1:
+                let n = parseInt(prompt("Enter the number of elements in the array:"));
+                if (n < 0) {
+                    console.log("The number of elements cannot be less than 0");
+                } else {
+                    arr = [];
+                    for (let i = 0; i < n; i++) {
+                        let numbers = parseInt(prompt(`Enter element ${i + 1}:`));
+                        arr.push(numbers);
+                    }
+                }
+                break;
+            case 2:
+                for (let i in arr) {
+                    console.log(`${i}. ${arr[i]}`);
+                }
+                break;
+            case 3:
+                let evenNum = [];
+                let evenSum = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i] % 2 === 0) {
+                        evenNum.push(arr[i]);
+                        evenSum += arr[i];
+                    }
+                }
+                console.log(`Even numbers: ${evenNum}`);
+                console.log(`Sum of even numbers: ${evenSum}`);
+                break;
+            case 4:
+                let max = arr[0];
+                let min = arr[0];
+                for (let i = 1; i < arr.length; i++) {
+                    if (arr[i] > max) {
+                        max = arr[i];
+                    }
+                    if (arr[i] < min) {
+                        min = arr[i];
+                    }
+                }
+                console.log(`Largest value: ${max}`);
+                console.log(`Smallest value: ${min}`);
+                break;
+
+            case 5:
+                let primeNum = [];
+                let primeSum = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    let num1 = arr[i];
+                    let check = num1 > 1;
+                    for (let j = 2; j * j <= num1; j++) {
+                        if (num1 % j === 0) {
+                            check = false;
+                            break;
+                        }
+                    }
+                    if (check) {
+                        primeNum.push(num1);
+                        primeSum += num1;
+                    }
+                }
+                console.log(`Prime numbers: ${primeNum}`);
+                console.log(`Sum of prime numbers: ${primeSum}`);
+                break;
+            case 6:
+                let a = parseInt(prompt("Enter the number to count occurrences:"));
+                let count = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i] === a) {
+                        count++;
+                    }
+                }
+                console.log(`The number ${a} appears ${count} times.`);
+                break;
+            case 7:
+                let addNumber = +prompt("Enter the number of elements you want to add:");
+                let addIndex = +prompt("Enter the position where you want to add elements:");
+                if (addIndex < 0 || addIndex > arr.length) {
+                    console.log("Invalid");
+                } else {
+                    for (let i = 0; i < addNumber; i++) {
+                        let addValue = +prompt("Enter the element to add:");
+                        arr.splice(addIndex, 0, addValue);
+                    }
+                    arr[addIndex] = value;
+                    console.log("Array after adding elements:", arr);
+                }
+                break;
+            case 8:
+                console.log("Exit program");
+                break;
+            default:
+                console.log("Invalid");
+                break;
+        }
+        if (menu === 8) {
+            break;
+        }
+    }
+</script>
+</body>
+</html>

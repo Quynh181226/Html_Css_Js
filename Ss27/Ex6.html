@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //Viết một function kiểm tra xem một mảng số nguyên
+        //có phải là dãy số cấp số cộng hay không (chênh lệch
+        //giữa các phần tử liên tiếp là không đổi).
+        //In-Out: [2,4,6,8]-TRUE
+        //        [3,6,9,12,14]-FALSE
+        //        "abc"-Invalid
+        const checkArray = (array, n) => {
+            let check = 2;
+            if (Array.isArray(array)) {
+                let dist = array[1] - array[0];
+                for (let i = 2; i < array.length; i++) {
+                    if (arr[i] - arr[i - 1] !== dist) {
+                        check = 1;
+                        break;
+                    }
+                }
+
+            } else {
+                check = 0;
+            }
+            return check;
+        }
+
+        let result = checkArray(arr, 3);
+        result === 2 ? console.log("TRUE") : result === 1 ? console.log("FALSE") : console.log("Invalid");
+    </script>
+</body>
+
+</html>
