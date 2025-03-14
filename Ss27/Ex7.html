@@ -15,11 +15,10 @@
         //        "abc"-Invalid
         let arr = [1, 2, 3, 4, 5, 7];
 
-        const findNumber = (array) => {
-            if (Array.isArray(array)) {
-                let desired = (array[0] + array[array.length - 1]) * (array.length + 1) / 2;
-                let actual = array.reduce((previous, current) => previous + current, 0);
-
+        const findNumber = (n) => {
+            if (Array.isArray(Array)) {
+                let desired = (n[0] + n[n.length - 1]) * (n.length + 1) / 2;
+                let actual = n.reduce((previous, current) => previous + current, 0);
                 return desired - actual;
 
             } else {
@@ -27,7 +26,7 @@
             }
         }
         let result = findNumber(arr);
-        result ? console.log("Result: ", result) : console.log("Invalid");
+        console.log(result === "Invalid" ? "Invalid" : `Result: ${result}`);
     </script>
 </body>
 

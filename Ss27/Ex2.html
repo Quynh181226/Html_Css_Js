@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Student Management</title>
 </head>
-
 <body>
-    <script>
-        //Xây dựng menu quản lý sinh viên, gồm các chức năng:
+<script>
+    let students = [];
 
-        // Nhập danh sách sinh viên.
-        //     Cho người dùng nhập số lượng số sinh viên, nhập lần lượt tên đầy đủ từng sinh viên.
-        //     Hiển thị danh sách sinh viên.
-        //     Tìm sinh viên theo tên.
-        //     Cho người dùng nhập tên sinh viên cần tìm kiếm, hiển thị tên đầy đủ sinh viên nếu tìm thấy, trong trường hợp không tìm thấy sinh viên thông báo sinh viên không có trong danh sách .
-        //     Xóa sinh viên khỏi danh sách.
-        //     Cho người dùng nhập tên sinh viên cần xóa, trong trường hợp có nhiều sinh viên trùng tên thì xóa sinh viên đầu tiên.
-        //     Thoát.
-        let students = [];
+    function inputStudents() {
+        let numStudent = prompt(`Input number of student: `);
+        if (isNaN(numStudent) || numStudent < 1) {
+            console.log(`Invalid`);
+            return;
+        }
+        for (let i = 0; i < numStudent; i++) {
+            let studentName;
+            do {
+                studentName = prompt(`Input name ${i + 1}:`);
+                if (!studentName) console.log(`Invalid`);
+            } while (!studentName);
+            students.push(studentName);
+        }
+    }
+
+    function displayStudents() {
+        if (students.length === 0) {
+            console.log(`List student is empty`);
+        } else {
+            console.log("List student is:\n" + students.join("\n"));
+        }
+    }
+
+    function searchStudent() {
+        let searchName = prompt(`Input name need search:`);
+        let check = false;
+        for (let student of students) {
+            if (student.toLowerCase() === searchName.toLowerCase()) {
+                console.log(`Student found is: ${student}`);
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            console.log(`Not found`);
+        }
+    }
+
+    function deleteStudent() {
+        let deleteName = prompt(`Input student name need delete:`);
+        let index = students.findIndex(student => student.toLowerCase() === deleteName.toLowerCase());
+        if (index !== -1) {
+            students.splice(index, 1);
+            console.log(`Deleted student: ${deleteName}`);
+        } else {
+            console.log(`Student not on list`);
+        }
+    }
         let choice;
         do {
             choice = +prompt(`
@@ -27,51 +65,19 @@
     3. Tìm sinh viên theo tên.
     4. Xóa sinh viên khỏi danh sách.
     5. Thoát.`);
+
             switch (choice) {
                 case 1:
-                    let numStudent = prompt(`Input number of student: `);
-                    if (isNaN(numStudent) || numStudent < 1) {
-                        console.log(`Invalid`);
-                    }
-                    for (let i = 0; i < numStudent; i++) {
-                        let studentName;
-                        do {
-                            studentName = prompt(`Input name ${i + 1}:`);
-                            if (!studentName) console.log(`Invalid`);
-                        } while (!studentName)
-                        students.push(studentName);
-                    }
+                    inputStudents();
                     break;
                 case 2:
-                    if (students.length === 0) {
-                        console.log(`List student is empty`);
-                    } else {
-                        console.log("List student is:\n" + students.join("\n"));
-                    }
+                    displayStudents();
                     break;
                 case 3:
-                    let searchName = prompt(`Input name need search:`);
-                    let check = false;
-                    for (let student of students) {
-                        if (student.toLowerCase() === searchName.toLowerCase()) {
-                            console.log(`Student found is: ${student}`);
-                            check = true;
-                            break;
-                        }
-                    }
-                    if (!check) {
-                        console.log(`Not found`);
-                    }
+                    searchStudent();
                     break;
                 case 4:
-                    let deleteName = prompt(`Input student name need delete:`);
-                    let index = students.findIndex(student => student.toLowerCase() === deleteName.toLowerCase());
-                    if (index !== -1) {
-                        students.splice(index, 1);
-                        console.log(`Deleted student: ${deleteName}`);
-                    } else {
-                        console.log(`Student not on list`);
-                    }
+                    deleteStudent();
                     break;
                 case 5:
                     console.log(`Exit program`);
@@ -81,7 +87,6 @@
                     break;
             }
         } while (choice !== 5);
-    </script>
+</script>
 </body>
-
 </html>

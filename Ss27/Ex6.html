@@ -14,25 +14,18 @@
         //In-Out: [2,4,6,8]-TRUE
         //        [3,6,9,12,14]-FALSE
         //        "abc"-Invalid
-        const checkArray = (array, n) => {
-            let check = 2;
-            if (Array.isArray(array)) {
-                let dist = array[1] - array[0];
-                for (let i = 2; i < array.length; i++) {
-                    if (arr[i] - arr[i - 1] !== dist) {
-                        check = 1;
-                        break;
-                    }
-                }
-
-            } else {
-                check = 0;
+        function checkArray(array) {
+            if (!Array.isArray(array) || array.length < 2) return "Invalid";
+            let dist = array[1] - array[0];
+            for (let i = 2; i < array.length; i++) {
+                if (array[i] - array[i - 1] !== dist) return false;
             }
-            return check;
+            return true;
         }
-
-        let result = checkArray(arr, 3);
-        result === 2 ? console.log("TRUE") : result === 1 ? console.log("FALSE") : console.log("Invalid");
+        let input = prompt("Input num:");
+        let arr = input ? input.split(' ').map(Number) : null;
+        let result = arr && !arr.some(isNaN) ? checkArray(arr) : "Invalid";
+        console.log(result === true ? "TRUE" : result === false ? "FALSE" : "Invalid");
     </script>
 </body>
 
