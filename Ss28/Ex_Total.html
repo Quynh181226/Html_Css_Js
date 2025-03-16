@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //B1. Tạo menu
+    //B1.1. Hiển thị lựa cho chọn cho người dùng
+    //B1.2. Lấy được lựa chọn từ người dùng
+    //B2. Kiểm tra lựa chọn từ người dùng
+    //B3. Thực hiện các logic trong từng lựa chọn
+    let products = []; // Khai báo mảng products để lưu trữ danh sách sản phẩm
+    let choice;
+    do{
+        choice=+prompt(
+        `1. Thêm sản phẩm
+         2. Sửa thông tin sản phẩm
+         3. Xóa sản phẩm theo id
+         4. In danh sách sản phẩm
+         5. Tìm kiếm sản phẩm theo tên
+         6. Thoát chương trình`);
+        switch (choice){
+            case 1:
+                //Lay ttin sp tu ng dung
+                const productIdInput=+prompt(`Input id product:`);
+                const productNameInput=prompt(`Input name product:`);
+                const productPriceInput=+prompt(`Input price product:`);
+                //Gom nhom tat ca dlieu ng dung thanh 1 object duy nhat
+                const newProduct={
+                    // id: Math.ceil(Math.random()*100000000000),
+                    id: productIdInput,
+                    productName: productNameInput,
+                    price: productPriceInput,
+                };
+                //Push doi tg newProduct vao trg 1 mang
+                products.push(newProduct);
+                alert(`Add product success`);
+                break;
+            case 2:
+                //Can lay dc id va ttin moi tu ng dung
+                const idUpdate=+prompt(`Input id of product need update`);
+                //Tkiem vtri sp do theo id: Tim thay or not tim thay
+                const findIndexProductUpdate=products.findIndex(product => product.id===idUpdate);
+                //Ktra dk if(findIndex=
+                if(findIndexProductUpdate !== -1){ // Hoàn thiện logic
+                    const newName = prompt(`Input new name:`);
+                    const newPrice = +prompt(`Input new price:`);
+                    products[findIndexProductUpdate].productName = newName;
+                    products[findIndexProductUpdate].price = newPrice;
+                    alert(`Update product success`);
+                } else {
+                    alert(`Product not found`);
+                }
+                break;
+            case 3:
+                const idDelete=+prompt(`Input id of product need delete:`);
+                //Tkiem vtri phan tu trg mang theo id
+                const findIndexProductDelete=products.findIndex((product)=>product.id===idDelete);
+                //Ktra xem la id do co ton tai trg mang hay ko
+                if(findIndexProductDelete!==-1){
+                    //Lay xnhan xoa tu ng dung
+                    const confirmDelete=confirm( // Sửa lỗi cú pháp
+                        `You co chac muon xoa ko`
+                    );
+                    //Trg js co nhg gtri nao luon luon la falsy: false, 0, "", null, NaN, undefined
+                    //Tien hanh xoa
+                    if(confirmDelete){
+                        products.splice(findIndexProductDelete,1);
+                    //Hien thi tbao
+                        alert(`Xoa tcong`);
+                    }
+                } else {
+                    alert(`Product not found`);
+                }
+                break;
+            case 4:
+                console.table(products);
+                if(products.length === 0){
+                    alert(`Product list is empty`);
+                } else {
+                    let productList = "Product list:\n";
+                    products.forEach(p => productList += `ID: ${p.id}, Name: ${p.productName}, Price: ${p.price}\n`);
+                    // alert(productList);
+                }
+                break;
+            case 5:
+                //Lay ten sp ma ng dung can tkiem
+                const productNameSearch = prompt(`Input product need search:`);
+                //Tkiem sp trg mang
+                const findProductByName=products.find((product)=>product.productName.trim().toLowerCase()===productNameSearch.trim().toLowerCase());
+                if(findProductByName){
+                    alert(`Found product: ID: ${findProductByName.id}, Name: ${findProductByName.productName}, Price: ${findProductByName.price}`);
+                }else{
+                    alert(`Not tim thay sp`);
+                }
+                break;
+            case 6:
+                console.log(`Exit program`);
+                break;
+            default:
+                alert(`Invalid`);
+                break;
+        }
+    }while(choice!==6);
+</script>
+</body>
+</html>

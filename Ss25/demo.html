@@ -6,6 +6,49 @@
 </head>
 <body>
 <script>
+    /*
+            Function hay còn gọi là hàm
+            sinh ra để làm gì?
+            1. giúp code gọn gàng hơn
+            2. tái sử dụng (viết 1 lần dùng nhiều lần)
+
+            + cú pháp khai báo
+             function checkEmail (){
+                // thân hàm
+             }
+            + ĐỂ HÀM THỰC THI THÌ BẮT BUỘC PHẢI GỌI HÀM
+            + từ khóa return
+                + dừng chương trình
+                + trả về giá trị của hàm
+            + tham số, đối số trong hàm  ==> tái sử dụng
+            tham số: parameter
+                giá trị ở trong phần khai báo của hàm
+            đối số: argument
+                giá trị truyền vào khi gọi hàm
+        */
+
+    function sayHello(){
+        // console.log("xin chào!");// xin chào
+        return ;
+        console.log("2222");
+
+    }
+
+    function sum(a,b,c) {
+
+    }
+    sum(1,2,3);
+    function checkEvenOdd(number){
+        if(number%2==0){
+            console.log(`${number} là số chẵn`);
+        }else{
+            console.log(`${number} là số lẻ`);
+
+        }
+    }
+    checkEvenOdd(5);
+    checkEvenOdd(6);
+    checkEvenOdd(7);
   // // function declaration
   // //khai báo hàm thông thường
   // // ngoặc đơn: parameters: tham số -> biến, chỉ tồn tại nội bộ
@@ -44,6 +87,105 @@
 
   let sum2 = (a, b)=>a + b;
   console.log(sum(10,20));
+
+
+  // declation function
+
+  /**
+   * Ham tinh tong hai so nguyen
+   * @param {*} number1 so nguyen thu nhat
+   * @param {*} number2 so nguyen thu hai
+   * @returns tong hai so nguyen
+   */
+// function sum(number1, number2) {
+//     return number1 + number2;
+// }
+
+// let result = sum(2, 3);
+// console.log(`Tổng: ${result}`);
+
+
+
+// expression
+// const sum = function (number1, number2) {
+//     return number1 + number2;
+// }
+
+// console.log("Tong: ", sum(2, 3));
+
+
+
+
+// arrow fn
+// const sum = (number1, number2) => {
+//     return number1 + number2;
+// }
+
+  const sum = (number1, number2) => number1 + number2;
+  console.log("Sum: ", sum(1, 1));
+
+
+
+  let carts = [];
+
+  /**
+   * ham them gia vao carts
+   * @param {*} price gia lay tu nguoi dung
+   * @returns carts sau khi them
+   * Auth: htmt (11/03/2025)
+   */
+  const addPrice = (array, price) => {
+      array.push(price);
+      return array;
+  }
+
+  /**
+   * Ham thay doi gia trong array
+   * @param {*} index vi tri thay doi gia
+   * @param {*} value gia tri moi
+   * @returns ham sau thay doi
+   * Auth: htmt (11/03/2025)
+   */
+  const updatePrice = (array, index, value) => {
+      array.splice(index, 1, value);
+      return array;
+  }
+
+  const removePrice = (array, index) => {
+      array.splice(index, 1);
+      return array;
+  }
+
+  const formatMoney = (price) => {
+      return price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  }
+
+  const totalAmount = (array) => {
+      let total = 0;
+
+      for (const element of array) {
+          total += element;
+      }
+      return formatMoney(total);
+  }
+
+
+  const resultAdd1 = addPrice(carts, 10);
+  const resultAdd2 = addPrice(carts, 20);
+  const resultAdd3 = addPrice(carts, 30);
+  const resultAdd4 = addPrice(carts, 40);
+  console.log("carts: ", carts);
+
+  const resultUpdate1 = updatePrice(carts, 0, 77);
+  console.log("carts: ", carts);
+
+
+  carts = removePrice(carts, 1);
+  console.log("carts: ", carts);
+
+  let cost = totalAmount(carts);
+  console.log("Tong tien: ", cost);
+
 </script>
 </body>
 </html>

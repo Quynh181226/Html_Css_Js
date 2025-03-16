@@ -6,7 +6,19 @@
 </head>
 <body>
 <script>
-
+    const cart = [
+        { name: "Mèn mén", price: 30000, quantity: 2 },
+        { name: "Mì tôm", price: 5000, quantity: 1 },
+        { name: "Bánh bao", price: 15000, quantity: 3 }
+    ];
+    const sumCart=(item)=>{
+        let sum=0;
+        for( n of item){
+            sum+=n.price*n.quantity;
+        }
+        return sum;
+    }
+    console.log(`Total amount in cart`, sumCart(cart).toLocaleString()+"VND");
 </script>
 </body>
 </html>

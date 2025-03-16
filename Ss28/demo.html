@@ -1,1597 +1,999 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-<script>
-    Cách tạo Object
-    1. Sử dụng dấu ngoặc nhọn {} (Object Literal)
-    Cách phổ biến nhất: Đơn giản, ngắn gọn, dễ đọc.
-        Cú pháp:
-    const obj = {
-        key1: value1,
-        key2: value2
-    };
-    Ví dụ:
-    const person = {
-        name: "An",
-        age: 20,
-        isStudent: true
-    };
-    console.log(person); // { name: "An", age: 20, isStudent: true }
-    // 2. Sử dụng từ khóa new Object()
-    // Cách truyền thống: Ít dùng hơn vì dài dòng.
-    //     Cú pháp:
-    const obj = new Object();
-    obj.key1 = value1;
-    obj.key2 = value2;
-    const person = new Object();
-    person.name = "Binh";
-    person.age = 25;
-    console.log(person); // { name: "Binh", age: 25 }
-    3. Sử dụng hàm khởi tạo (Constructor Function)
-    Mục đích: Tạo nhiều object có cùng cấu trúc.
-        Cú pháp:
-    function ConstructorName(param1, param2) {
-        this.key1 = param1;
-        this.key2 = param2;
-    }
-    const obj = new ConstructorName(value1, value2);
-    eg:
-    function Person(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-    const person1 = new Person("An", 20);
-    const person2 = new Person("Binh", 25);
-    console.log(person1); // Person { name: "An", age: 20 }
-    console.log(person2); // Person { name: "Binh", age: 25 }
-    4. Sử dụng class (ES6)
-    Cách hiện đại: Dễ đọc, hỗ trợ kế thừa tốt hơn, ra mắt trong ES6 (2015).
-        Cú pháp:
+<!--//NaN là gì-->
+<!--Object.values()-->
+<!--const person = {-->
+<!--name: "An",-->
+<!--age: 20,-->
+<!--city: "Hanoi"-->
+<!--};-->
+
+<!--const values = Object.values(person);-->
+<!--values.forEach(value => {-->
+<!--console.log(value);-->
+<!--});-->
+    <script>
+        // Cấu trúc chuỗi JSON
+        // Object là gì?
+        //     Object trong Json được thể hiện bằng dấu ngoặc nhọn {}. Khái niệm Object trong Json cũng khá tương đồng với Object trong Javascript. Tuy nhiên, Object trong Json vẫn có những giới hạn như:
+        //
+        //     Key: phải luôn nằm trong dấu ngoặc kép, không được phép là biến số.
+        //     Value: Chỉ cho phép các kiểu dữ liệu cơ bản: numbers, String, Booleans, arrays, objects, null. Không cho phép function, date, undefined.
+        //     Không cho phép dấy phẩy cuối cùng như Object trong Javascript.
+
+        //OOP_JS
+        //for...in
+        const object = { a: 1, b: 2, c: 3 };
+
+        for (const property in object) {
+            console.log(`${property}: ${object[property]}`);
+        }
+
+        // Expected output:
+        // "a: 1"
+        // "b: 2"
+        // "c: 3"
+
+        //Object.values()
+        const object1 = {
+            a: "somestring",
+            b: 42,
+            c: false,
+        };
+
+        console.log(Object.values(object1));
+        // Expected output: Array ["somestring", 42, false]
+
+        //Object.keys()
+        const object1 = {
+            a: "somestring",
+            b: 42,
+            c: false,
+        };
+
+        console.log(Object.keys(object1));
+        // Expected output: Array ["a", "b", "c"]
+
+        // Cách tạo Object
+
+        // 1. Sử dụng dấu ngoặc nhọn {} (Object Literal)
+        // Cách phổ biến nhất: Đơn giản, ngắn gọn, dễ đọc.
+        //     Cú pháp:
+        const obj = {
+            key1: value1,
+            key2: value2
+        };
+
+        // Ví dụ:
+        const person = {
+            name: "An",
+            age: 20,
+            isStudent: true
+        };
+        console.log(person); // { name: "An", age: 20, isStudent: true }
+
+        // 2. Sử dụng từ khóa new Object()
+        // Cách truyền thống: Ít dùng hơn vì dài dòng.
+        //     Cú pháp:
+        const obj = new Object();
+        obj.key1 = value1;
+        obj.key2 = value2;
+        const person = new Object();
+        person.name = "Binh";
+        person.age = 25;
+        console.log(person); // { name: "Binh", age: 25 }
+
+        // 3. Sử dụng hàm khởi tạo (Constructor Function)
+        // Mục đích: Tạo nhiều object có cùng cấu trúc.
+        //     Cú pháp:
+        function ConstructorName(param1, param2) {
+            this.key1 = param1;
+            this.key2 = param2;
+        }
+        const obj = new ConstructorName(value1, value2);
+
+        // eg:
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        const person1 = new Person("An", 20);
+        const person2 = new Person("Binh", 25);
+        console.log(person1); // Person { name: "An", age: 20 }
+        console.log(person2); // Person { name: "Binh", age: 25 }
+
+        // 1. Constructor Function là gì?
+        //     Định nghĩa:
+        // Constructor Function (Hàm khởi tạo) là một cách truyền thống trong JavaScript để tạo ra nhiều đối tượng (objects) có cùng cấu trúc (các thuộc tính và phương thức giống nhau). Nó đóng vai trò như một "khuôn mẫu" (blueprint) để tạo các instance (thực thể) mới.
+        //     Trong JavaScript, đây là cách tiếp cận lập trình hướng đối tượng (OOP) trước khi có cú pháp class (ES6).
+        //     Cách hoạt động:
+        //     Khi bạn định nghĩa một hàm với từ khóa this bên trong và gọi nó bằng từ khóa new, JavaScript sẽ:
+        //     Tạo một đối tượng mới rỗng {}.
+        // Gán this trong hàm trỏ đến đối tượng mới đó.
+        //     Gán các thuộc tính/phương thức cho this.
+        //     Trả về đối tượng đã tạo.
+        //     Cú pháp cơ bản:
+        function ConstructorName(param1, param2) {
+            this.key1 = param1;
+            this.key2 = param2;
+        }
+        const obj = new ConstructorName(value1, value2);
+
+        // 2. Phân tích ví dụ của bạn
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        const person1 = new Person("An", 20);
+        const person2 = new Person("Binh", 25);
+        console.log(person1); // Person { name: "An", age: 20 }
+        console.log(person2); // Person { name: "Binh", age: 25 }
+        // Giải thích từng dòng:
+        //     function Person(name, age):
+        //         Định nghĩa một hàm khởi tạo tên Person.
+        //     Nhận hai tham số: name (tên) và age (tuổi).
+        //     this.name = name; và this.age = age;
+        // this là tham chiếu đến đối tượng mới sẽ được tạo khi gọi hàm với new.
+        //     Gán giá trị từ tham số name và age vào các thuộc tính name và age của đối tượng.
+        //     const person1 = new Person("An", 20);
+        // Từ khóa new kích hoạt quá trình:
+        //     Tạo một đối tượng mới {}.
+        // Gán this trong Person trỏ đến đối tượng đó.
+        //     Thực thi hàm Person với name = "An" và age = 20.
+        // Trả về đối tượng: { name: "An", age: 20 }.
+        // console.log(person1);
+        // In ra đối tượng person1 với các thuộc tính đã được gán.
+        //     Tương tự với person2:
+        //     Tạo một đối tượng khác với name = "Binh" và age = 25.
+        // Kết quả:
+        //     person1 và person2 là hai đối tượng riêng biệt, nhưng có cùng cấu trúc (cùng các thuộc tính name và age).
+
+        // 3. Thêm ví dụ minh họa
+        // Ví dụ 1: Tạo đối tượng "Car" với phương thức
+        function Car(brand, model, year) {
+            this.brand = brand;   // Thuộc tính: hãng xe
+            this.model = model;   // Thuộc tính: mẫu xe
+            this.year = year;     // Thuộc tính: năm sản xuất
+            this.getInfo = function() { // Phương thức
+                return `${this.brand} ${this.model} (${this.year})`;
+            };
+        }
+
+        const car1 = new Car("Toyota", "Camry", 2020);
+        const car2 = new Car("Honda", "Civic", 2021);
+
+        console.log(car1.getInfo()); // "Toyota Camry (2020)"
+        console.log(car2.getInfo()); // "Honda Civic (2021)"
+
+        // Ví dụ 2: Quản lý sinh viên
+        function Student(id, name, grade) {
+            this.id = id;
+            this.name = name;
+            this.grade = grade;
+            this.isPassing = function() {
+                return this.grade >= 5 ? "Pass" : "Fail";
+            };
+        }
+
+        const student1 = new Student(1, "An", 8.5);
+        const student2 = new Student(2, "Binh", 4.0);
+
+        console.log(student1);         // Student { id: 1, name: "An", grade: 8.5, isPassing: [Function] }
+        console.log(student1.isPassing()); // "Pass"
+        console.log(student2.isPassing()); // "Fail"
+
+        //Ví dụ 3: OJ Constructor
+        // Constructor function
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.sayHello = function() {
+                console.log(`My name is ${this.name} and I am ${this.age} years old.`);
+            };
+        }
+
+        //Creating Instances with a Constructor
+        const p1 = new Person("Akash", 30);
+        const p2 = new Person("Anvesh", 25);
+
+        p1.sayHello();
+        p2.sayHello();
+
+        // My name is Akash and I am 30 years old.
+        // My name is Anvesh and I am 25 years old.
+
+        // 4. Cách sử dụng và khi nào cần sử dụng
+        // Cách sử dụng:
+        //     Bước 1: Định nghĩa hàm khởi tạo với this để gán thuộc tính/phương thức.
+        //     Bước 2: Gọi hàm với new để tạo instance mới.
+        //     Thêm phương thức: Có thể thêm phương thức bên trong hàm hoặc gắn vào prototype (xem phần nâng cao bên dưới).
+        // Khi nào cần sử dụng:
+        //     Khi cần tạo nhiều đối tượng cùng cấu trúc:
+        //     Ví dụ: Danh sách sinh viên, xe hơi, sản phẩm trong cửa hàng.
+        //     Thay vì viết từng đối tượng riêng lẻ, dùng constructor để tái sử dụng code.
+        //     Trước khi có class (ES6):
+        // Constructor Function là cách chính để triển khai OOP trong JavaScript trước ES6. Nếu bạn làm việc với code cũ hoặc môi trường không hỗ trợ class, đây là lựa chọn phổ biến.
+        //     Khi cần kiểm soát việc khởi tạo:
+        //     Bạn có thể thêm logic trong hàm khởi tạo (ví dụ: kiểm tra dữ liệu đầu vào).
+        // Ví dụ thực tế:
+        //     Quản lý danh sách nhân viên trong công ty:
+        function Employee(id, name, salary) {
+            this.id = id;
+            this.name = name;
+            this.salary = salary >= 0 ? salary : 0; // Kiểm tra lương không âm
+        }
+
+        const emp1 = new Employee(101, "John", 5000);
+        const emp2 = new Employee(102, "Jane", -1000);
+        console.log(emp1); // Employee { id: 101, name: "John", salary: 5000 }
+        console.log(emp2); // Employee { id: 102, name: "Jane", salary: 0 }
+
+        // 5. Nâng cao: Prototype và Constructor Function
+        // Prototype là gì?
+        //     Mỗi constructor function có một thuộc tính prototype, cho phép bạn thêm phương thức chia sẻ giữa các instance để tiết kiệm bộ nhớ.
+        //     Ví dụ với prototype:
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Thêm phương thức vào prototype
+        Person.prototype.sayHello = function() {
+            return `Hi, I'm ${this.name}, ${this.age} years old!`;
+        };
+
+        const person1 = new Person("An", 20);
+        const person2 = new Person("Binh", 25);
+
+        console.log(person1.sayHello()); // "Hi, I'm An, 20 years old!"
+        console.log(person2.sayHello()); // "Hi, I'm Binh, 25 years old!"
+        // Lợi ích: Phương thức sayHello được chia sẻ giữa person1 và person2, không tạo bản sao cho mỗi instance.
+
+        // 6. So sánh với class (ES6)
+        // Constructor Function là cách cũ, trong khi class là cách hiện đại hơn:
+        // Constructor Function
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Class (ES6)
+        class PersonClass {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        // Khác biệt: class là cú pháp "ngọt" (syntactic sugar) của Constructor Function, dễ đọc hơn và hỗ trợ kế thừa tốt hơn.
+        //     Khi nào dùng Constructor thay vì class?
+        //     Code cũ hoặc môi trường không hỗ trợ ES6 (hiếm gặp ngày nay).
+        // Khi bạn muốn hiểu sâu về cách JavaScript hoạt động bên dưới.
+
+        // 4. Sử dụng class (ES6)
+        // Cách hiện đại: Dễ đọc, hỗ trợ kế thừa tốt hơn, ra mắt trong ES6(2015).
+        //     Cú pháp:
         class ClassName {
             constructor(param1, param2) {
                 this.key1 = param1;
                 this.key2 = param2;
             }
         }
-    const obj = new ClassName(value1, value2);
-    eg:
+        const obj = new ClassName(value1, value2);
+        // eg:
         class Person {
             constructor(name, age) {
                 this.name = name;
                 this.age = age;
             }
         }
-    const person = new Person("An", 20);
-    console.log(person); // Person { name: "An", age: 20 }
-    Thuộc tính và Phương thức
-    Thuộc tính (Properties)
-    Định nghĩa: Các cặp key-value lưu trữ dữ liệu trong object.
-        Truy cập:
-        Dùng dấu chấm: obj.key.
-        Dùng dấu ngoặc vuông: obj["key"] (hữu ích khi key là biến hoặc có ký tự đặc biệt).
-    Ví dụ:
-        javascript
+        const person = new Person("An", 20);
+        console.log(person); // Person { name: "An", age: 20 }
 
-    Collapse
+        // Thuộc tính và Phương thức
+        // Thuộc tính(Properties)
+        // Định nghĩa: Các cặp key - value lưu trữ dữ liệu trong object.
+        //     Truy cập:
+        //     Dùng dấu chấm: obj.key.
+        //     Dùng dấu ngoặc vuông: obj["key"](hữu ích khi key là biến hoặc có ký tự đặc biệt).
 
-    Wrap
+        // Ví dụ:
+        const person = {
+            name: "An",
+            age: 20
+        };
+        console.log(person.name);      // "An"
+        console.log(person["age"]);    // 20
+        person.age = 21;               // Thay đổi giá trị
+        person.city = "Hanoi";         // Thêm thuộc tính mới
+        console.log(person);           // { name: "An", age: 21, city: "Hanoi" }
 
-    Copy
-    const person = {
+        // Phương thức(Methods)
+        // Định nghĩa: Hàm được định nghĩa bên trong object, biểu diễn hành vi của object.
+        //     Cú pháp:
+        const obj = {
+            key: function () {
+                // logic
+            }
+        };
+        // Ví dụ:
+        const person = {
+            name: "An",
+            age: 20,
+            sayHello: function () {
+                return `Hello, I'm ${this.name}, ${this.age} years old!`;
+            }
+        };
+        console.log(person.sayHello()); // "Hello, I'm An, 20 years old!"
+        // ES6 shorthand:
+        const person = {
+            name: "An",
+            age: 20,
+            sayHello() {  // Không cần từ khóa "function"
+                return `Hello, I'm ${this.name}, ${this.age} years old!`;
+            }
+        };
+
+        // Một số khía cạnh bổ sung:
+        // 1. Thao tác với Object:
+        // Thêm / Xóa thuộc tính:
+        const obj = { name: "An" };
+        obj.age = 20;         // Thêm
+        delete obj.name;      // Xóa
+        console.log(obj);     // { age: 20 }
+        // Duyệt qua thuộc tính:
+        const obj = { name: "An", age: 20 };
+        for (let key in obj) {
+            console.log(`${key}: ${obj[key]}`);
+        }
+        // Output:
+        // name: An
+        // age: 20
+
+        // 2. Object Methods hữu ích:
+        // Object.keys(obj): Trả về mảng các key.
+        //     Object.values(obj): Trả về mảng các value.
+        //     Object.entries(obj): Trả về mảng các cặp[key, value].
+        //     Ví dụ:
+        const obj = { name: "An", age: 20 };
+        console.log(Object.keys(obj));    // ["name", "age"]
+        console.log(Object.values(obj));  // ["An", 20]
+        console.log(Object.entries(obj)); // [["name", "An"], ["age", 20]]
+
+        // 3. Sao chép Object:
+        //     Shallow (sao chép nông):
+        const obj1 = { name: "An" };
+        const obj2 = Object.assign({}, obj1);
+        console.log(obj2); // { name: "An" }
+
+        // Deep (sao chép sâu):
+        const obj1 = { info: { name: "An" } };
+        const obj2 = JSON.parse(JSON.stringify(obj1));
+
+        // 4. Kế thừa(Prototype):
+        // Mọi object trong JavaScript đều có một prototype(nguyên mẫu), cho phép kế thừa thuộc tính / phương thức.
+        //     Ví dụ:
+        const parent = { greet: function () { return "Hello"; } };
+        const child = Object.create(parent);
+        console.log(child.greet()); // "Hello"
+
+        // Kết quả khi chạy:
+        //     Dựa trên tổng quan của bạn, nếu thêm code ví dụ:
+        const person = {
+            name: "An",
+            age: 20,
+            sayHello() {
+                return `Hi, I'm ${this.name}`;
+            }
+        };
+        console.log(person.sayHello()); // "Hi, I'm An"
+
+        //     => Object là gì: Container linh hoạt lưu trữ dữ liệu dạng key - value.
+        //     Cách tạo: Object literal({}), new Object(), constructor function, hoặc class.
+        // Thuộc tính: Dữ liệu(key - value).
+        // Phương thức: Hành vi(hàm trong object)
+
+        // 1. Truy cập thuộc tính bằng dấu chấm (.)
+        // Định nghĩa: Đây là cách đơn giản và trực quan nhất để truy cập thuộc tính khi tên thuộc tính (key) đã biết trước và là một identifier hợp lệ trong JavaScript.
+        // Cú pháp:
+        // objectName.propertyName
+
+        // Ví dụ:
+        const person = {
         name: "An",
         age: 20
-    };
-    console.log(person.name);      // "An"
-    console.log(person["age"]);    // 20
-    person.age = 21;               // Thay đổi giá trị
-    person.city = "Hanoi";         // Thêm thuộc tính mới
-    console.log(person);           // { name: "An", age: 21, city: "Hanoi" }
-    Phương thức (Methods)
-    Định nghĩa: Hàm được định nghĩa bên trong object, biểu diễn hành vi của object.
-        Cú pháp:
-        javascript
+        };
+        console.log(person.name); // "An"
+        console.log(person.age);  // 20
 
-    Collapse
+        // Ưu điểm:
+        // Ngắn gọn, dễ đọc.
+        // Thích hợp khi làm việc với các thuộc tính cố định.
 
-    Wrap
+        // Lưu ý:
+        // Tên thuộc tính phải tuân theo quy tắc đặt tên của JavaScript:
+        // Không chứa dấu cách (ví dụ: "first name" không dùng được).
+        // Không bắt đầu bằng số (ví dụ: 1stName không hợp lệ).
+        // Không chứa ký tự đặc biệt như -, @, #.
+        // Không thể dùng nếu tên thuộc tính là một biến hoặc được tính toán động.
 
-    Copy
-    const obj = {
-        key: function() {
-            // logic
-        }
-    };
-    Ví dụ:
-        javascript
+        // 2. Truy cập thuộc tính bằng dấu ngoặc vuông ([])
+        // Định nghĩa: Cách linh hoạt hơn, cho phép truy cập thuộc tính khi tên thuộc tính chứa ký tự đặc biệt, có dấu cách, hoặc được lưu trong một biến.
 
-    Collapse
+        // Cú pháp:
+        // objectName["propertyName"]
 
-    Wrap
+        // Ví dụ:
+        const person = {
+        "first name": "An",
+        "age-group": "young",
+        job: "student"
+        };
+        console.log(person["first name"]); // "An"
+        console.log(person["age-group"]);  // "young"
 
-    Copy
-    const person = {
+        // Ưu điểm:
+        // Có thể truy cập thuộc tính với tên không hợp lệ khi dùng dấu chấm (có dấu cách, ký tự đặc biệt).
+        // Hỗ trợ truy cập động (dùng biến).
+        // Truy cập thuộc tính động:
+        // Khi tên thuộc tính được lưu trong một biến, chỉ có thể dùng dấu ngoặc vuông:
+        const person = {
         name: "An",
+        age: 20
+        };
+        const prop = "name";
+        console.log(person[prop]); // "An" (prop được thay bằng "name")
+        console.log(person["age"]); // 20
+
+        // Lưu ý:
+        // Giá trị trong [] phải là chuỗi (string) hoặc biểu thức trả về chuỗi.
+        // Thích hợp khi làm việc với dữ liệu JSON hoặc khi tên thuộc tính không cố định.
+
+        // 3. Xử lý khi thuộc tính không tồn tại
+        // Hành vi mặc định: Nếu truy cập một thuộc tính không tồn tại trong object, JavaScript trả về undefined thay vì báo lỗi.
+
+        // Ví dụ:
+        const person = {
+        name: "An"
+        };
+        console.log(person.age);       // undefined
+        console.log(person["job"]);    // undefined
+        // Ý nghĩa: Điều này giúp tránh crash chương trình, nhưng cần kiểm tra cẩn thận khi sử dụng giá trị.
+
+        // 4. Xử lý an toàn với Optional Chaining (?.)
+        // Định nghĩa: Cú pháp ?. (ra mắt trong ES2020) giúp truy cập thuộc tính an toàn, tránh lỗi khi đối tượng là null hoặc undefined.
+
+        // Cú pháp:
+        // objectName?.propertyName
+        // objectName?.["propertyName"]
+
+        // Ví dụ:
+        const person = {
+        address: {
+        city: "Hanoi"
+        }
+        };
+        console.log(person.address?.city);      // "Hanoi"
+        console.log(person.phone?.number);      // undefined (không lỗi)
+        console.log(person?.address?.street);   // "Hanoi" hoặc undefined nếu address không tồn tại
+
+        const obj = null;
+        console.log(obj?.name);                 // undefined (không lỗi)
+
+        // Ưu điểm:
+        // Ngăn lỗi TypeError: Cannot read property 'x' of undefined/null.
+        // Rút gọn code so với kiểm tra thủ công (if (obj && obj.prop)).
+        // So sánh hai cách truy cập:
+        // Tiêu chí    Dấu chấm (.)   Dấu ngoặc vuông ([])
+        // Cú pháp obj.prop   obj["prop"]
+        // Tên thuộc tính  Phải là identifier hợp lệ  Có thể chứa ký tự đặc biệt
+        // Truy cập động   Không hỗ trợ   Hỗ trợ (dùng biến)
+        // Dễ đọc  Cao    Thấp hơn khi dùng nhiều
+        // Ví dụ   person.name    person["first name"]
+
+        // Ví dụ tổng hợp:
+        const person = {
+        "first name": "An",
         age: 20,
+        address: {
+        city: "Hanoi"
+        },
         sayHello: function() {
-            return `Hello, I'm ${this.name}, ${this.age} years old!`;
+        return "Hi!";
         }
-    };
-    console.log(person.sayHello()); // "Hello, I'm An, 20 years old!"
-    ES6 shorthand:
-        javascript
+        };
 
-    Collapse
+        // Dấu chấm
+        console.log(person.age);            // 20
+        console.log(person.sayHello());     // "Hi!"
 
-    Wrap
+        // Dấu ngoặc vuông
+        console.log(person["first name"]);  // "An"
+        const key = "age";
+        console.log(person[key]);           // 20
 
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        sayHello() {  // Không cần từ khóa "function"
-            return `Hello, I'm ${this.name}, ${this.age} years old!`;
+        // Optional chaining
+        console.log(person.address?.city);  // "Hanoi"
+        console.log(person.phone?.number);  // undefined
+
+        // Thuộc tính không tồn tại
+        console.log(person.job);            // undefined
+
+        // Một số mẹo và lưu ý:
+        // Kiểm tra thuộc tính tồn tại:
+        // Dùng in:
+        console.log("name" in person); // true
+        console.log("job" in person);  // false
+
+        // Dùng hasOwnProperty:
+        console.log(person.hasOwnProperty("name")); // true
+        // Gán giá trị:
+        // Cả hai cách đều dùng được:
+        person.name = "Binh";         // Dấu chấm
+        person["age"] = 21;           // Dấu ngoặc vuông
+        // Xóa thuộc tính:
+        // Dùng delete:
+        delete person.age;
+        console.log(person.age); // undefined
+
+        // Kết luận:
+        // Dấu chấm (.): Dùng khi tên thuộc tính cố định, hợp lệ.
+        // Dấu ngoặc vuông ([]): Dùng khi tên thuộc tính động hoặc không hợp lệ.
+        // Optional Chaining (?.)**: Bảo vệ code khỏi lỗi với null/undefined.
+
+        //   Duyệt qua đối tượng trong JavaScript
+        //   Khi làm việc với các đối tượng (Object), việc duyệt qua các thuộc tính
+        //   (properties) là rất phổ biến để truy xuất hoặc xử lý dữ liệu. JavaScript cung cấp nhiều cách để thực hiện điều này, bao gồm for … in, Object.keys(), và Object.values(). Hãy phân tích từng cách:
+        //
+        //         1. Duyệt qua bằng for … in
+        //     Định nghĩa:
+        //         Vòng lặp for … in được thiết kế đặc biệt để lặp qua tất cả các thuộc tính có thể liệt kê (enumerable properties) của một đối tượng, bao gồm cả key của các thuộc tính.
+
+        //         Cú pháp:
+        //     for (let key in object) {
+        //         // Xử lý với key hoặc object[key]
+        //     }
+        //     key: Biến tạm lưu tên thuộc tính (key) trong mỗi lần lặp.
+        //         object: Đối tượng cần duyệt.
+
+        //         Ví dụ:
+            const person = {
+                name: "An",
+                age: 20,
+                city: "Hanoi"
+            };
+
+            for (let key in person) {
+                console.log(`Key: ${key}, Value: ${person[key]}`);
+            }
+        //     Kết quả:
+        //     Key: name, Value: An
+        //     Key: age, Value: 20
+        //     Key: city, Value: Hanoi
+
+        //     Cách hoạt động:
+        //         Mỗi lần lặp, key nhận giá trị là tên của một thuộc tính trong person.
+        //         person[key] truy cập giá trị tương ứng với key đó.
+        //         Ví dụ với thuộc tính kế thừa:
+            // Đối tượng cha
+            const parent = {
+                country: "Vietnam"
+            };
+
+            // Đối tượng con kế thừa từ parent
+            const person = Object.create(parent);
+            person.name = "An";
+            person.age = 20;
+
+            for (let key in person) {
+                console.log(`Key: ${key}, Value: ${person[key]}`);
+            }
+        //     Kết quả:
+        //     Key: name, Value: An
+        //     Key: age, Value: 20
+        //     Key: country, Value: Vietnam
+        //     for … in duyệt qua cả thuộc tính trực tiếp (name, age) và thuộc tính kế thừa (country).
+
+        //         Lọc thuộc tính trực tiếp với hasOwnProperty():
+            for (let key in person) {
+                if (person.hasOwnProperty(key)) {
+                    console.log(`Key: ${key}, Value: ${person[key]}`);
+                }
+            }
+        //     Kết quả:
+        //     Key: name, Value: An
+        //     Key: age, Value: 20
+        //     hasOwnProperty() kiểm tra xem key có phải là thuộc tính trực tiếp của person hay không, bỏ qua country từ prototype.
+        //         Lưu ý:
+        //         Enumerable Properties: Chỉ duyệt qua các thuộc tính có thuộc tính enumerable: true (mặc định khi tạo bằng cú pháp thông thường).
+
+        //     Ví dụ thuộc tính không enumerable:
+            const obj = {};
+            Object.defineProperty(obj, "hidden", {
+                value: "secret",
+                enumerable: false
+            });
+            obj.name = "An";
+            for (let key in obj) {
+                console.log(key); // Chỉ in "name", không in "hidden"
+            }
+        //     Kế thừa: Duyệt qua cả prototype chain, cần thận trọng khi không muốn điều này.
+        //         Không dùng cho mảng: Dù hoạt động được, for … in không phù hợp với mảng vì nó duyệt qua cả các thuộc tính không phải chỉ số.
+        //         Ưu điểm:
+        //         Dễ sử dụng, cú pháp đơn giản.
+        //         Truy cập trực tiếp cả key và value trong vòng lặp.
+        //         Nhược điểm:
+        //         Duyệt qua thuộc tính kế thừa, có thể gây nhầm lẫn nếu không kiểm soát.
+
+        //     2. Duyệt qua bằng Object.keys()
+        //     Định nghĩa:
+        //         Phương thức Object.keys() trả về một mảng chứa tất cả các tên thuộc tính (keys) trực tiếp của đối tượng, không bao gồm thuộc tính kế thừa từ prototype.
+        //         Cú pháp:
+        //     const keys = Object.keys(object);
+        //     // Duyệt qua mảng keys bằng for, for...of, hoặc forEach
+        //     Ví dụ:
+            const person = {
+                name: "An",
+                age: 20,
+                city: "Hanoi"
+            };
+
+            const keys = Object.keys(person);
+            console.log(keys); // ["name", "age", "city"]
+
+            // Duyệt bằng forEach
+            keys.forEach(key => {
+                console.log(`Key: ${key}, Value: ${person[key]}`);
+            });
+        //     Kết quả:
+        //     Key: name, Value: An
+        //     Key: age, Value: 20
+        //     Key: city, Value: Hanoi
+
+        //     Ví dụ với for...of:
+            for (let key of Object.keys(person)) {
+                console.log(`Key: ${key}, Value: ${person[key]}`);
+            }
+        //     Kết quả: Tương tự như trên.
+
+        //         Ví dụ với kế thừa:
+            const parent = { country: "Vietnam" };
+            const person = Object.create(parent);
+            person.name = "An";
+            person.age = 20;
+
+            console.log(Object.keys(person)); // ["name", "age"]
+        //     Chỉ lấy các thuộc tính trực tiếp, bỏ qua country.
+        //         Cách hoạt động:
+        //         Object.keys(person) trả về mảng các key: ["name", "age", "city"].
+        //         Dùng vòng lặp để duyệt qua mảng này, truy cập giá trị bằng person[key].
+        //         Ưu điểm:
+        //         Chỉ lấy thuộc tính trực tiếp: Không duyệt qua prototype chain.
+        //         Linh hoạt: Có thể dùng với bất kỳ vòng lặp nào (for, for...of, forEach).
+        //     Dễ kiểm soát: Trả về mảng, có thể thao tác trước khi duyệt (lọc, sắp xếp).
+        //     Nhược điểm:
+        //         Cần thêm bước truy cập giá trị (object[key]), không trực tiếp như for … in.
+
+        //     3. Duyệt qua bằng Object.values()
+        //     Định nghĩa:
+        //         Phương thức Object.values() trả về một mảng chứa tất cả các giá trị (values) của các thuộc tính trực tiếp trong đối tượng.
+        //         Cú pháp:
+        //     const values = Object.values(object);
+        //     // Duyệt qua mảng values
+
+        //     Ví dụ:
+            const person = {
+                name: "An",
+                age: 20,
+                city: "Hanoi"
+            };
+            const values = Object.values(person);
+            console.log(values); // ["An", 20, "Hanoi"]
+
+            // Duyệt bằng forEach
+            values.forEach(value => {
+                console.log(`Value: ${value}`);
+            });
+        //     Kết quả:
+        //     Value: An
+        //     Value: 20
+        //     Value: Hanoi
+
+        //     Ví dụ với for...of:
+            for (let value of Object.values(person)) {
+                console.log(`Value: ${value}`);
+            }
+        //     Kết quả: Tương tự.
+
+        //         Ví dụ với kế thừa:
+            const parent = { country: "Vietnam" };
+            const person = Object.create(parent);
+            person.name = "An";
+            person.age = 20;
+
+            console.log(Object.values(person)); // ["An", 20]
+        //     Chỉ lấy giá trị của thuộc tính trực tiếp.
+        //         Cách hoạt động:
+        //         Object.values(person) trả về mảng các giá trị: ["An", 20, "Hanoi"].
+        //         Dùng vòng lặp để duyệt qua mảng này, tập trung vào giá trị.
+        //         Ưu điểm:
+        //         Tập trung vào giá trị mà không cần quan tâm đến key.
+        //         Không duyệt qua prototype chain.
+        //         Hữu ích khi chỉ cần xử lý giá trị.
+        //         Nhược điểm:
+        //         Không truy cập được key trực tiếp, cần kết hợp với Object.keys() nếu muốn cả key và value.
+
+        //         Bổ sung: Object.entries()
+        //     Định nghĩa: Trả về một mảng các cặp [key, value] của các thuộc tính trực tiếp.
+        //         Ví dụ:
+            const person = {
+                name: "An",
+                age: 20
+            };
+
+            const entries = Object.entries(person);
+            console.log(entries); // [["name", "An"], ["age", 20]]
+
+            entries.forEach(([key, value]) => {
+                console.log(`Key: ${key}, Value: ${value}`);
+            });
+        //     Kết quả:
+        //     Key: name, Value: An
+        //     Key: age, Value: 20
+        //     So sánh chi tiết:
+        //         Phương pháp Trả về Duyệt qua  Kế thừa từ prototype   Vòng lặp sử dụng   Khi nào dùng?
+        //     for … in    Không trả về (duyệt trực tiếp) Tất cả enumerable properties   Có for … in   Khi cần duyệt trực tiếp key
+        //     Object.keys()   Mảng các key   Thuộc tính trực tiếp   Không  for, for...of, forEach Khi cần danh sách key
+        //     Object.values() Mảng các value Thuộc tính trực tiếp   Không  for, for...of, forEach Khi chỉ cần giá trị
+        //     Object.entries()    Mảng các [key, value]  Thuộc tính trực tiếp   Không  for, for...of, forEach Khi cần cả key và value
+
+        //     Ví dụ tổng hợp:
+            const person = {
+                name: "An",
+                age: 20,
+                city: "Hanoi"
+            };
+
+            // 1. for … in
+            console.log("Dùng for … in:");
+            for (let key in person) {
+                console.log(`${key}: ${person[key]}`);
+            }
+
+            // 2. Object.keys()
+            console.log("\nDùng Object.keys():");
+            Object.keys(person).forEach(key => {
+                console.log(`${key}: ${person[key]}`);
+            });
+
+            // 3. Object.values()
+            console.log("\nDùng Object.values():");
+            Object.values(person).forEach(value => {
+                console.log(value);
+            });
+
+            // 4. Object.entries()
+            console.log("\nDùng Object.entries():");
+            Object.entries(person).forEach(([key, value]) => {
+                console.log(`${key}: ${value}`);
+            });
+        //     Kết quả:
+        //     Dùng for … in:
+        //     name: An
+        //     age: 20
+        //     city: Hanoi
+
+        //     Dùng Object.keys():
+        //     name: An
+        //     age: 20
+        //     city: Hanoi
+
+        //     Dùng Object.values():
+        //     An
+        //     20
+        //     Hanoi
+
+        //     Dùng Object.entries():
+        //     name: An
+        //     age: 20
+        //     city: Hanoi
+        //     Lưu ý bổ sung:
+        //         Thuộc tính không enumerable:
+        //         Nếu thuộc tính được định nghĩa với enumerable: false, các phương pháp trên sẽ bỏ qua:
+            const obj = { name: "An" };
+            Object.defineProperty(obj, "age", { value: 20, enumerable: false });
+            console.log(Object.keys(obj)); // ["name"]
+        //     Thứ tự duyệt:
+        //         Từ ES6, thứ tự duyệt thường theo thứ tự khai báo cho các key là chuỗi hoặc số nguyên.
+        //         Hiệu suất:
+        //         for … in: Nhanh cho đối tượng nhỏ, nhưng chậm hơn với prototype chain lớn.
+        //         Object.keys/values/entries: Tạo mảng mới, có thể tốn bộ nhớ hơn nhưng dễ thao tác.
+
+        //     Kết luận:
+        //         for … in: Truy cập trực tiếp key, nhưng cần chú ý kế thừa.
+        //     Object.keys(): Lấy mảng key, linh hoạt và an toàn với prototype.
+        //     Object.values(): Tập trung vào giá trị, bỏ qua key.
+
+        //Ví dụ tổng hợp: Ve them, sua, xoa
+        const person = {
+            name: "An"
+        };
+
+        // Thêm thuộc tính
+        person.age = 20;              // Dấu chấm
+        person["city"] = "Hanoi";     // Dấu ngoặc vuông
+        console.log(person);          // { name: "An", age: 20, city: "Hanoi" }
+
+        // Sửa thuộc tính
+        person.age = 21;              // Dấu chấm
+        person["name"] = "Binh";      // Dấu ngoặc vuông
+        console.log(person);          // { name: "Binh", age: 21, city: "Hanoi" }
+
+        // Xóa thuộc tính
+        delete person.age;            // Dấu chấm
+        delete person["city"];        // Dấu ngoặc vuông
+        console.log(person);          // { name: "Binh" }
+
+        // 1. Duyệt qua mảng đối tượng
+        // a. Sử dụng for:
+        // Ví dụ:
+        const students = [
+            { name: "An", age: 20 },
+            { name: "Binh", age: 21 }
+        ];
+
+        for (let i = 0; i < students.length; i++) {
+            console.log(`Name: ${students[i].name}, Age: ${students[i].age}`);
         }
-    };
-    Một số khía cạnh bổ sung:
-        1. Thao tác với Object:
-        Thêm/Xóa thuộc tính:
-        javascript
+        // Kết quả:
+        // Name: An, Age: 20
+        // Name: Binh, Age: 21
 
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = { name: "An" };
-    obj.age = 20;         // Thêm
-    delete obj.name;      // Xóa
-    console.log(obj);     // { age: 20 }
-    Duyệt qua thuộc tính:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = { name: "An", age: 20 };
-    for (let key in obj) {
-        console.log(`${key}: ${obj[key]}`);
-    }
-    // Output:
-    // name: An
-    // age: 20
-    2. Object Methods hữu ích:
-        Object.keys(obj): Trả về mảng các key.
-    Object.values(obj): Trả về mảng các value.
-    Object.entries(obj): Trả về mảng các cặp [key, value].
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = { name: "An", age: 20 };
-    console.log(Object.keys(obj));    // ["name", "age"]
-    console.log(Object.values(obj));  // ["An", 20]
-    console.log(Object.entries(obj)); // [["name", "An"], ["age", 20]]
-    3. Sao chép Object:
-        Shallow copy (sao chép nông):
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj1 = { name: "An" };
-    const obj2 = Object.assign({}, obj1);
-    console.log(obj2); // { name: "An" }
-    Deep copy (sao chép sâu):
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj1 = { info: { name: "An" } };
-    const obj2 = JSON.parse(JSON.stringify(obj1));
-    4. Kế thừa (Prototype):
-    Mọi object trong JavaScript đều có một prototype (nguyên mẫu), cho phép kế thừa thuộc tính/phương thức.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const parent = { greet: function() { return "Hello"; } };
-    const child = Object.create(parent);
-    console.log(child.greet()); // "Hello"
-    Kết quả khi chạy:
-        Dựa trên tổng quan của bạn, nếu thêm code ví dụ:
-
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        sayHello() {
-            return `Hi, I'm ${this.name}`;
+        // b. Sử dụng for … of:
+        //     Ví dụ:
+        for (let student of students) {
+            console.log(`Name: ${student.name}, Age: ${student.age}`);
         }
-    };
-    console.log(person.sayHello()); // "Hi, I'm An"
-    Tài liệu tham khảo:
-        MDN Web Docs - Object: Nguồn tài liệu chính thức, rất chi tiết.
-        Kết luận:
-        Object là gì: Container linh hoạt lưu trữ dữ liệu dạng key-value.
-        Cách tạo: Object literal ({}), new Object(), constructor function, hoặc class.
-    Thuộc tính: Dữ liệu (key-value).
-        Phương thức: Hành vi (hàm trong object).
-    Bạn có muốn mình giải thích sâu hơn về phần nào không? Ví dụ: this, kế thừa, hay cách sao chép object?
-
-
-
-
-1. Truy cập thuộc tính bằng dấu chấm (.)
-Định nghĩa: Đây là cách đơn giản và trực quan nhất để truy cập thuộc tính khi tên thuộc tính (key) đã biết trước và là một identifier hợp lệ trong JavaScript.
-Cú pháp:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-objectName.propertyName
-Ví dụ:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-name: "An",
-age: 20
-};
-console.log(person.name); // "An"
-console.log(person.age);  // 20
-Ưu điểm:
-Ngắn gọn, dễ đọc.
-Thích hợp khi làm việc với các thuộc tính cố định.
-Lưu ý:
-Tên thuộc tính phải tuân theo quy tắc đặt tên của JavaScript:
-Không chứa dấu cách (ví dụ: "first name" không dùng được).
-Không bắt đầu bằng số (ví dụ: 1stName không hợp lệ).
-Không chứa ký tự đặc biệt như -, @, #.
-Không thể dùng nếu tên thuộc tính là một biến hoặc được tính toán động.
-2. Truy cập thuộc tính bằng dấu ngoặc vuông ([])
-Định nghĩa: Cách linh hoạt hơn, cho phép truy cập thuộc tính khi tên thuộc tính chứa ký tự đặc biệt, có dấu cách, hoặc được lưu trong một biến.
-Cú pháp:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-objectName["propertyName"]
-Ví dụ:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-"first name": "An",
-"age-group": "young",
-job: "student"
-};
-console.log(person["first name"]); // "An"
-console.log(person["age-group"]);  // "young"
-Ưu điểm:
-Có thể truy cập thuộc tính với tên không hợp lệ khi dùng dấu chấm (có dấu cách, ký tự đặc biệt).
-Hỗ trợ truy cập động (dùng biến).
-Truy cập thuộc tính động:
-Khi tên thuộc tính được lưu trong một biến, chỉ có thể dùng dấu ngoặc vuông:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-name: "An",
-age: 20
-};
-const prop = "name";
-console.log(person[prop]); // "An" (prop được thay bằng "name")
-console.log(person["age"]); // 20
-Lưu ý:
-Giá trị trong [] phải là chuỗi (string) hoặc biểu thức trả về chuỗi.
-Thích hợp khi làm việc với dữ liệu JSON hoặc khi tên thuộc tính không cố định.
-3. Xử lý khi thuộc tính không tồn tại
-Hành vi mặc định: Nếu truy cập một thuộc tính không tồn tại trong object, JavaScript trả về undefined thay vì báo lỗi.
-Ví dụ:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-name: "An"
-};
-console.log(person.age);       // undefined
-console.log(person["job"]);    // undefined
-Ý nghĩa: Điều này giúp tránh crash chương trình, nhưng cần kiểm tra cẩn thận khi sử dụng giá trị.
-4. Xử lý an toàn với Optional Chaining (?.)
-Định nghĩa: Cú pháp ?. (ra mắt trong ES2020) giúp truy cập thuộc tính an toàn, tránh lỗi khi đối tượng là null hoặc undefined.
-Cú pháp:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-objectName?.propertyName
-objectName?.["propertyName"]
-Ví dụ:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-address: {
-city: "Hanoi"
-}
-};
-console.log(person.address?.city);      // "Hanoi"
-console.log(person.phone?.number);      // undefined (không lỗi)
-console.log(person?.address?.street);   // "Hanoi" hoặc undefined nếu address không tồn tại
-
-const obj = null;
-console.log(obj?.name);                 // undefined (không lỗi)
-Ưu điểm:
-Ngăn lỗi TypeError: Cannot read property 'x' of undefined/null.
-Rút gọn code so với kiểm tra thủ công (if (obj && obj.prop)).
-So sánh hai cách truy cập:
-Tiêu chí	Dấu chấm (.)	Dấu ngoặc vuông ([])
-Cú pháp	obj.prop	obj["prop"]
-Tên thuộc tính	Phải là identifier hợp lệ	Có thể chứa ký tự đặc biệt
-Truy cập động	Không hỗ trợ	Hỗ trợ (dùng biến)
-Dễ đọc	Cao	Thấp hơn khi dùng nhiều
-Ví dụ	person.name	person["first name"]
-Ví dụ tổng hợp:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-const person = {
-"first name": "An",
-age: 20,
-address: {
-city: "Hanoi"
-},
-sayHello: function() {
-return "Hi!";
-}
-};
-
-// Dấu chấm
-console.log(person.age);            // 20
-console.log(person.sayHello());     // "Hi!"
-
-// Dấu ngoặc vuông
-console.log(person["first name"]);  // "An"
-const key = "age";
-console.log(person[key]);           // 20
-
-// Optional chaining
-console.log(person.address?.city);  // "Hanoi"
-console.log(person.phone?.number);  // undefined
-
-// Thuộc tính không tồn tại
-console.log(person.job);            // undefined
-Một số mẹo và lưu ý:
-Kiểm tra thuộc tính tồn tại:
-Dùng in:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-console.log("name" in person); // true
-console.log("job" in person);  // false
-Dùng hasOwnProperty:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-console.log(person.hasOwnProperty("name")); // true
-Gán giá trị:
-Cả hai cách đều dùng được:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-person.name = "Binh";         // Dấu chấm
-person["age"] = 21;           // Dấu ngoặc vuông
-Xóa thuộc tính:
-Dùng delete:
-javascript
-
-Collapse
-
-Wrap
-
-Copy
-delete person.age;
-console.log(person.age); // undefined
-Tài liệu tham khảo:
-Dmitri Pavlutin - Access Object Properties: Giải thích chi tiết cách truy cập.
-MDN - Optional Chaining: Tài liệu về ?..
-Kết luận:
-Dấu chấm (.): Dùng khi tên thuộc tính cố định, hợp lệ.
-Dấu ngoặc vuông ([]): Dùng khi tên thuộc tính động hoặc không hợp lệ.
-Optional Chaining (?.)**: Bảo vệ code khỏi lỗi với null/undefined.
-Bạn có muốn mình giải thích thêm về phần nào không? Ví dụ: cách dùng ?. trong trường hợp phức tạp hơn, hay cách xử lý thuộc tính động?
-
-
-
-
-
-        Duyệt qua đối tượng trong JavaScript
-    Khi làm việc với các đối tượng (Object), việc duyệt qua các thuộc tính (properties) là rất phổ biến để truy xuất hoặc xử lý dữ liệu. JavaScript cung cấp nhiều cách để thực hiện điều này, bao gồm for … in, Object.keys(), và Object.values(). Hãy phân tích từng cách:
-
-        1. Duyệt qua bằng for … in
-    Định nghĩa:
-        Vòng lặp for … in được thiết kế đặc biệt để lặp qua tất cả các thuộc tính có thể liệt kê (enumerable properties) của một đối tượng, bao gồm cả key của các thuộc tính.
-        Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    for (let key in object) {
-        // Xử lý với key hoặc object[key]
-    }
-    key: Biến tạm lưu tên thuộc tính (key) trong mỗi lần lặp.
-        object: Đối tượng cần duyệt.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        city: "Hanoi"
-    };
-
-    for (let key in person) {
-        console.log(`Key: ${key}, Value: ${person[key]}`);
-    }
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Key: name, Value: An
-    Key: age, Value: 20
-    Key: city, Value: Hanoi
-    Cách hoạt động:
-        Mỗi lần lặp, key nhận giá trị là tên của một thuộc tính trong person.
-        person[key] truy cập giá trị tương ứng với key đó.
-        Ví dụ với thuộc tính kế thừa:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    // Đối tượng cha
-    const parent = {
-        country: "Vietnam"
-    };
-
-    // Đối tượng con kế thừa từ parent
-    const person = Object.create(parent);
-    person.name = "An";
-    person.age = 20;
-
-    for (let key in person) {
-        console.log(`Key: ${key}, Value: ${person[key]}`);
-    }
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Key: name, Value: An
-    Key: age, Value: 20
-    Key: country, Value: Vietnam
-    for … in duyệt qua cả thuộc tính trực tiếp (name, age) và thuộc tính kế thừa (country).
-        Lọc thuộc tính trực tiếp với hasOwnProperty():
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    for (let key in person) {
-        if (person.hasOwnProperty(key)) {
-            console.log(`Key: ${key}, Value: ${person[key]}`);
-        }
-    }
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Key: name, Value: An
-    Key: age, Value: 20
-    hasOwnProperty() kiểm tra xem key có phải là thuộc tính trực tiếp của person hay không, bỏ qua country từ prototype.
-        Lưu ý:
-        Enumerable Properties: Chỉ duyệt qua các thuộc tính có thuộc tính enumerable: true (mặc định khi tạo bằng cú pháp thông thường).
-    Ví dụ thuộc tính không enumerable:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = {};
-    Object.defineProperty(obj, "hidden", {
-        value: "secret",
-        enumerable: false
-    });
-    obj.name = "An";
-    for (let key in obj) {
-        console.log(key); // Chỉ in "name", không in "hidden"
-    }
-    Kế thừa: Duyệt qua cả prototype chain, cần thận trọng khi không muốn điều này.
-        Không dùng cho mảng: Dù hoạt động được, for … in không phù hợp với mảng vì nó duyệt qua cả các thuộc tính không phải chỉ số.
-        Ưu điểm:
-        Dễ sử dụng, cú pháp đơn giản.
-        Truy cập trực tiếp cả key và value trong vòng lặp.
-        Nhược điểm:
-        Duyệt qua thuộc tính kế thừa, có thể gây nhầm lẫn nếu không kiểm soát.
-    2. Duyệt qua bằng Object.keys()
-    Định nghĩa:
-        Phương thức Object.keys() trả về một mảng chứa tất cả các tên thuộc tính (keys) trực tiếp của đối tượng, không bao gồm thuộc tính kế thừa từ prototype.
-        Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const keys = Object.keys(object);
-    // Duyệt qua mảng keys bằng for, for...of, hoặc forEach
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        city: "Hanoi"
-    };
-
-    const keys = Object.keys(person);
-    console.log(keys); // ["name", "age", "city"]
-
-    // Duyệt bằng forEach
-    keys.forEach(key => {
-        console.log(`Key: ${key}, Value: ${person[key]}`);
-    });
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Key: name, Value: An
-    Key: age, Value: 20
-    Key: city, Value: Hanoi
-    Ví dụ với for...of:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    for (let key of Object.keys(person)) {
-        console.log(`Key: ${key}, Value: ${person[key]}`);
-    }
-    Kết quả: Tương tự như trên.
-
-        Ví dụ với kế thừa:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const parent = { country: "Vietnam" };
-    const person = Object.create(parent);
-    person.name = "An";
-    person.age = 20;
-
-    console.log(Object.keys(person)); // ["name", "age"]
-    Chỉ lấy các thuộc tính trực tiếp, bỏ qua country.
-        Cách hoạt động:
-        Object.keys(person) trả về mảng các key: ["name", "age", "city"].
-        Dùng vòng lặp để duyệt qua mảng này, truy cập giá trị bằng person[key].
-        Ưu điểm:
-        Chỉ lấy thuộc tính trực tiếp: Không duyệt qua prototype chain.
-        Linh hoạt: Có thể dùng với bất kỳ vòng lặp nào (for, for...of, forEach).
-    Dễ kiểm soát: Trả về mảng, có thể thao tác trước khi duyệt (lọc, sắp xếp).
-    Nhược điểm:
-        Cần thêm bước truy cập giá trị (object[key]), không trực tiếp như for … in.
-    3. Duyệt qua bằng Object.values()
-    Định nghĩa:
-        Phương thức Object.values() trả về một mảng chứa tất cả các giá trị (values) của các thuộc tính trực tiếp trong đối tượng.
-        Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const values = Object.values(object);
-    // Duyệt qua mảng values
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        city: "Hanoi"
-    };
-
-    const values = Object.values(person);
-    console.log(values); // ["An", 20, "Hanoi"]
-
-    // Duyệt bằng forEach
-    values.forEach(value => {
-        console.log(`Value: ${value}`);
-    });
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Value: An
-    Value: 20
-    Value: Hanoi
-    Ví dụ với for...of:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    for (let value of Object.values(person)) {
-        console.log(`Value: ${value}`);
-    }
-    Kết quả: Tương tự.
-
-        Ví dụ với kế thừa:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const parent = { country: "Vietnam" };
-    const person = Object.create(parent);
-    person.name = "An";
-    person.age = 20;
-
-    console.log(Object.values(person)); // ["An", 20]
-    Chỉ lấy giá trị của thuộc tính trực tiếp.
-        Cách hoạt động:
-        Object.values(person) trả về mảng các giá trị: ["An", 20, "Hanoi"].
-        Dùng vòng lặp để duyệt qua mảng này, tập trung vào giá trị.
-        Ưu điểm:
-        Tập trung vào giá trị mà không cần quan tâm đến key.
-        Không duyệt qua prototype chain.
-        Hữu ích khi chỉ cần xử lý giá trị.
-        Nhược điểm:
-        Không truy cập được key trực tiếp, cần kết hợp với Object.keys() nếu muốn cả key và value.
-        Bổ sung: Object.entries()
-    Định nghĩa: Trả về một mảng các cặp [key, value] của các thuộc tính trực tiếp.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20
-    };
-
-    const entries = Object.entries(person);
-    console.log(entries); // [["name", "An"], ["age", 20]]
-
-    entries.forEach(([key, value]) => {
-        console.log(`Key: ${key}, Value: ${value}`);
-    });
-    Kết quả:
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Key: name, Value: An
-    Key: age, Value: 20
-    So sánh chi tiết:
-        Phương pháp	Trả về	Duyệt qua	Kế thừa từ prototype	Vòng lặp sử dụng	Khi nào dùng?
-    for … in	Không trả về (duyệt trực tiếp)	Tất cả enumerable properties	Có	for … in	Khi cần duyệt trực tiếp key
-    Object.keys()	Mảng các key	Thuộc tính trực tiếp	Không	for, for...of, forEach	Khi cần danh sách key
-    Object.values()	Mảng các value	Thuộc tính trực tiếp	Không	for, for...of, forEach	Khi chỉ cần giá trị
-    Object.entries()	Mảng các [key, value]	Thuộc tính trực tiếp	Không	for, for...of, forEach	Khi cần cả key và value
-    Ví dụ tổng hợp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        city: "Hanoi"
-    };
-
-    // 1. for … in
-    console.log("Dùng for … in:");
-    for (let key in person) {
-        console.log(`${key}: ${person[key]}`);
-    }
-
-    // 2. Object.keys()
-    console.log("\nDùng Object.keys():");
-    Object.keys(person).forEach(key => {
-        console.log(`${key}: ${person[key]}`);
-    });
-
-    // 3. Object.values()
-    console.log("\nDùng Object.values():");
-    Object.values(person).forEach(value => {
-        console.log(value);
-    });
-
-    // 4. Object.entries()
-    console.log("\nDùng Object.entries():");
-    Object.entries(person).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`);
-    });
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Dùng for … in:
-    name: An
-    age: 20
-    city: Hanoi
-
-    Dùng Object.keys():
-    name: An
-    age: 20
-    city: Hanoi
-
-    Dùng Object.values():
-    An
-    20
-    Hanoi
-
-    Dùng Object.entries():
-    name: An
-    age: 20
-    city: Hanoi
-    Lưu ý bổ sung:
-        Thuộc tính không enumerable:
-        Nếu thuộc tính được định nghĩa với enumerable: false, các phương pháp trên sẽ bỏ qua:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = { name: "An" };
-    Object.defineProperty(obj, "age", { value: 20, enumerable: false });
-    console.log(Object.keys(obj)); // ["name"]
-    Thứ tự duyệt:
-        Từ ES6, thứ tự duyệt thường theo thứ tự khai báo cho các key là chuỗi hoặc số nguyên.
-        Hiệu suất:
-        for … in: Nhanh cho đối tượng nhỏ, nhưng chậm hơn với prototype chain lớn.
-        Object.keys/values/entries: Tạo mảng mới, có thể tốn bộ nhớ hơn nhưng dễ thao tác.
-        Tài liệu tham khảo:
-        MDN - Object.keys: Tài liệu chi tiết về Object.keys.
-        MDN - Object.values: Tài liệu về Object.values.
-        MDN - for...in: Thông tin về for … in.
-    Kết luận:
-        for … in: Truy cập trực tiếp key, nhưng cần chú ý kế thừa.
-    Object.keys(): Lấy mảng key, linh hoạt và an toàn với prototype.
-    Object.values(): Tập trung vào giá trị, bỏ qua key.
-        Bạn có muốn mình giải thích thêm về cách áp dụng thực tế, hoặc ví dụ phức tạp hơn không? Ví dụ: duyệt đối tượng lồng nhau, hoặc xử lý dữ liệu JSON?
-
-
-
-
-
-
-        Các thao tác thêm, sửa, xóa thuộc tính của đối tượng
-
-
-
-    Trong JavaScript, đối tượng (object) được thiết kế để dễ dàng thay đổi bằng cách thêm, sửa hoặc xóa thuộc tính. Dưới đây là hướng dẫn chi tiết về cách thực hiện các thao tác này.
-
-
-
-        Thêm thuộc tính
-    Thuộc tính có thể được thêm vào một đối tượng bằng cách sử dụng dấu chấm (.) hoặc dấu ngoặc vuông ([])
-    Cú pháp
-
-
-    Ví dụ:
-
-
-
-        Khi nào dùng dấu ngoặc vuông:
-        Khi tên thuộc tính chứa ký tự đặc biệt hoặc khoảng trắng
-
-
-    Khi tên thuộc tính được lưu trữ trong một biến
-
-
-
-
-    Sửa đổi thuộc tính
-    Bạn có thể sửa giá trị của một thuộc tính hiện có bằng cách gán một giá trị mới cho thuộc tính đó
-    Cú pháp
-
-
-    Ví dụ:
-
-
-
-
-
-        Xóa thuộc tính
-    Để xóa một thuộc tính khỏi đối tượng, sử dụng từ khóa delete
-        Cú pháp
-
-
-    Ví dụ:
-
-
-
-        Lưu ý
-    Sau khi xóa, thuộc tính sẽ không còn trong đối tượng.
-        Nếu xóa một thuộc tính không tồn tại, JavaScript sẽ không gây lỗ
-
-
-
-
-    Tài liệu tham khảo
-    https://www.geeksforgeeks.org/how-to-perform-crud-operations-on-javascript-object/
-
-
-        Cảm ơn bạn đã cung cấp tổng quan về các thao tác thêm, sửa, xóa thuộc tính của đối tượng trong JavaScript! Mình sẽ phân tích chi tiết từng phần, giải thích cách hoạt động, bổ sung ví dụ minh họa, và làm rõ các lưu ý quan trọng để bạn hiểu sâu hơn.
-
-        Các thao tác thêm, sửa, xóa thuộc tính của đối tượng trong JavaScript
-    Trong JavaScript, đối tượng (Object) là một cấu trúc dữ liệu linh hoạt, cho phép thay đổi nội dung (thêm, sửa, xóa thuộc tính) sau khi được tạo. Dưới đây là phân tích chi tiết từng thao tác:
-
-        1. Thêm thuộc tính
-    Định nghĩa:
-        Bạn có thể thêm thuộc tính mới vào một đối tượng bất kỳ lúc nào bằng cách gán giá trị cho một key mới, sử dụng dấu chấm (.) hoặc dấu ngoặc vuông ([])*.
-    Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    // Dùng dấu chấm
-    object.propertyName = value;
-
-    // Dùng dấu ngoặc vuông
-    object["propertyName"] = value;
-    Ví dụ cơ bản:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An"
-    };
-
-    // Thêm thuộc tính bằng dấu chấm
-    person.age = 20;
-
-    // Thêm thuộc tính bằng dấu ngoặc vuông
-    person["city"] = "Hanoi";
-
-    console.log(person); // { name: "An", age: 20, city: "Hanoi" }
-    Khi nào dùng dấu ngoặc vuông?
-        a. Tên thuộc tính chứa ký tự đặc biệt hoặc khoảng trắng:
-        Nếu tên thuộc tính không phải là một identifier hợp lệ (có dấu cách, ký tự đặc biệt như -, hoặc bắt đầu bằng số), chỉ có thể dùng dấu ngoặc vuông.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {};
-
-    person["first name"] = "An"; // Có dấu cách
-    person["age-group"] = "young"; // Có dấu gạch ngang
-
-    console.log(person["first name"]); // "An"
-    console.log(person["age-group"]);  // "young"
-    b. Tên thuộc tính được lưu trữ trong một biến:
-        Khi tên thuộc tính là giá trị động (lấy từ biến), dấu ngoặc vuông là cách duy nhất.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {};
-    const propName = "name";
-
-    person[propName] = "An"; // propName được thay bằng "name"
-    console.log(person); // { name: "An" }
-    Lưu ý:
-        Nếu thuộc tính đã tồn tại, việc gán giá trị mới sẽ sửa đổi thay vì thêm.
-    2. Sửa đổi thuộc tính
-    Định nghĩa:
-        Để sửa giá trị của một thuộc tính hiện có, bạn chỉ cần gán một giá trị mới cho thuộc tính đó bằng dấu chấm hoặc dấu ngoặc vuông.
-        Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    // Dùng dấu chấm
-    object.propertyName = newValue;
-
-    // Dùng dấu ngoặc vuông
-    object["propertyName"] = newValue;
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20
-    };
-
-    // Sửa bằng dấu chấm
-    person.age = 21;
-
-    // Sửa bằng dấu ngoặc vuông
-    person["name"] = "Binh";
-
-    console.log(person); // { name: "Binh", age: 21 }
-    Ví dụ động:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An"
-    };
-    const key = "name";
-
-    person[key] = "Binh"; // Sửa thuộc tính "name"
-    console.log(person); // { name: "Binh" }
-    Lưu ý:
-        Nếu thuộc tính chưa tồn tại, thao tác này sẽ thêm thay vì sửa.
-        Có thể sửa cả giá trị đơn giản (string, number) lẫn phức tạp (object, array):
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        address: { city: "Hanoi" }
-    };
-    person.address.city = "Saigon";
-    console.log(person); // { address: { city: "Saigon" } }
-    3. Xóa thuộc tính
-    Định nghĩa:
-        Để xóa một thuộc tính khỏi đối tượng, sử dụng từ khóa delete, sau đó thuộc tính sẽ không còn tồn tại trong đối tượng.
-        Cú pháp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    // Dùng dấu chấm
-    delete object.propertyName;
-
-    // Dùng dấu ngoặc vuông
-    delete object["propertyName"];
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20,
-        city: "Hanoi"
-    };
-
-    // Xóa bằng dấu chấm
-    delete person.age;
-
-    // Xóa bằng dấu ngoặc vuông
-    delete person["city"];
-
-    console.log(person); // { name: "An" }
-    console.log(person.age); // undefined
-    Ví dụ động:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An",
-        age: 20
-    };
-    const keyToDelete = "age";
-
-    delete person[keyToDelete];
-    console.log(person); // { name: "An" }
-    Lưu ý:
-        Sau khi xóa: Thuộc tính không còn trong đối tượng, truy cập sẽ trả về undefined.
-        Xóa thuộc tính không tồn tại: Không gây lỗi, chỉ đơn giản không làm gì.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = { name: "An" };
-    delete person.job; // Không có "job"
-    console.log(person); // { name: "An" }
-    delete không xóa biến: Chỉ xóa thuộc tính của object, không dùng được với biến thông thường.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    let x = 10;
-    delete x; // Không hoạt động
-    console.log(x); // 10
-    Ví dụ tổng hợp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const person = {
-        name: "An"
-    };
-
-    // Thêm thuộc tính
-    person.age = 20;              // Dấu chấm
-    person["city"] = "Hanoi";     // Dấu ngoặc vuông
-    console.log(person);          // { name: "An", age: 20, city: "Hanoi" }
-
-    // Sửa thuộc tính
-    person.age = 21;              // Dấu chấm
-    person["name"] = "Binh";      // Dấu ngoặc vuông
-    console.log(person);          // { name: "Binh", age: 21, city: "Hanoi" }
-
-    // Xóa thuộc tính
-    delete person.age;            // Dấu chấm
-    delete person["city"];        // Dấu ngoặc vuông
-    console.log(person);          // { name: "Binh" }
-    So sánh dấu chấm và dấu ngoặc vuông:
-        Thao tác	Dấu chấm (.)	Dấu ngoặc vuông ([])
-    Thêm	obj.prop = value	obj["prop"] = value
-    Sửa	obj.prop = newValue	obj["prop"] = newValue
-    Xóa	delete obj.prop	delete obj["prop"]
-    Khi nào dùng	Key cố định, hợp lệ	Key động, có ký tự đặc biệt
-    Lưu ý bổ sung:
-        Thuộc tính không thể xóa:
-        Nếu thuộc tính được định nghĩa với configurable: false (qua Object.defineProperty), delete sẽ không hoạt động:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = {};
-    Object.defineProperty(obj, "name", {
-        value: "An",
-        configurable: false
-    });
-    delete obj.name; // Không xóa được
-    console.log(obj.name); // "An"
-    Hiệu suất:
-        Thêm/sửa/xóa bằng dấu chấm hoặc dấu ngoặc vuông có hiệu suất tương đương, trừ khi đối tượng rất lớn hoặc dùng key động phức tạp.
-        Kiểm tra thuộc tính tồn tại:
-        Trước khi sửa/xóa, có thể kiểm tra:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    console.log("name" in person); // true
-    console.log(person.hasOwnProperty("age")); // false
-    Ứng dụng thực tế:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const student = {};
-
-    // Thêm thông tin
-    student["full name"] = "Nguyen Van An";
-    student.grade = 8.5;
-
-    // Sửa thông tin
-    student.grade = 9.0;
-
-    // Xóa thông tin không cần
-    delete student["full name"];
-
-    console.log(student); // { grade: 9 }
-    Tài liệu tham khảo:
-        GeeksforGeeks - CRUD Operations on JavaScript Object: Hướng dẫn chi tiết về CRUD (Create, Read, Update, Delete) trên object.
-        Kết luận:
-        Thêm: Dùng . hoặc [] để gán giá trị cho key mới.
-        Sửa: Gán giá trị mới cho key hiện có.
-        Xóa: Dùng delete để loại bỏ thuộc tính.
-
-
-
-        Mảng đối tượng trong JavaScript
-    Mảng đối tượng là gì?
-        Định nghĩa: Mảng đối tượng là một mảng (array) mà các phần tử bên trong là các đối tượng (object). Đây là cách kết hợp giữa mảng (danh sách có thứ tự) và đối tượng (dữ liệu dạng key-value), rất hữu ích để lưu trữ và quản lý dữ liệu phức tạp.
-        Ứng dụng: Thường dùng để biểu diễn danh sách thực thể (ví dụ: danh sách học sinh, sản phẩm, nhân viên, v.v.).
-    1. Tạo mảng đối tượng
-    Cách tạo:
-        Sử dụng dấu ngoặc vuông [] để khai báo mảng, và mỗi phần tử là một đối tượng được định nghĩa bằng {}.
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20, grade: 8.5 },
-        { name: "Binh", age: 21, grade: 7.0 },
-        { name: "Cuong", age: 19, grade: 9.0 }
-    ];
-    console.log(students);
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-        [
-        { name: "An", age: 20, grade: 8.5 },
-            { name: "Binh", age: 21, grade: 7 },
-            { name: "Cuong", age: 19, grade: 9 }
-        ]
-    Lưu ý:
-        Mỗi đối tượng trong mảng có thể có cấu trúc khác nhau, nhưng thường nên giữ đồng nhất để dễ xử lý.
-    2. Truy cập phần tử trong mảng đối tượng
-    Cách truy cập:
-        Dùng chỉ số (index) để lấy đối tượng, sau đó dùng dấu chấm (.) hoặc dấu ngoặc vuông ([]) để truy cập thuộc tính.
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 }
-    ];
-
-    // Truy cập đối tượng tại index 0
-    console.log(students[0].name);      // "An"
-    console.log(students[0]["age"]);    // 20
-
-    // Truy cập đối tượng tại index 1
-    console.log(students[1].name);      // "Binh"
-    Lưu ý:
-        Nếu index vượt quá độ dài mảng, trả về undefined.
-        Nếu thuộc tính không tồn tại, trả về undefined.
-    3. Duyệt qua mảng đối tượng
-    a. Sử dụng for:
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 }
-    ];
-
-    for (let i = 0; i < students.length; i++) {
-        console.log(`Name: ${students[i].name}, Age: ${students[i].age}`);
-    }
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-    Name: An, Age: 20
-    Name: Binh, Age: 21
-    b. Sử dụng for … of:
-        Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    for (let student of students) {
-        console.log(`Name: ${student.name}, Age: ${student.age}`);
-    }
-    Kết quả: Tương tự trên.
-
-        Ưu điểm: Truy cập trực tiếp từng đối tượng, không cần dùng chỉ số.
-        c. Sử dụng forEach():
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    students.forEach(student => {
-        console.log(`Name: ${student.name}, Age: ${student.age}`);
-    });
-    Kết quả: Tương tự trên.
-
-        Ưu điểm: Ngắn gọn, cú pháp hàm arrow hiện đại.
-        So sánh:
-        Phương pháp	Cú pháp	Truy cập	Dừng vòng lặp
-    for	for (let i = 0; ...)	Qua index	Dùng break
-    for … of	for (let item of array)	Trực tiếp object	Dùng break
-    forEach()	array.forEach(item => ...)	Trực tiếp object	Không dừng được
-    4. Thao tác với mảng đối tượng
-    a. Thêm mới một đối tượng
-    Sử dụng push():
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 }
-    ];
-
-    students.push({ name: "Binh", age: 21 });
-    console.log(students);
-    Kết quả:
-
-        text
-
-    Collapse
-
-    Wrap
-
-    Copy
-        [{ name: "An", age: 20 }, { name: "Binh", age: 21 }]
-    Gán trực tiếp vào chỉ mục:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    students[1] = { name: "Cuong", age: 19 }; // Thay thế hoặc thêm
-    console.log(students);
-    b. Sửa đổi một đối tượng
-    Ví dụ:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 }
-    ];
-
-    // Sửa đối tượng tại index 0
-    students[0].age = 21;
-    students[0].name = "An Nguyen";
-    console.log(students); // [{ name: "An Nguyen", age: 21 }]
-    c. Xóa một đối tượng
-    Sử dụng splice():
-    javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 }
-    ];
-
-    // Xóa đối tượng tại index 1
-    students.splice(1, 1); // Bắt đầu từ index 1, xóa 1 phần tử
-    console.log(students); // [{ name: "An", age: 20 }]
-    d. Tìm kiếm đối tượng
-    Sử dụng find():
-    Trả về đối tượng đầu tiên thỏa mãn điều kiện.
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 }
-    ];
-
-    const found = students.find(student => student.name === "Binh");
-    console.log(found); // { name: "Binh", age: 21 }
-    e. Lọc đối tượng
-    Sử dụng filter():
-    Trả về mảng các đối tượng thỏa mãn điều kiện.
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 },
-        { name: "Cuong", age: 19 }
-    ];
-
-    const adults = students.filter(student => student.age >= 20);
-    console.log(adults); // [{ name: "An", age: 20 }, { name: "Binh", age: 21 }]
-    f. Sắp xếp đối tượng
-    Sử dụng sort():
-    Sắp xếp theo một thuộc tính cụ thể.
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "Binh", age: 21 },
-        { name: "An", age: 20 },
-        { name: "Cuong", age: 19 }
-    ];
-
-    // Sắp xếp theo tuổi tăng dần
-    students.sort((a, b) => a.age - b.age);
-    console.log(students);
-    // [{ name: "Cuong", age: 19 }, { name: "An", age: 20 }, { name: "Binh", age: 21 }]
-
-    // Sắp xếp theo tên
-    students.sort((a, b) => a.name.localeCompare(b.name));
-    console.log(students);
-    // [{ name: "An", age: 20 }, { name: "Binh", age: 21 }, { name: "Cuong", age: 19 }]
-    Ví dụ tổng hợp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const students = [
-        { name: "An", age: 20 },
-        { name: "Binh", age: 21 }
-    ];
-
-    // Thêm
-    students.push({ name: "Cuong", age: 19 });
-
-    // Sửa
-    students[1].age = 22;
-
-    // Xóa
-    students.splice(0, 1);
-
-    // Tìm
-    const found = students.find(s => s.name === "Cuong");
-
-    // Lọc
-    const older = students.filter(s => s.age > 20);
-
-    // Sắp xếp
-    students.sort((a, b) => a.age - b.age);
-
-    console.log(students); // [{ name: "Cuong", age: 19 }, { name: "Binh", age: 22 }]
-    console.log(found);    // { name: "Cuong", age: 19 }
-    console.log(older);    // [{ name: "Binh", age: 22 }]
-    Lưu ý:
-        Tham chiếu: Đối tượng trong mảng là tham chiếu, sửa đổi thuộc tính sẽ ảnh hưởng trực tiếp:
-        javascript
-
-    Collapse
-
-    Wrap
-
-    Copy
-    const obj = students[0];
-    obj.age = 25;
-    console.log(students[0].age); // 25
-    Hiệu suất: filter, sort tạo mảng mới, có thể tốn tài nguyên với mảng lớn.
-        Tài liệu tham khảo:
-        Scaler - Array of Objects in JavaScript: Hướng dẫn chi tiết về mảng đối tượng.
-        Kết luận:
-        Tạo: Dùng [] với các đối tượng {}.
-    Truy cập: Qua index và . hoặc [].
-        Duyệt: for, for … of, forEach.
-        Thao tác: Thêm (push), sửa (gán trực tiếp), xóa (splice), tìm (find), lọc (filter), sắp xếp (sort).
-</script>
+        // Kết quả: Tương tự trên.
+        //     Ưu điểm: Truy cập trực tiếp từng đối tượng, không cần dùng chỉ số.
+
+        //     c. Sử dụng forEach():
+        // Ví dụ:
+        students.forEach(student => {
+            console.log(`Name: ${student.name}, Age: ${student.age}`);
+        });
+        // Kết quả: Tương tự trên.
+        //
+        //     Ưu điểm: Ngắn gọn, cú pháp hàm arrow hiện đại.
+        //     So sánh:
+        //     Phương pháp	Cú pháp	Truy cập	Dừng vòng lặp
+        // for	for (let i = 0; ...)	Qua index	Dùng break
+        // for … of	for (let item of array)	Trực tiếp object	Dùng break
+        // forEach()	array.forEach(item => ...)	Trực tiếp object	Không dừng được
+
+        // 4. Thao tác với mảng đối tượng
+        // a. Thêm mới một đối tượng
+        // Sử dụng push():
+        const students = [
+            { name: "An", age: 20 }
+        ];
+
+        students.push({ name: "Binh", age: 21 });
+        console.log(students);
+
+        // Kết quả:
+        //     [{ name: "An", age: 20 }, { name: "Binh", age: 21 }]
+
+        // Gán trực tiếp vào chỉ mục:
+        students[1] = { name: "Cuong", age: 19 }; // Thay thế hoặc thêm
+        console.log(students);
+
+       // b. Sửa đổi một đối tượng
+        // Ví dụ:
+        const students = [
+            { name: "An", age: 20 }
+        ];
+
+        // Sửa đối tượng tại index 0
+        students[0].age = 21;
+        students[0].name = "An Nguyen";
+        console.log(students); // [{ name: "An Nguyen", age: 21 }]
+
+        // c. Xóa một đối tượng
+        // Sử dụng splice():
+        const students = [
+            { name: "An", age: 20 },
+            { name: "Binh", age: 21 }
+        ];
+
+        // Xóa đối tượng tại index 1
+        students.splice(1, 1); // Bắt đầu từ index 1, xóa 1 phần tử
+        console.log(students); // [{ name: "An", age: 20 }]
+
+        // d. Tìm kiếm đối tượng
+        // Sử dụng find():
+        // Trả về đối tượng đầu tiên thỏa mãn điều kiện.
+        const students = [
+            { name: "An", age: 20 },
+            { name: "Binh", age: 21 }
+        ];
+
+        const found = students.find(student => student.name === "Binh");
+        console.log(found); // { name: "Binh", age: 21 }
+
+        // e. Lọc đối tượng
+        // Sử dụng filter():
+        // Trả về mảng các đối tượng thỏa mãn điều kiện.
+        const students = [
+            { name: "An", age: 20 },
+            { name: "Binh", age: 21 },
+            { name: "Cuong", age: 19 }
+        ];
+
+        const adults = students.filter(student => student.age >= 20);
+        console.log(adults); // [{ name: "An", age: 20 }, { name: "Binh", age: 21 }]
+
+        // f. Sắp xếp đối tượng
+        // Sử dụng sort():
+        // Sắp xếp theo một thuộc tính cụ thể.
+        const students = [
+            { name: "Binh", age: 21 },
+            { name: "An", age: 20 },
+            { name: "Cuong", age: 19 }
+        ];
+
+        // Sắp xếp theo tuổi tăng dần
+        students.sort((a, b) => a.age - b.age);
+        console.log(students);
+        // [{ name: "Cuong", age: 19 }, { name: "An", age: 20 }, { name: "Binh", age: 21 }]
+
+        // Sắp xếp theo tên
+        students.sort((a, b) => a.name.localeCompare(b.name));
+        console.log(students);
+        // [{ name: "An", age: 20 }, { name: "Binh", age: 21 }, { name: "Cuong", age: 19 }]
+        // Ví dụ tổng hợp:
+        const students = [
+            { name: "An", age: 20 },
+            { name: "Binh", age: 21 }
+        ];
+
+        // Thêm
+        students.push({ name: "Cuong", age: 19 });
+
+        // Sửa
+        students[1].age = 22;
+
+        // Xóa
+        students.splice(0, 1);
+
+        // Tìm
+        const found = students.find(s => s.name === "Cuong");
+
+        // Lọc
+        const older = students.filter(s => s.age > 20);
+
+        // Sắp xếp
+        students.sort((a, b) => a.age - b.age);
+
+        console.log(students); // [{ name: "Cuong", age: 19 }, { name: "Binh", age: 22 }]
+        console.log(found);    // { name: "Cuong", age: 19 }
+        console.log(older);    // [{ name: "Binh", age: 22 }]
+        // Lưu ý:
+        //     Tham chiếu: Đối tượng trong mảng là tham chiếu, sửa đổi thuộc tính sẽ ảnh hưởng trực tiếp:
+        const obj = students[0];
+        obj.age = 25;
+        console.log(students[0].age); // 25
+        //Hiệu suất: filter, sort tạo mảng mới, có thể tốn tài nguyên với mảng lớn.
+    </script>
 </body>
+
 </html>

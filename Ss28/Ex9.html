@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<script>
 
-</script>
+<body>
+    <script>
+        let book = [];
+        let choice;
+        do {
+            choice = +prompt(`
+    1. Thêm sách mới.
+    2. Hiển thị danh sách sách.
+    3. Tìm kiếm sách theo tiêu đề.
+    4. Cập nhật trạng thái mượn/trả sách theo id sách.
+    5. Xóa sách theo id sách ra khỏi danh sách.
+    6. Sắp xếp sách theo giá tăng dần.
+    7. Thoát.`);
+            switch (choice) {
+                case 1:
+                    const id=+prompt(`Input id book:`).trim();
+                    const title=prompt(`Input title book:`).trim();
+                    const author=prompt(`Input author book:`).trim();
+                    const price=+prompt(`Input price book:`).trim();
+                    const books={
+                        id: id,
+                        title: title,
+                        author: author,
+                        price: price,
+                        isAvailable: true,
+                    };
+                    book.push(books);
+                    alert(`Add book success`);
+                    break;
+                case 2:
+                    if(book.length===0){
+                        alert(`Book list is empty`);
+                    }else{
+                        let bookList="Book list is:\n";
+                        book.forEach(item=>bookList+=`Id: ${item.id}, Title: ${item.title},
+                                                      Author: ${item.author}, Price: ${item.price},
+                                                      Status: ${item.isAvailable} `);
+                        console.table(book);
+                    }
+                    break;
+                case 3:
+                    if(book.length===0){
+                        alert(`List book empty`);
+                    }else{
+                        const search=prompt(`Input book need search by title:`).trim();
+                        const bookSearchTitle=book.find((item)=>item.title.trim().toLowerCase()===search.trim().toLowerCase());
+                        if(bookSearchTitle){
+                            alert(`Found book: ID: ${bookSearchTitle.id}, Title: ${bookSearchTitle.title},
+                                                      Author: ${bookSearchTitle.author}, Price: ${bookSearchTitle.price},
+                                                      Status: ${bookSearchTitle.isAvailable}`);
+                            // console.table(bookSearchTitle);
+                            console.table([bookSearchTitle]);
+                        }else{
+                            alert(`Not found book`);
+                        }
+                    }
+                    break;
+                case 4:
+                    // Cập nhật trạng thái mượn/trả sách theo id sách.
+                    if(book.length===0){
+                        alert(`List book empty`);
+                    }else{
+                       let idInput=
+                    }
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    console.log(`Exit program`);
+                    break;
+                default:
+                    console.log(`Invalid`);
+            }
+        } while (choice !== 7);
+    </script>
 </body>
+
 </html>

@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Constructor
+        // Định nghĩa: Hàm khởi tạo dùng để tạo và khởi tạo đối tượng.
+        //     Cách dùng: Dùng với từ khóa new để tạo instance mới.
+        //     Ví dụ:
+        function Person(name) {
+            this.name = name; // Constructor
+        }
+        const person1 = new Person("An");
+        console.log(person1.name); // "An"
+        // 2. Enumerable Properties
+        // Định nghĩa: Thuộc tính của đối tượng có thể được liệt kê (duyệt qua) bằng vòng lặp như for...in.
+        // Cách dùng: Thuộc tính có enumerable: true (mặc định khi tạo bằng cú pháp thông thường).
+        // Ví dụ:
+        const obj1 = { name: "An", age: 20 };
+        for (let key in obj1) {
+            console.log(key); // "name", "age" (enumerable)
+        }
+        // 3. Callback
+        // Định nghĩa: Hàm được truyền vào một hàm khác làm tham số, sẽ được gọi lại (executed) sau khi một sự kiện hoặc tác vụ hoàn thành.
+        //     Cách dùng: Thường dùng trong lập trình bất đồng bộ (asynchronous).
+        //     Ví dụ:
+        function greet(name, callback) {
+            console.log("Hello, " + name);
+            callback();
+        }
+        greet("An", () => console.log("Done!"));
+        // Output:
+        // Hello, An
+        // Done!
+        // 4. Object
+        // Định nghĩa: Kiểu dữ liệu cơ bản trong JS, lưu trữ dữ liệu dạng cặp key-value.
+        //     Cách dùng: Dùng để biểu diễn thực thể phức tạp.
+        //     Ví dụ:
+        const person2 = { name: "An", age: 20 };
+        // 5. Array
+        // Định nghĩa: Danh sách có thứ tự chứa các phần tử (có thể là bất kỳ kiểu dữ liệu nào).
+        // Cách dùng: Dùng để lưu trữ nhiều giá trị.
+        //     Ví dụ:
+        const numbers = [1, 2, 3];
+        // 6. Method
+        // Định nghĩa: Hàm được định nghĩa bên trong một đối tượng hoặc lớp.
+        //     Cách dùng: Thực hiện hành vi của đối tượng.
+        //     Ví dụ:
+        const obj2 = {
+            sayHi: function () { // Method
+                console.log("Hi!");
+            }
+        };
+        obj2.sayHi(); // "Hi!"
+        // 7. Prototype
+        // Định nghĩa: Cơ chế trong JS cho phép đối tượng kế thừa thuộc tính/phương thức từ một đối tượng khác.
+        //     Cách dùng: Dùng để chia sẻ phương thức giữa các instance.
+        //     Ví dụ:
+        function Person(name) {
+            this.name = name;
+        }
+        Person.prototype.greet = function () {
+            console.log("Hello, " + this.name);
+        };
+        const p1 = new Person("An");
+        p1.greet(); // "Hello, An"
+        // 8. Instance
+        // Định nghĩa: Một đối tượng cụ thể được tạo ra từ một constructor hoặc class.
+        // Cách dùng: Đại diện cho một thực thể cụ thể.
+        //     Ví dụ:
+        const person3 = new Person("An"); // person là instance của Person
+        // 9. Property
+        // Định nghĩa: Thuộc tính của đối tượng, là cặp key-value.
+        //     Cách dùng: Lưu trữ dữ liệu trong object.
+        //     Ví dụ:
+        const obj3 = { name: "An" }; // "name" là property
+        // 10. Function
+        // Định nghĩa: Khối mã có thể tái sử dụng, thực hiện một tác vụ cụ thể.
+        //     Cách dùng: Định nghĩa logic hoặc hành vi.
+        //     Ví dụ:
+        function add(a, b) {
+            return a + b;
+        }
+        console.log(add(2, 3)); // 5
+        // 11. Parameter / Argument
+        // Định nghĩa:
+        //     Parameter: Biến trong định nghĩa hàm.
+        //     Argument: Giá trị truyền vào khi gọi hàm.
+        //     Cách dùng: Truyền dữ liệu vào hàm.
+        //     Ví dụ:
+        function greet(name) { // "name" là parameter
+            console.log("Hi, " + name);
+        }
+        greet("An"); // "An" là argument
+        // 12. Scope
+        // Định nghĩa: Phạm vi mà biến có thể được truy cập.
+        //     Cách dùng: Quy định nơi biến tồn tại (global, local, block).
+        //     Ví dụ:
+        let globalVar = "I'm global";
+        function test() {
+            let localVar = "I'm local";
+            console.log(globalVar); // Truy cập được
+            console.log(localVar);  // Chỉ truy cập trong hàm
+        }
+        // 13. Closure
+        // Định nghĩa: Hàm bên trong có thể truy cập biến của hàm bên ngoài ngay cả khi hàm ngoài đã kết thúc.
+        //     Cách dùng: Dùng để tạo biến riêng tư.
+        //     Ví dụ:
+        function outer() {
+            let count = 0;
+            return function inner() {
+                count++;
+                console.log(count);
+            };
+        }
+        const counter = outer();
+        counter(); // 1
+        counter(); // 2
+        // 14. Event
+        // Định nghĩa: Hành động hoặc sự kiện (như click, load) mà JS có thể phản hồi.
+        //     Cách dùng: Xử lý tương tác người dùng.
+        //     Ví dụ:
+        document.addEventListener("click", () => console.log("Clicked!"));
+        // 15. Asynchronous
+        // Định nghĩa: Thực thi không đồng bộ, cho phép tiếp tục chạy mã mà không chờ đợi.
+        //     Cách dùng: Dùng với setTimeout, Promise, async/await.
+        // Ví dụ:
+        setTimeout(() => console.log("Delayed"), 1000);
+        console.log("Immediate");
+        // Output: "Immediate" -> "Delayed" (sau 1 giây)
+        // 16. Promise
+        // Định nghĩa: Đối tượng đại diện cho kết quả của một tác vụ bất đồng bộ (thành công hoặc thất bại).
+        // Cách dùng: Quản lý các hoạt động như fetch dữ liệu.
+        //     Ví dụ:
+        const p2 = new Promise((resolve) => resolve("Success"));
+        p2.then(result => console.log(result)); // "Success"
+        // 17. This
+        // Định nghĩa: Từ khóa tham chiếu đến ngữ cảnh hiện tại (context), thay đổi tùy vào cách gọi hàm.
+        //     Cách dùng: Thường dùng trong đối tượng hoặc hàm.
+        //     Ví dụ:
+        const obj4 = {
+            name: "An",
+            getName: function () {
+                return this.name;
+            }
+        };
+        console.log(obj4.getName()); // "An"
+        // 18. Module
+        // Định nghĩa: Cách tổ chức mã thành các tệp riêng biệt, có thể nhập/xuất (import/export).
+        // Cách dùng: Tái sử dụng mã giữa các file.
+        //     Ví dụ:
+        // file: math.js
+        export function add(a, b) { return a + b; }
+        // file: main.js
+        import { add } from './math.js';
+        console.log(add(2, 3)); // 5
+        // 19. JSON
+        // Định nghĩa: Định dạng dữ liệu (JavaScript Object Notation) để lưu trữ và trao đổi dữ liệu.
+        //     Cách dùng: Chuyển đổi giữa object và chuỗi.
+        //     Ví dụ:
+        const obj5 = { name: "An" };
+        const json = JSON.stringify(obj5); // '{"name":"An"}'
+        console.log(JSON.parse(json));    // { name: "An" }
+        // 20. Loop
+        // Định nghĩa: Vòng lặp để thực hiện lặp lại một tác vụ.
+        //     Cách dùng: Duyệt qua mảng hoặc đối tượng.
+        //     Ví dụ:
+        for (let i = 0; i < 3; i++) {
+            console.log(i); // 0, 1, 2
+        }
+        // 21. Variable
+        // Định nghĩa: Một "hộp chứa" để lưu trữ dữ liệu, có thể thay đổi hoặc không tùy vào cách khai báo (let, const, var).
+        // Cách dùng: Lưu giá trị để sử dụng sau.
+        //     Ví dụ:
+        let name1 = "An"; // Variable có thể thay đổi
+        const age1 = 20;  // Variable không thay đổi
+        console.log(name1, age1); // "An", 20
+        // 22. Hoisting
+        // Định nghĩa: Cơ chế trong JS đưa khai báo biến (var) hoặc hàm lên đầu phạm vi (scope) trước khi thực thi mã.
+        //     Cách dùng: Hiểu cách JS xử lý khai báo.
+        //     Ví dụ:
+        console.log(x); // undefined (hoisted nhưng chưa gán giá trị)
+        var x = 5;
+        // 23. Event Listener
+        // Định nghĩa: Hàm được gắn vào một sự kiện (event) để xử lý khi sự kiện xảy ra.
+        //     Cách dùng: Xử lý tương tác người dùng (click, keypress, v.v.).
+        //     Ví dụ:
+        document.addEventListener("click", () => console.log("Page clicked!"));
+        // 24. DOM (Document Object Model)
+        // Định nghĩa: Mô hình đối tượng tài liệu, biểu diễn cấu trúc HTML dưới dạng cây đối tượng mà JS có thể thao tác.
+        //     Cách dùng: Truy cập và chỉnh sửa trang web.
+        //     Ví dụ:
+        document.getElementById("myId").textContent = "Hello!";
+        //     25. Fetch
+        // Định nghĩa: API trong JS để thực hiện yêu cầu HTTP(như lấy dữ liệu từ server).
+        // Cách dùng: Lấy dữ liệu bất đồng bộ.
+        //     Ví dụ:
+        fetch("https://api.example.com/data")
+            .then(response => response.json())
+            .then(data => console.log(data));
+        //     26. Async / Await
+        // Định nghĩa: Cú pháp hiện đại để xử lý bất đồng bộ, giúp mã dễ đọc hơn so với Promise.
+        //     Cách dùng: Thay thế.then() trong Promise.
+        //     Ví dụ:
+        async function getData() {
+            const response = await fetch("https://api.example.com/data");
+            const data = await response.json();
+            console.log(data);
+        }
+        getData();
+        //     27. Try / Catch
+        // Định nghĩa: Cấu trúc xử lý lỗi(exception) trong JS.
+        //     Cách dùng: Bắt và xử lý lỗi để tránh chương trình bị crash.
+        //     Ví dụ:
+        try {
+            let result = undefinedVariable; // Lỗi
+        } catch (error) {
+            console.log("Error:", error.message); // "undefinedVariable is not defined"
+        }
+        //     28. Class
+        // Định nghĩa: Cú pháp ES6 để định nghĩa đối tượng theo kiểu lập trình hướng đối tượng.
+        //     Cách dùng: Tạo đối tượng với cấu trúc rõ ràng.
+        //     Ví dụ:
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+            greet() {
+                console.log("Hi, " + this.name);
+            }
+        }
+        const p = new Person("An");
+        p.greet(); // "Hi, An"
+        //     29. Inheritance
+        // Định nghĩa: Cơ chế cho phép một class kế thừa thuộc tính / phương thức từ class khác.
+        // Cách dùng: Tái sử dụng mã trong OOP.
+        //     Ví dụ:
+        class Animal {
+            speak() {
+                console.log("Sound");
+            }
+        }
+        class Dog extends Animal {
+            bark() {
+                console.log("Woof");
+            }
+        }
+        const dog = new Dog();
+        dog.speak(); // "Sound"
+        dog.bark();  // "Woof"
+        //     30. Static
+        // Định nghĩa: Thuộc tính / phương thức thuộc về class chứ không phải instance.
+        //     Cách dùng: Dùng mà không cần tạo instance.
+        //     Ví dụ:
+        class MathUtils {
+            static add(a, b) {
+                return a + b;
+            }
+        }
+        console.log(MathUtils.add(2, 3)); // 5
+        //     31. Spread Operator
+        // Định nghĩa: Toán tử ... dùng để "bung" các phần tử của mảng hoặc thuộc tính của object.
+        //     Cách dùng: Sao chép, hợp nhất dữ liệu.
+        //     Ví dụ:
+        const arr1 = [1, 2];
+        const newArr = [...arr1, 3]; // [1, 2, 3]
+        const obj = { name: "An" };
+        const newObj = { ...obj, age: 20 }; // { name: "An", age: 20 }
+        //     32. Destructuring
+        // Định nghĩa: Cách "tách" dữ liệu từ mảng hoặc object vào các biến riêng lẻ.
+        //     Cách dùng: Rút gọn cú pháp truy cập.
+        //     Ví dụ:
+        const person = { name2: "An", age: 20 };
+        const { name2, age } = person;
+        console.log(name2, age); // "An", 20
+        //     33. Template Literal
+        // Định nghĩa: Chuỗi được bao bởi dấu `, hỗ trợ chèn biến bằng ${}.
+        // Cách dùng: Tạo chuỗi động dễ đọc.
+        // Ví dụ:
+        const name = "An";
+        console.log(`Hello, ${name}!`); // "Hello, An!"
+        // 34. Arrow Function
+        // Định nghĩa: Cú pháp ngắn gọn cho hàm, không có this riêng.
+        // Cách dùng: Viết hàm ngắn gọn, thường dùng trong callback.
+        // Ví dụ:
+        const add = (a, b) => a + b;
+        console.log(add(2, 3)); // 5
+        // 35. Global
+        // Định nghĩa: Phạm vi toàn cục, nơi biến hoặc hàm có thể truy cập từ bất kỳ đâu.
+        // Cách dùng: Khai báo biến ngoài mọi hàm.
+        // Ví dụ:
+        var globalVar1 = "I'm global";
+        function test() {
+            console.log(globalVar1); // "I'm global"
+        }
+        test();
+        // 36. Null
+        // Định nghĩa: Giá trị đặc biệt biểu thị "không có gì"(khác với undefined).
+        // Cách dùng: Gán khi muốn xóa giá trị.
+        // Ví dụ:
+        let value = null;
+        console.log(value); // null
+        // 37. Undefined
+        // Định nghĩa: Giá trị mặc định của biến chưa được gán hoặc thuộc tính không tồn tại.
+        // Cách dùng: Kiểm tra trạng thái biến.
+        // Ví dụ:
+        let x;
+        console.log(x); // undefined
+        // 38. RegExp(Regular Expression)
+        // Định nghĩa: Đối tượng dùng để tìm kiếm hoặc thay thế chuỗi theo mẫu.
+        // Cách dùng: Xử lý chuỗi phức tạp.
+        // Ví dụ:
+        const str1 = "Hello123";
+        const regex = /\d+/;
+        console.log(str1.match(regex)); // ["123"]
+        //  39. Iterator
+        // Định nghĩa: Đối tượng cho phép duyệt qua các phần tử của tập hợp(như mảng).
+        // Cách dùng: Dùng với for...of hoặc tự định nghĩa.
+        // Ví dụ:
+        const arr2 = [1, 2, 3];
+        const it1 = arr2[Symbol.iterator]();
+        console.log(it1.next().value); // 1
+        // 40. API
+        // Định nghĩa: Giao diện lập trình ứng dụng, cung cấp cách tương tác với hệ thống hoặc thư viện.
+        // Cách dùng: Gọi hàm từ JS hoặc server.
+        // Ví dụ:
+        fetch("https://api.example.com") // Web API
+            .then(res => res.json());
+
+        // 1. Debugging
+        // Định nghĩa: Quá trình tìm và sửa lỗi (bug) trong mã nguồn.
+        //     Ngữ cảnh: Dùng khi kiểm tra mã bằng console hoặc công cụ như Chrome DevTools.
+        //     Ví dụ: "I spent an hour debugging this function to find the issue."
+        // 2. Syntax
+        // Định nghĩa: Quy tắc viết mã (cấu trúc câu lệnh) trong JS.
+        //     Ngữ cảnh: Khi nói về cách viết mã đúng.
+        //     Ví dụ: "The syntax for a for loop is simple: for (let i = 0; i < n; i++)."
+        // 3. Logic
+        // Định nghĩa: Luồng tư duy hoặc cách giải quyết vấn đề trong mã.
+        //     Ngữ cảnh: Khi thảo luận về cách một chương trình hoạt động.
+        //     Ví dụ: "The logic behind this algorithm is to sort the array first."
+        // 4. Runtime
+        // Định nghĩa: Thời điểm mã được thực thi (chạy) trong môi trường JS.
+        //     Ngữ cảnh: Khi nói về hành vi của mã lúc chạy.
+        //     Ví dụ: "This error only occurs at runtime, not during compilation."
+        // 5. Performance
+        // Định nghĩa: Hiệu suất của mã, liên quan đến tốc độ và tài nguyên sử dụng.
+        //     Ngữ cảnh: Khi tối ưu hóa chương trình.
+        //     Ví dụ: "Using forEach instead of a for loop might affect performance with large arrays."
+        // 6. Bug
+        // Định nghĩa: Lỗi trong mã khiến chương trình không hoạt động như mong đợi.
+        //     Ngữ cảnh: Khi báo cáo hoặc sửa lỗi.
+        //     Ví dụ: "There’s a bug in this code—it crashes when the input is null."
+        // 7. Code
+        // Định nghĩa: Tập hợp các lệnh được viết bằng JS (hoặc ngôn ngữ khác).
+        // Ngữ cảnh: Từ chung để chỉ mã nguồn.
+        //     Ví dụ: "Let’s write some code to fetch data from the server."
+        // 8. Refactor
+        // Định nghĩa: Tái cấu trúc mã để cải thiện readability hoặc hiệu suất mà không thay đổi chức năng.
+        //     Ngữ cảnh: Khi chỉnh sửa mã cũ.
+        //     Ví dụ: "I refactored this function to make it more modular."
+        // 9. Library
+        // Định nghĩa: Bộ sưu tập mã được viết sẵn để tái sử dụng (như jQuery, React).
+        // Ngữ cảnh: Khi tích hợp công cụ bên ngoài.
+        //     Ví dụ: "This project uses the Lodash library for array manipulation."
+        // 10. Framework
+        // Định nghĩa: Khung phần mềm cung cấp cấu trúc và công cụ để xây dựng ứng dụng (như Vue, Angular).
+        // Ngữ cảnh: Khi chọn công nghệ.
+        //     Ví dụ: "React is a popular framework for building user interfaces."
+        // 11. Client-side
+        // Định nghĩa: Mã chạy trên trình duyệt của người dùng (khác với server-side).
+        // Ngữ cảnh: Khi nói về môi trường chạy JS.
+        //     Ví dụ: "This JS code handles client-side validation."
+        // 12. Server-side
+        // Định nghĩa: Mã chạy trên máy chủ (ví dụ: Node.js).
+        // Ngữ cảnh: Khi phân biệt với client-side.
+        //     Ví dụ: "Node.js allows JavaScript to run server-side."
+        // 13. Environment
+        // Định nghĩa: Bối cảnh hoặc hệ thống nơi mã chạy (trình duyệt, Node.js, v.v.).
+        // Ngữ cảnh: Khi nói về nơi triển khai mã.
+        //     Ví dụ: "This variable is only available in the Node.js environment."
+        // 14. Deployment
+        // Định nghĩa: Quá trình đưa mã lên môi trường thực tế (như server hoặc web).
+        // Ngữ cảnh: Khi phát hành ứng dụng.
+        //     Ví dụ: "After deployment, the app will be live on the website."
+        // 15. Data
+        // Định nghĩa: Thông tin được lưu trữ hoặc xử lý trong chương trình.
+        //     Ngữ cảnh: Khi nói về đầu vào/đầu ra.
+        //     Ví dụ: "This function processes user data from the form."
+        // 16. State
+        // Định nghĩa: Trạng thái hiện tại của ứng dụng hoặc đối tượng.
+        //     Ngữ cảnh: Thường dùng trong quản lý giao diện (UI).
+        //     Ví dụ: "The state of this button changes when clicked."
+        // 17. Behavior
+        // Định nghĩa: Hành vi hoặc cách hoạt động của mã.
+        //     Ngữ cảnh: Khi mô tả chức năng.
+        //     Ví dụ: "The behavior of this script depends on user input."
+        // 18. Context
+        // Định nghĩa: Ngữ cảnh mà một hàm hoặc biến được thực thi, liên quan đến this.
+        //     Ngữ cảnh: Khi nói về phạm vi của this.
+        //     Ví dụ: "The context of this changes inside an arrow function."
+        // 19. Dependency
+        // Định nghĩa: Mã hoặc thư viện mà dự án dựa vào để hoạt động.
+        //     Ngữ cảnh: Khi quản lý package (npm, yarn).
+        //     Ví dụ: "This project has a dependency on the Axios library."
+        // 20. Boilerplate
+        // Định nghĩa: Mã mẫu cơ bản dùng để khởi đầu một dự án.
+        //     Ngữ cảnh: Khi bắt đầu viết ứng dụng.
+        //     Ví dụ: "I used a boilerplate template to set up this React app."
+        // 21. Feature
+        // Định nghĩa: Tính năng hoặc chức năng cụ thể trong ứng dụng.
+        //     Ngữ cảnh: Khi mô tả khả năng của mã.
+        //     Ví dụ: "This update adds a new feature to filter the list."
+        // 22. Version
+        // Định nghĩa: Phiên bản của JS, thư viện, hoặc ứng dụng.
+        //     Ngữ cảnh: Khi nói về cập nhật hoặc tương thích.
+        //     Ví dụ: "This code requires JavaScript ES6 or a newer version."
+        // 23. Execution
+        // Định nghĩa: Quá trình thực thi mã nguồn.
+        //     Ngữ cảnh: Khi nói về cách mã chạy.
+        //     Ví dụ: "The execution of this loop takes 2 seconds."
+        // 24. Pattern
+        // Định nghĩa: Mô hình hoặc cách tiếp cận lập trình (như Singleton, Observer).
+        // Ngữ cảnh: Khi thiết kế mã.
+        //     Ví dụ: "The Observer pattern is useful for event handling in JS."
+        // 25. Community
+        // Định nghĩa: Cộng đồng lập trình viên hỗ trợ và phát triển JS.
+        //     Ngữ cảnh: Khi nói về tài nguyên hoặc sự phổ biến.
+        //     Ví dụ: "The JavaScript community provides tons of open-source tools."
+        // Ví dụ tổng hợp trong ngữ cảnh:
+        // Debugging a bug in the code
+        function calculateTotal(price, tax) {
+            console.log("Debugging: Checking inputs", price, tax); // Debugging
+            return price + tax; // Logic
+        }
+
+        const data = { price: 100, tax: 10 }; // Data
+        console.log(calculateTotal(data.price, data.tax)); // Execution
+        // "Debugging: Checking inputs 100 10"
+
+        //     Iterator trong JavaScript
+        // 1. Định nghĩa
+        // Iterator (Trình lặp): Là một đối tượng trong JavaScript cho phép bạn duyệt qua (iterate) các phần tử của một tập hợp (như mảng, chuỗi, hoặc các cấu trúc dữ liệu khác) theo từng bước một.
+        //     Iterator tuân theo Iterator Protocol, nghĩa là nó phải có một phương thức next() trả về một đối tượng với hai thuộc tính:
+        //     value: Giá trị của phần tử hiện tại.
+        //     done: Boolean cho biết liệu đã duyệt hết tập hợp chưa (true nếu hết, false nếu chưa).
+        // 2. Iterator Protocol
+        // Một đối tượng được coi là Iterator nếu nó có phương thức next()
+        {
+            next: function() {
+                return { value: any, done: boolean };
+            }
+        }
+        // Một đối tượng là Iterable (có thể lặp) nếu nó có phương thức [Symbol.iterator], trả về một Iterator.
+        // 3. Iterable vs Iterator
+        // Iterable: Là đối tượng có thể được duyệt qua (như Array, String, Set, Map), được định nghĩa bằng [Symbol.iterator].
+        //     Iterator: Là công cụ thực tế để duyệt qua Iterable, được tạo ra từ [Symbol.iterator].
+        // 4. Cách hoạt động
+        // Khi bạn gọi iterable[Symbol.iterator](), nó trả về một Iterator.
+        //     Gọi next() trên Iterator để lấy từng phần tử cho đến khi done: true.
+        // 5. Ví dụ cơ bản
+        // Với mảng:
+        const arr = [1, 2, 3];
+        const iterator = arr[Symbol.iterator](); // Lấy Iterator từ mảng
+
+        console.log(iterator.next()); // { value: 1, done: false }
+        console.log(iterator.next()); // { value: 2, done: false }
+        console.log(iterator.next()); // { value: 3, done: false }
+        console.log(iterator.next()); // { value: undefined, done: true }
+        // Giải thích:
+        //     arr[Symbol.iterator]() trả về Iterator của mảng.
+        //     Mỗi lần gọi next() lấy phần tử tiếp theo, khi hết mảng thì done: true.
+        //     Với chuỗi:
+        const str = "Hello";
+        const iterator = str[Symbol.iterator]();
+
+        console.log(iterator.next()); // { value: "H", done: false }
+        console.log(iterator.next()); // { value: "e", done: false }
+        console.log(iterator.next()); // { value: "l", done: false }
+        console.log(iterator.next()); // { value: "l", done: false }
+        console.log(iterator.next()); // { value: "o", done: false }
+        console.log(iterator.next()); // { value: undefined, done: true }
+        // 6. Sử dụng Iterator với for...of
+        // Vòng lặp for...of tự động sử dụng Iterator để duyệt qua các phần tử của một Iterable.
+        //     Ví dụ:
+        const arr = [1, 2, 3];
+        for (let value of arr) {
+            console.log(value); // 1, 2, 3
+        }
+        // Cách hoạt động bên trong:
+        //     for...of gọi [Symbol.iterator]() để lấy Iterator.
+        //     Lặp gọi next() và lấy value cho đến khi done: true.
+        // 7. Tự tạo Iterator
+        // Bạn có thể tự định nghĩa Iterator cho một đối tượng bằng cách triển khai [Symbol.iterator].
+        //
+        //     Ví dụ: Iterator tùy chỉn
+        const myObject = {
+            start: 1,
+            end: 5,
+            [Symbol.iterator]() {
+                let current = this.start;
+                const end = this.end;
+                return {
+                    next() {
+                        if (current <= end) {
+                            return { value: current++, done: false };
+                        }
+                        return { value: undefined, done: true };
+                    }
+                };
+            }
+        };
+        for (let num of myObject) {
+            console.log(num); // 1, 2, 3, 4, 5
+        }
+        // Giải thích:
+        //     [Symbol.iterator] trả về một Iterator.
+        // next() tăng current và trả về giá trị cho đến khi vượt quá end.
+        // 8. Ứng dụng thực tế
+        // a. Duyệt mảng lớn:
+        //     Iterator giúp kiểm soát việc duyệt thủ công, thay vì dùng vòng lặp thông thường.
+        const largeArray = [1, 2, 3, 4, 5];
+        const it = largeArray[Symbol.iterator]();
+        let result = it.next();
+        while (!result.done) {
+            console.log(result.value);
+            result = it.next();
+        }
+        // b. Tích hợp với Spread Operator:
+        const arr = [1, 2, 3];
+        console.log([...arr]); // [1, 2, 3] (dùng Iterator để "bung" mảng)
+        // c. Làm việc với Set/Map
+        const set = new Set([1, 2, 3]);
+        const iterator = set[Symbol.iterator]();
+        console.log(iterator.next().value); // 1
+        // 9. Iterator và Generator
+        // Generator: Là một dạng đặc biệt của Iterator, dùng function* và yield để tạo chuỗi giá trị.
+        //     Ví dụ:
+        function* numberGenerator() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        const gen = numberGenerator();
+        console.log(gen.next()); // { value: 1, done: false }
+        console.log(gen.next()); // { value: 2, done: false }
+        console.log(gen.next()); // { value: 3, done: false }
+        console.log(gen.next()); // { value: undefined, done: true }
+        // 10. Khi nào dùng Iterator?
+        //     Khi cần duyệt thủ công: Kiểm soát từng bước thay vì duyệt toàn bộ (ví dụ: dừng giữa chừng).
+        // Khi tạo cấu trúc dữ liệu tùy chỉnh: Muốn đối tượng của bạn tương thích với for...of.
+        //     Khi làm việc với dữ liệu lớn: Iterator tiết kiệm bộ nhớ vì không tải toàn bộ dữ liệu cùng lúc.
+        // 11. Lưu ý
+        // Không tái sử dụng: Một Iterator chỉ dùng được một lần; sau khi done: true, nó không "reset" lại trừ khi tạo mới.
+        //     Khác với forEach: forEach không dựa vào Iterator Protocol mà là phương thức của mảng.
+        // 12. Kết luận
+        // Iterator là công cụ mạnh mẽ để duyệt qua dữ liệu theo cách có kiểm soát.
+        //     JS cung cấp sẵn Iterator cho các kiểu dữ liệu như Array, String, Set, Map.
+        //     Bạn có thể tự tạo Iterator để mở rộng khả năng của đối tượng tùy chỉnh.
+        ///======alt+shift+mũi tên đi xuống để mở rộng code
+        //=======ctrl+alt+down để copy dòng + tab để thụt dòng
+    </script>
+</body>
+
+</html>

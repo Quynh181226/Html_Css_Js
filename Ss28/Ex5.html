@@ -6,7 +6,19 @@
 </head>
 <body>
 <script>
-
+const company= {
+    name: "RikkeiSoft",
+    location: "Hà Nội",
+    employees: [
+        {name: "Nguyễn Văn Luận", position: "Developer"},
+        {name: "Nguyễn Văn Hoàng", position: "Tester"},
+        {name: "Hoàng Nam Cao", position: "Manager"}
+    ]
+}
+    console.log(`Company name:`,company.name);
+    company.employees.forEach(employees=>{
+        console.log(`List employee:`,employees.name);
+    });
 </script>
 </body>
 </html>

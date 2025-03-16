@@ -6,7 +6,40 @@
 </head>
 <body>
 <script>
-
+    let  students=[
+        { name: "Trần Trí Dương", scores: { math: 9, english: 8, literature : 7 } },
+        { name: "Hà Bích Ngọc", scores: { math: 3, english: 2, literature : 5} },
+        { name: "Bùi Thái Sơn", scores: { math: 9.5, english: 9, literature : 9 } }
+    ];
+    //C1
+    const Avg=(item)=>{
+        return item.filter(student => {
+            const{
+                math,english,literature
+            }
+            =student.scores;
+            const avg=(math+english+literature)/3;
+            return avg >=8;
+        });
+    };
+    console.log(`Student has a score avg >=8:`, Avg(students));
+    //C2
+    function Avg1(){
+        let arr=[];
+        for(const student of students){
+            const {
+                math, english, literature
+            }
+            =student.scores;
+            const avg=(math+english+literature)/3;
+            if(avg>=8){
+                arr.push(student);
+            }
+        }
+        return arr;
+    }
+    console.log(`Student has a score avg >=8:`, Avg1(students));
+//Can gt ki
 </script>
 </body>
 </html>
