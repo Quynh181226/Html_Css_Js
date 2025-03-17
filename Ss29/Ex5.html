@@ -1,12 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<script>
 
-</script>
+<body>
+    <script>
+        // Xây dựng ứng dụng đăng ký, đăng nhập gồm các chức năng:
+        //     Đăng nhập người dùng.
+        //     Người dùng nhập email và mật khẩu để đăng nhập.
+        //     Khi đăng nhập thành công hiển thị thông tin người dùng.
+        //     Đăng nhập không thành công hiển thị thông báo.
+        //     Thoát.
+        let app = [];
+        let choice;
+        do {
+            choice = +prompt(`
+        1. Đăng ký người dùng mới.
+        2. Đăng nhập người dùng.
+        3. Thoát.`);
+            switch (choice) {
+                case 1:
+                    // register();
+                    signUp();
+                    break;
+                case 2:
+                    // logIn();
+                    break;
+                case 3:
+                    console.log(`Exit program`);
+                    break;
+                default:
+                    console.log(`Invalid`);
+            }
+        } while (choice !== 3);
+        //     Đăng ký người dùng mới.
+        function signUp() {
+            //     Người dùng nhập tên, email và mật khẩu để đăng ký.
+            const name = prompt(`Input name:`).trim();
+            const email = prompt(`Input email:`).trim();
+            const password = prompt(`Input password:`).trim();
+            //     Yêu cầu email phải chứa @ và kết thúc bằng .com hoặc .vn,
+            //     mật khẩu phải từ  6 ký tự trở lên (gồm ký tự đặc biệt, ký tự viết hoa).
+            while (true) {
+                if (!email.includes('@') && (!email.endsWith('.com') || !email.endsWith('.vn'))) {
+                    if (password.length < 6) {
+                        console.log(`Invalid`);
+                    }
+                }
+                const specialChars = ['!', '@', '#', '$', '%', '^', '&', '*'];
+                let check = false;
+                // for(let char of password){
+                //     if(specialChars.includes(char)){
+                //         check = true;
+                //         break;
+                //     }
+                // }
+                for (let i = 0; i < password.length; i++) {
+                    if (specialChars.includes(password[i])) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    console.log(`Invalid`);
+                    return;
+                }
+                check = false;
+                // for(let char of password){
+                //     if(char === char.toUpperCase()){
+                //         check = true;
+                //         break;
+                //     }
+                // }
+                // for(let char of password){
+                //     if(char>='A' && char<='Z'){
+                //         check = true;
+                //         break;
+                //     }
+                // }
+                for (let i = 0; i < password.length; i++) {
+                    if (password[i] === password[i].toUpperCase()) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    console.log(`Invalid`);
+                    return;
+                }
+                //     Khi đăng ký tồn tại email hiển thị thông báo cho người dùng.
+                const emailDuplicate = app.some(function (item) {
+                    return item.email === email;
+                });
+                if (emailDuplicate) {
+                    console.log(`Invalid`);
+                    return;
+                }
+                const user = {
+                    name,
+                    email,
+                    password
+                };
+                app.push(user);
+                alert(`Sign up successfully`);
+            }
+        }
+    </script>
 </body>
+
 </html>

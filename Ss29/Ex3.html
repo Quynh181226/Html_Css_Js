@@ -1,12 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<script>
 
-</script>
+<body>
+    <script>
+        // Tạo một hệ thống quản lý menu cho nhà hàng trong đó:
+        //
+        //     Mỗi danh mục sẽ có một số món ăn.
+        //     Mỗi món ăn trong danh mục sẽ có thông tin: tên món ăn, giá và mô tả.
+        //     Các chức năng:
+        //     Thêm món ăn vào danh mục.
+        //     Xóa món ăn theo tên khỏi danh mục.
+        //     Cập nhật thông tin theo tên của món ăn  (tên, giá, mô tả).
+        //     Hiển thị toàn bộ menu gồm từng danh mục và từng món ăn.
+        //     Tìm kiếm món ăn theo tên trong toàn bộ menu.
+        //     Thoát
+        let menu = [];
+        let choice;
+        do {
+            choice = +prompt(`
+    1. Thêm món ăn vào danh mục.
+    2. Xóa món ăn theo tên khỏi danh mục.
+    3. Cập nhật thông tin theo tên của món ăn (tên, giá, mô tả).
+    4. Hiển thị toàn bộ menu gồm từng danh mục và từng món ăn.
+    5. Tìm kiếm món ăn theo tên trong toàn bộ menu.
+    6. Thoát.`);
+            switch (choice) {
+                case 1:
+                    addFood();
+                    break;
+                case 2:
+                    deleteFood();
+                    break;
+                case 3:
+                    updateFood();
+                    break;
+                case 4:
+                    displayFood();
+                    break;
+                case 5:
+                    searchFood();
+                    break;
+                case 6:
+                    console.log(`Exit program`);
+                    break;
+                default:
+                    console.log(`Invalid`);
+            }
+        } while (choice !== 6);
+        function addFood(){
+            const name = prompt(`Input name:`).trim();
+            const price = +prompt(`Input price:`);
+            const category = prompt(`Input category:`).trim();
+            const description = prompt(`Input description:`).trim();
+            // const menuFood = {
+            //     name,
+            //     price,
+            //     category,
+            //     description
+            // };
+        
+        }
+        function addFood() {
+                const name = prompt(`Input name:`).trim();
+                const price = +prompt(`Input price:`);
+                const category = prompt(`Input category:`).trim();
+                const description = prompt(`Input description:`).trim();
+
+                if (!name || !category || !description) {
+                    alert(`Name, category, and description are required`);
+                    return;
+                }
+                if (isNaN(price) || price <= 0) {
+                    alert(`Price must be a positive number`);
+                    return;
+                }
+
+                const food = { name, price, description };
+                let found = false;
+                for (let i = 0; i < menu.length; i++) {
+                    if (menu[i].category === category) {
+                        menu[i].foods.push(food);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    menu.push({
+                        category: category,
+                        foods: [food]
+                    });
+                }
+
+                alert(`Food "${name}" added to "${category}" successfully`);
+            }
+            function addFood() {
+                    const name = prompt(`Input name:`).trim();
+                    const price = +prompt(`Input price:`);
+                    const category = prompt(`Input category:`).trim();
+                    const description = prompt(`Input description:`).trim();
+
+                    if (!name || !category || !description) {
+                        alert(`Name, category, and description are required`);
+                        return;
+                    }
+                    if (isNaN(price) || price <= 0) {
+                        alert(`Price must be a positive number`);
+                        return;
+                    }
+
+                    const food = { name, price, description };
+                    let categoryAdded = false;
+                    menu.forEach(item => {
+                        if (item.category === category) {
+                            item.foods.push(food);
+                            categoryAdded = true;
+                        }
+                    });
+                    if (!categoryAdded) {
+                        menu.push({
+                            category: category,
+                            foods: [food]
+                        });
+                    }
+
+                    alert(`Food "${name}" added to "${category}" successfully`);
+                }
+                function addFood() {
+                        const name = prompt(`Input name:`).trim();
+                        const price = +prompt(`Input price:`);
+                        const category = prompt(`Input category:`).trim();
+                        const description = prompt(`Input description:`).trim();
+
+                        if (!name || !category || !description) {
+                            alert(`Name, category, and description are required`);
+                            return;
+                        }
+                        if (isNaN(price) || price <= 0) {
+                            alert(`Price must be a positive number`);
+                            return;
+                        }
+
+                        const food = { name, price, description };
+                        let categoryExists = menu.find(item => item.category === category);
+                        if (categoryExists) {
+                            if (categoryExists.foods.some(f => f.name === name)) {
+                                alert(`Food "${name}" already exists in "${category}"`);
+                                return;
+                            }
+                            categoryExists.foods.push(food);
+                        } else {
+                            menu.push({
+                                category: category,
+                                foods: [food]
+                            });
+                        }
+
+                        alert(`Food "${name}" added to "${category}" successfully`);
+                    }
+    </script>
 </body>
+
 </html>

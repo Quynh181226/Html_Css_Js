@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
-<script>
-</script>
+  <script>
+    let contact = [];
+    let choice;
+    do {
+      choice = +prompt(`
+    1.Thêm đối tượng Contact vào danh sách liên hệ.
+    2.Hiển thị danh sách danh bạ.
+    3.Tìm kiếm thông tin Contact theo số điện thoại.
+    4.Cập nhật thông tin Contact(name, email, phone) theo id.
+    5.Xóa một đối tượng Contact  khỏi danh sách danh bạ theo id.
+    6.Thoát.`);
+      switch (choice) {
+        case 1:
+          addContact();
+          break;
+        case 2:
+          display();
+          display1();
+          break;
+        case 3:
+          searchContact();
+          searchContact1();
+          searchContact2();
+          break;
+        case 4:
+          updateContact();
+          break;
+        case 5:
+          deleteContact();
+          break;
+        case 6:
+          console.log(`Exit program`);
+          break;
+        default:
+          console.log(`Invalid`);
+      }
+    } while (choice !== 6);
+    function addContact() {
+      // const id = +prompt(`Input id:`);
+      // if(isNaN(id)){
+      //   console.log(`Invalid`);
+      //   return;
+      // }
+      // if(contact.find(item => item.id === id)){
+      //   console.log(`Duplicate ID`);
+      //   return;
+      // }
+      const name = prompt(`Input name:`).trim();
+      const email = prompt(`Input email:`).trim();
+      let phone;
+      do{
+        phone = prompt(`Input phone:`).trim();
+      }while (isNaN(phone)||phone.length===0);
+      const contacts = {
+        id: Math.ceil(Math.random()*1000),
+        name,
+        email,
+        phone
+      };
+      contact.push(contacts);
+      alert(`Add contact success`);
+    }
+    function display() {
+      console.table(contact);
+    }
+    function display1() {
+      contact.forEach(function (item, index) {
+        alert(`Id: ${item.id}, Name ${index + 1}: ${item.name}, Email: ${item.email}, Phone: ${item.phone}`);
+      });
+    }
+    function searchContact() {
+      const inputPhone = +prompt(`Input phone number:`);
+      let result = contact.filter(item => item.phone == inputPhone);
+      if (result.length === 0) {
+        console.log(`Contact not found`);
+      }else{
+        result.forEach(function(item, index){
+          alert(`Found contact: ID: ${item.id}, Name: ${item.name}, Email: ${item.email}, Phone: ${item.phone}`);
+        });
+        console.table(result);
+      }
+    }
+    function searchContact1(arr, target) {
+      let inputPhone = prompt(`Input contact by phone number:`);
+      let check=false;
+      for (let contact in arr) {
+        if (arr[contact].phone === target) {
+          alert(`Found contact: ID: ${arr[contact].id}, Name: ${arr[contact].name}, Email: ${arr[contact].email}, Phone: ${arr[contact].phone}`);
+          console.log(`Found contact: ID: ${arr[contact].id}, Name: ${arr[contact].name}, Email: ${arr[contact].email}, Phone: ${arr[contact].phone}`);
+          check=true;
+          break;
+        }
+      }
+      if (!check) {
+        console.log(`Contact not found`);
+      }
+    }
+    function searchContact2() {
+      const inputPhone = +prompt(`Input phone number:`);
+      let result = contact.find((item) => item.phone== inputPhone);
+      if (result) {
+        console.log(`Found contact: ID: ${result.id}, Name: ${result.name}, Email: ${result.email}, Phone: ${result.phone}`);
+      }
+    }
+    //cap nhat name, email, phone theo id
+    function updateContact() {
+      const inputId = +prompt(`Input id:`).trim();
+      let index = contact.findIndex(item => item.id === inputId);
+      if (index === -1) {
+        alert(`Contact with ID "${inputId}" not found`);
+      } else {
+        let check = confirm(`Contact with name "${contact[index].name}", email "${contact[index].email}, phone "${contact[index].phone}" are you sure want to change ???`);
+        if (check) {
+          contact[index].name = prompt(`Input new name:`).trim();
+          contact[index].email = prompt(`Input new email:`).trim();
+          contact[index].phone = +prompt(`Input new phone:`).trim();
+          alert(`Update contact success`);
+          console.table(contact);
+        }
+      }
+    }
+    function deleteContact() {
+      const inputId = +prompt(`Input id:`);
+      let index = contact.findIndex(item => item.id === inputId);
+      if (index === -1) {
+        alert(`Contact not found`);
+      } else {
+        let check = confirm(`Are you sure want to delete contact:`);
+        if (check) {
+          contact.splice(index, 1);
+          alert(`Delete success`);
+          if (contact.length === 0) {
+            alert(`List contact empty`);
+          } else {
+            console.table(contact);
+          }
+        }
+      }
+    }
+  </script>
 </body>
+
 </html>
