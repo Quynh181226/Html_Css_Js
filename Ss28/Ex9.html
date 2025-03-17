@@ -21,59 +21,22 @@
     7. Thoát.`);
             switch (choice) {
                 case 1:
-                    const id=+prompt(`Input id book:`).trim();
-                    const title=prompt(`Input title book:`).trim();
-                    const author=prompt(`Input author book:`).trim();
-                    const price=+prompt(`Input price book:`).trim();
-                    const books={
-                        id: id,
-                        title: title,
-                        author: author,
-                        price: price,
-                        isAvailable: true,
-                    };
-                    book.push(books);
-                    alert(`Add book success`);
+                    input();
                     break;
                 case 2:
-                    if(book.length===0){
-                        alert(`Book list is empty`);
-                    }else{
-                        let bookList="Book list is:\n";
-                        book.forEach(item=>bookList+=`Id: ${item.id}, Title: ${item.title},
-                                                      Author: ${item.author}, Price: ${item.price},
-                                                      Status: ${item.isAvailable} `);
-                        console.table(book);
-                    }
+                    display();
                     break;
                 case 3:
-                    if(book.length===0){
-                        alert(`List book empty`);
-                    }else{
-                        const search=prompt(`Input book need search by title:`).trim();
-                        const bookSearchTitle=book.find((item)=>item.title.trim().toLowerCase()===search.trim().toLowerCase());
-                        if(bookSearchTitle){
-                            alert(`Found book: ID: ${bookSearchTitle.id}, Title: ${bookSearchTitle.title},
-                                                      Author: ${bookSearchTitle.author}, Price: ${bookSearchTitle.price},
-                                                      Status: ${bookSearchTitle.isAvailable}`);
-                            // console.table(bookSearchTitle);
-                            console.table([bookSearchTitle]);
-                        }else{
-                            alert(`Not found book`);
-                        }
-                    }
+                   searchBook();
                     break;
                 case 4:
-                    // Cập nhật trạng thái mượn/trả sách theo id sách.
-                    if(book.length===0){
-                        alert(`List book empty`);
-                    }else{
-                       let idInput=
-                    }
+                    updateStatus();
                     break;
                 case 5:
+                    deleteBook();
                     break;
                 case 6:
+                    sortPrice();
                     break;
                 case 7:
                     console.log(`Exit program`);
@@ -82,6 +45,95 @@
                     console.log(`Invalid`);
             }
         } while (choice !== 7);
+        function input(){
+            const id=+prompt(`Input id book:`).trim();
+            const title=prompt(`Input title book:`).trim();
+            const author=prompt(`Input author book:`).trim();
+            const price=+prompt(`Input price book:`).trim();
+            const books={
+                id: id,
+                title: title,
+                author: author,
+                price: price,
+                isAvailable: true,
+            };
+            book.push(books);
+            alert(`Add book success`);
+        }
+        const display=()=>{
+            if(book.length===0){
+                alert(`Book list is empty`);
+            }else{
+                let bookList="Book list is:\n";
+                book.forEach(item=>bookList+=`Id: ${item.id}, Title: ${item.title},
+                                                      Author: ${item.author}, Price: ${item.price},
+                                                      Status: ${item.isAvailable} `);
+                alert(bookList);
+                console.table(book);
+            }
+        }
+        function searchBook(){
+            if(book.length===0){
+                alert(`List book empty`);
+            }else{
+                const search=prompt(`Input book need search by title:`).trim();
+                const bookSearchTitle=book.find((item)=>item.title.trim().toLowerCase()===search.trim().toLowerCase());
+                if(bookSearchTitle){
+                    alert(`Found book: ID: ${bookSearchTitle.id}, Title: ${bookSearchTitle.title},
+                                                      Author: ${bookSearchTitle.author}, Price: ${bookSearchTitle.price},
+                                                      Status: ${bookSearchTitle.isAvailable}`);
+                    // console.table(bookSearchTitle);
+                    console.table([bookSearchTitle]);
+                }else{
+                    alert(`Not found book`);
+                }
+            }
+        }
+        function updateStatus(){
+            if(book.length===0){
+            alert(`List book empty`);
+        }else{
+            const idInput=+prompt(`Input id book update status:`);
+            let index=book.findIndex(item=>item.id===idInput);
+            if(index===-1){
+                console.log(`Book with ID ${idInput} not found`);
+            }else{
+                let check=confirm(`Book with status "${book[index].isAvailable}" are you sure want to change ???`);
+                if(check){
+                    book[index].isAvailable=!book[index].isAvailable;
+                    alert(`Update status success`);
+                    console.table(book);
+                }
+            }
+        }
+        }
+        const deleteBook =()=>{
+            if(book.length===0){
+                alert(`List book empty`);
+            }else{
+               const idInput=+prompt(`Input id need delete:`);
+               const deleteBook=book.findIndex((item)=>item.id===idInput);
+               if(deleteBook!==-1){
+                   let check=confirm(`Are your sure want to delete book:`);
+                   if(check){
+                       book.splice(deleteBook,1);
+                       alert(`Delete success`);
+                       console.table(book);
+                   }
+               }else{
+                   alert(`Book not found`);
+               }
+            }
+        }
+        function sortPrice(){
+            if(book.length===0){
+                alert(`List book empty`);
+            }else{
+                book.sort((a, b) => a.price - b.price);
+                alert(`Sort book by price success`);
+                console.table(book);
+            }
+        }
     </script>
 </body>
 
