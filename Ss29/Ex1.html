@@ -57,11 +57,11 @@
       const name = prompt(`Input name:`).trim();
       const email = prompt(`Input email:`).trim();
       let phone;
-      do{
+      do {
         phone = prompt(`Input phone:`).trim();
-      }while (isNaN(phone)||phone.length===0);
+      } while (isNaN(phone) || phone.length === 0);
       const contacts = {
-        id: Math.ceil(Math.random()*1000),
+        id: Math.ceil(Math.random() * 1000),
         name,
         email,
         phone
@@ -82,8 +82,8 @@
       let result = contact.filter(item => item.phone == inputPhone);
       if (result.length === 0) {
         console.log(`Contact not found`);
-      }else{
-        result.forEach(function(item, index){
+      } else {
+        result.forEach(function (item, index) {
           alert(`Found contact: ID: ${item.id}, Name: ${item.name}, Email: ${item.email}, Phone: ${item.phone}`);
         });
         console.table(result);
@@ -91,12 +91,12 @@
     }
     function searchContact1(arr, target) {
       let inputPhone = prompt(`Input contact by phone number:`);
-      let check=false;
+      let check = false;
       for (let contact in arr) {
         if (arr[contact].phone === target) {
           alert(`Found contact: ID: ${arr[contact].id}, Name: ${arr[contact].name}, Email: ${arr[contact].email}, Phone: ${arr[contact].phone}`);
           console.log(`Found contact: ID: ${arr[contact].id}, Name: ${arr[contact].name}, Email: ${arr[contact].email}, Phone: ${arr[contact].phone}`);
-          check=true;
+          check = true;
           break;
         }
       }
@@ -106,7 +106,7 @@
     }
     function searchContact2() {
       const inputPhone = +prompt(`Input phone number:`);
-      let result = contact.find((item) => item.phone== inputPhone);
+      let result = contact.find((item) => item.phone == inputPhone);
       if (result) {
         console.log(`Found contact: ID: ${result.id}, Name: ${result.name}, Email: ${result.email}, Phone: ${result.phone}`);
       }

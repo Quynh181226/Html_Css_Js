@@ -52,116 +52,106 @@
                     console.log(`Invalid`);
             }
         } while (choice !== 6);
-        function addFood(){
+        function addFood() {
             const name = prompt(`Input name:`).trim();
             const price = +prompt(`Input price:`);
             const category = prompt(`Input category:`).trim();
             const description = prompt(`Input description:`).trim();
-            // const menuFood = {
-            //     name,
-            //     price,
-            //     category,
-            //     description
-            // };
-        
-        }
-        function addFood() {
-                const name = prompt(`Input name:`).trim();
-                const price = +prompt(`Input price:`);
-                const category = prompt(`Input category:`).trim();
-                const description = prompt(`Input description:`).trim();
 
-                if (!name || !category || !description) {
-                    alert(`Name, category, and description are required`);
-                    return;
-                }
-                if (isNaN(price) || price <= 0) {
-                    alert(`Price must be a positive number`);
-                    return;
-                }
+            // if (!name || !category || !description) {
+            //     alert(`Invalid`);
+            //     return;
+            // }
+            // if (isNaN(price) || price <= 0) {
+            //     alert(`Invalid`);
+            //     return;
+            // }
 
-                const food = { name, price, description };
-                let found = false;
-                for (let i = 0; i < menu.length; i++) {
-                    if (menu[i].category === category) {
-                        menu[i].foods.push(food);
-                        found = true;
-                        break;
-                    }
+            const food = { name, price, description };
+            let check = false;
+            menu.forEach(item => {
+                if (item.category === category) {
+                    item.foods.push(food);
+                    check = true;
                 }
-                if (!found) {
-                    menu.push({
-                        category: category,
-                        foods: [food]
-                    });
-                }
-
-                alert(`Food "${name}" added to "${category}" successfully`);
+            });
+            if (!check) {
+                menu.push({
+                    category: category,
+                    foods: [food]
+                });
             }
-            function addFood() {
-                    const name = prompt(`Input name:`).trim();
-                    const price = +prompt(`Input price:`);
-                    const category = prompt(`Input category:`).trim();
-                    const description = prompt(`Input description:`).trim();
 
-                    if (!name || !category || !description) {
-                        alert(`Name, category, and description are required`);
-                        return;
-                    }
-                    if (isNaN(price) || price <= 0) {
-                        alert(`Price must be a positive number`);
-                        return;
-                    }
-
-                    const food = { name, price, description };
-                    let categoryAdded = false;
-                    menu.forEach(item => {
-                        if (item.category === category) {
-                            item.foods.push(food);
-                            categoryAdded = true;
-                        }
-                    });
-                    if (!categoryAdded) {
-                        menu.push({
-                            category: category,
-                            foods: [food]
-                        });
-                    }
-
-                    alert(`Food "${name}" added to "${category}" successfully`);
+            alert(`Food "${name}" added to "${category}" success`);
+        }
+        function deleteFood() {
+            const name = prompt(`Input name:`).trim();
+            let check = false;
+            for (let item of menu) {
+                let index = item.foods.findIndex(f => f.name === name);
+                if (index !== -1) {
+                    item.foods.splice(index, 1);
+                    check = true;
+                    break;
                 }
-                function addFood() {
-                        const name = prompt(`Input name:`).trim();
-                        const price = +prompt(`Input price:`);
-                        const category = prompt(`Input category:`).trim();
-                        const description = prompt(`Input description:`).trim();
-
-                        if (!name || !category || !description) {
-                            alert(`Name, category, and description are required`);
-                            return;
-                        }
-                        if (isNaN(price) || price <= 0) {
-                            alert(`Price must be a positive number`);
-                            return;
-                        }
-
-                        const food = { name, price, description };
-                        let categoryExists = menu.find(item => item.category === category);
-                        if (categoryExists) {
-                            if (categoryExists.foods.some(f => f.name === name)) {
-                                alert(`Food "${name}" already exists in "${category}"`);
-                                return;
-                            }
-                            categoryExists.foods.push(food);
-                        } else {
-                            menu.push({
-                                category: category,
-                                foods: [food]
-                            });
-                        }
-
-                        alert(`Food "${name}" added to "${category}" successfully`);
-                    }
+            }
+            if (check) {
+                alert(`Delete food "${name}" successfully`);
+            } else {
+                alert(`Food not found`);
+            }
+        }
+        function updateFood() {
+            const name = prompt(`Input name:`).trim();
+            let check = false;
+            for (let item of menu) {
+                let food = item.foods.find(f => f.name === name);
+                if (food) {
+                    const newName = prompt(`Input new name:`).trim();
+                    const newPrice = +prompt(`Input new price:`);
+                    const newDescription = prompt(`Input new description:`).trim();
+                    food.name = newName;
+                    food.price = newPrice;
+                    food.description = newDescription;
+                    check = true;
+                    break;
+                }
+            }
+            if (check) {
+                alert(`Update food "${name}" successfully`);
+            } else {
+                alert(`Food not found`);
+            }
+        }
+        function displayFood() {
+            if (menu.length === 0) {
+                console.log(`Array empty`);
+            } else {
+                menu.forEach(item => {
+                    console.log(`Category: ${item.category}`);
+                    item.foods.forEach(food => {
+                        // console.log(`Name: ${food.name}, Price: ${food.price}, Description: ${food.description}`);
+                        console.table(food);
+                    });
+                });
+            }
+        }
+        function searchFood() {
+            const name = prompt(`Input name:`).trim();
+            let check = false;
+            for (let item of menu) {
+                let food = item.foods.find(f => f.name === name);
+                if (food) {
+                    console.log(`Category: ${item.category}`);
+                    console.log(`Name: ${food.name}, Price: ${food.price}, Description: ${food.description}`);
+                    check = true;
+                    break;
+                }
+            }
+            if (!check) {
+                console.log(`Food not found`);
+            }
+        }
     </script>
 </body>
 

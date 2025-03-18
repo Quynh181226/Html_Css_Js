@@ -63,12 +63,12 @@
             //     price: Giá sản phẩm.
             //     category: Danh mục sản phẩm.
             //     quantity: Số lượng sản phẩm trong kho.
-            const name=prompt(`Input name:`).trim();
-            const price=+prompt(`Input price:`);
-            const category=prompt(`Input category:`).trim();
-            const quantity=+prompt(`Input quantity:`);
-            const products={
-                id: Math.random(),
+            const name = prompt(`Input name:`).trim();
+            const price = +prompt(`Input price:`);
+            const category = prompt(`Input category:`).trim();
+            const quantity = +prompt(`Input quantity:`);
+            const products = {
+                id: Math.floor(Math.random() * 1000000),
                 name,
                 price,
                 category,
@@ -78,82 +78,88 @@
             alert(`Add product success`);
         }
         function display() {
-            if(product.length===0){
+            if (product.length === 0) {
                 console.log(`Array empty`);
-            }else{
+            } else {
                 console.log(`List product:`);
                 console.table(product);
-                product.forEach(function(item,index){
+                product.forEach(function (item, index) {
                     alert(`Id: ${item.id}, Name: ${item.name}, Price: ${item.price}, Category: ${item.category}, Quantity: ${item.quantity}`);
                 });
             }
         }
         function displayDetail() {
-            if(product.length===0){
+            if (product.length === 0) {
                 console.log(`Array empty`);
-            }else{
-               const idInput=+prompt(`Input id product:`);
-               const detail=product.find(item=>item.id===idInput);
-               if(detail){
-                   console.log(`Detail product:`);
-                   console.table(detail);
-                   alert(`Id: ${detail.id}, Name: ${detail.name}, Price: ${detail.price}, Category: ${detail.category}, Quantity: ${detail.quantity}`);
-               }else{
-                   alert(`Product not found`);
-               }
-            }
-        }//....
-        function updateProduct() {
-            if(product.length===0){
-                console.log(`Array empty`);
-            }else{
-                const idInput=+prompt(`Input id product:`);
-                const index=product.findIndex(item=>item.id===idInput);
-                if(index!==-1){
-                    const name=prompt(`Input name:`).trim();
-                    const price=+prompt(`Input price:`);
-                    const category=prompt(`Input category:`).trim();
-                    const quantity=+prompt(`Input quantity:`);
-                    product[index].name=name;
-                    product[index].price=price;
-                    product[index].category=category;
-                    product[index].quantity=quantity;
-                    alert(`Update product success`);
-                }else{
+            } else {
+                const idInput = +prompt(`Input id product:`);
+                const detail = product.find(item => item.id === idInput);
+                if (detail) {
+                    console.log(`Detail product:`);
+                    console.table(detail);
+                    alert(`Id: ${detail.id}, Name: ${detail.name}, Price: ${detail.price}, Category: ${detail.category}, Quantity: ${detail.quantity}`);
+                } else {
                     alert(`Product not found`);
                 }
             }
-        }//....
-        function deleteProduct() {
-            if(product.length===0){
+        }
+        function updateProduct() {
+            if (product.length === 0) {
                 console.log(`Array empty`);
-            }else{
-                const idInput=+prompt(`Input id product:`);
-                const index=product.findIndex(item=>item.id===idInput);
-                if(index!==-1){
-                    let check=confirm(`Are you sure want to delete product:`);
-                    if(check){
-                        product.splice(index,1);
+            } else {
+                const idInput = +prompt(`Input id product:`);
+                const index = product.findIndex(item => item.id === idInput);
+                if (index !== -1) {
+                    if (!confirm(`Are you sure want to update product:`)) {
+                        return;
+                    }
+                    const name = prompt(`Input name:`).trim();
+                    const price = +prompt(`Input price:`);
+                    const category = prompt(`Input category:`).trim();
+                    const quantity = +prompt(`Input quantity:`);
+                    product[index].name = name;
+                    product[index].price = price;
+                    product[index].category = category;
+                    product[index].quantity = quantity;
+                    alert(`Update product success`);
+                } else {
+                    alert(`Product not found`);
+                }
+            }
+        }
+        function deleteProduct() {
+            if (product.length === 0) {
+                console.log(`Array empty`);
+            } else {
+                const idInput = +prompt(`Input id product:`);
+                if (!confirm(`Are you sure want to delete product:`)) {
+                    return;
+                }
+                const index = product.findIndex(item => item.id === idInput);
+                if (index !== -1) {
+                    let check = confirm(`Are you sure want to delete product:`);
+                    if (check) {
+                        product.splice(index, 1);
                         alert(`Delete product success`);
                     }
-                }else{
+                } else {
                     alert(`Product not found`);
                 }
             }
-        }//...
+        }
         function filterPrice() {
-            if(product.length===0){
+            if (product.length === 0) {
                 console.log(`Array empty`);
-            }else{
-                const min=+prompt(`Input min price:`);
-                const max=+prompt(`Input max price:`);
-                const result=product.filter(item=>item.price>=min && item.price<=max);
-                if(result.length===0){
+            } else {
+                const min = +prompt(`Input min price:`);
+                const max = +prompt(`Input max price:`);
+                const result = product.filter(item => item.price >= min && item.price <= max);
+                if (result.length === 0) {
                     console.log(`Product not found`);
-                }else{
+                } else {
                     console.log(`List product:`);
                     console.table(result);
-                    result.forEach(function(item,index){
+                    result.forEach(function (item, index) {
                         alert(`Id: ${item.id}, Name: ${item.name}, Price: ${item.price}, Category: ${item.category}, Quantity: ${item.quantity}`);
                     });
                 }
