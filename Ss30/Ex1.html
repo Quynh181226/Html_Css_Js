@@ -1,11 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
-<script>
-</script>
+  <script>
+    //Tao 1 mang cart chua sp mua.
+    let cart = [];
+    //Tao 1 mang products chua sp.
+     let products = [
+        {
+          id: 1,
+          name: `mèn mén`,
+          price: 20000,
+          quantity: 20,
+          category: "món ăn dân tộc Mông"
+        },
+        {
+          id: 2,
+          name: "mứt",
+          price: 80000,
+          quantity: 21,
+          category: "món ăn dân tộc Kinh"
+        },
+        {
+          id: 3,
+          name: "cơm lam",
+          price: 40000,
+          quantity: 15,
+          category: "món ăn dân tộc Mông"
+        },
+        {
+          id: 4,
+          name: "bánh đậu",
+          price: 60000,
+          quantity: 30,
+          category: "món ăn dân tộc Kinh"
+        }
+
+      ];
+    let choice;
+    do {
+      choice = +prompt(`
+  1. Hiển thị các sản phẩm theo tên danh mục.
+  2. Chọn sản phẩm để mua bằng cách nhập id sản phẩm.
+  3. Sắp xếp các sản phẩm trong cửa hàng theo giá:
+        a. Tăng dần.
+        b. Giảm dần.
+  4. Tính số tiền thanh toán trong giỏ hàng.
+  5. Thoát.`);
+      switch (choice) {
+        case 1:
+          displayProduct();
+          break;
+        case 2:
+          buyProduct();
+          break;
+        case 3:
+          sortProduct();
+          break;
+        case 4:
+          calculateTotal();
+          break;
+        case 5:
+          console.log(`Exit program`);
+          break;
+        default:
+          console.log(`Invalid`);
+      }
+    } while (choice !== 5);
+    function displayProduct() {
+    // Nhap vao category.
+    let category= prompt(`Input category:`).trim();
+    //Tim cac sp category trung voi category nhap vao.
+    let check = products.filter(function(product){
+      return product.category === category;
+    });
+    //Hthi cac sp category trung voi category nhap vao.
+    if(check.length === 0){
+      console.log(`No product`);
+    }else{
+      console.log(check);
+      console.table(check);
+    }
+}
+function buyProduct(){
+  //Nhap vao id sp muon mua.
+  let id = +prompt(`Input id:`);
+  //Tim sp co id trung voi id nhap vao.
+  let check = products.find(function(product){
+    return check.id === id;
+  });
+  //Neu ko tim thay sp co id trung voi id nhap vao.
+  if(!check){
+    console.log(`No product`);
+    return;
+  }
+  //Nhap slg sp muon mua.
+  let quantity = +prompt(`Input quantity:`);
+  //Neu slg sp muon mua lon hon slg sp trg cua hang.
+  if(quantity > check.quantity){
+    console.log(`Invalid`);
+    return;
+  }
+  //Slg sp trg cua hang se bi tru di slg sp mua.
+  check.quantity -= quantity;
+  //Tao 1 dtg cart chua ttin sp mua.
+  let cart = {
+    id: check.id,
+    name: check.name,
+    price: check.price,
+    quantity
+  };
+  //Them dtg cart vao gio hang.
+  cart.push(cart);
+  console.log(`Buy success`);
+}
+  function sortProduct(){
+    //Nhap vao lua chon sap xep.
+    let choiceSort = prompt(`Input choice(a or b):`).trim();
+    //Sap xep cac san pham trong cua hang theo gia tang dan.
+    if(choiceSort===`a`){
+      products.sort(function(a,b){
+        return a.price - b.price;
+      });
+    }
+    //Sap xep cac san pham trong cua hang theo gia giam dan.
+    if(choiceSort===`b`){
+      products.sort(function(a,b){
+        return b.price - a.price;
+      });
+    }
+    if(choiceSort !== `a` && choiceSort !== `b`){
+      console.log(`Invalid`);
+      return;
+    }
+    console.log(products);
+    console.table(products);
+  }
+  function calculateTotal(){
+    //Tinh tong so tien thanh toan trong gio hang
+    let sum=0;
+    for(let item of cart){
+      sum += item.price * item.quantity;
+    }
+    alert(`Total: ${sum}`);
+    console.log(`Total: ${sum}`);
+  }
+  </script>
 </body>
+
 </html>
+ 

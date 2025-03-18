@@ -1,12 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<script>
 
-</script>
+<body>
+    <script>
+        //     Viết chương trình quản lý sách gồm các thông tin như sau:
+        // Khoi tao mang chua sach
+        let cart = []
+        let choice;
+        //         id: number(mã sách)
+        //         name: string(tên sách)
+        //         price: number(giá sách)
+        //         quantity: number(số lượng sách)
+        //         category: string(tên thể loại sách)
+        do {
+            choice = +prompt(`
+    1. Hiển thị danh sách sách theo thể loại.
+    2. Thêm sách mới vào kho.
+    3. Tìm kiếm sách theo tên hoặc id.
+    4. Mua sách.
+    5. Sắp xếp sách theo giá.
+       a. Tăng dần.
+       b. Giảm dần.
+    6. Tính tổng số lượng sách đã mua và in ra tổng tiền trong giỏ hàng.
+    7. Hiển thị tổng số lượng sách trong kho.
+    8. Thoát chương trình.`);
+            switch (choice) {
+                case 1:
+                    displayBook();
+                    break;
+                case 2:
+                    break;
+                default:
+                    console.log(`Invalid`);
+                    break;
+            }
+            function displayBook() {
+                let books = [
+                    {
+                        id: 1,
+                        name: `Harry Potter`,
+                        price: 20000,
+                        quantity: 20,
+                        category: "Fantasy"
+                    },
+                    {
+                        id: 2,
+                        name: `Conan`,
+                        price: 30000,
+                        quantity: 30,
+                        category: "Fantasy"
+                    },
+                    {
+                        id: 3,
+                        name: `Doremon`,
+                        price: 40000,
+                        quantity: 40,
+                        category: "Mystery"
+                    },
+                    {
+                        id: 4,
+                        name: `One Piece`,
+                        price: 50000,
+                        quantity: 50,
+                        category: "Fantasy"
+                    }
+                ]
+                //Nhap the loai sach
+                let categoryInput = prompt(`Input category:`).trim();
+                //Loc sach theo the loai
+                let check = books.filter(function (book)){
+                    return book.categoryInput=== category;
+                }
+            
+            //In ra danh sach sach theo the loai
+            if (check.length === 0) {
+                console.log(`Invalid`);
+            } else {
+                console.table(check);
+            }
+        }
+            function addBook(){
+                //Them sach moi vao kho
+                let id = +prompt(`Input id:`);
+                let name = prompt(`Input name:`).trim();
+                let price = +prompt(`Input price:`);
+                let quantity = +prompt(`Input quantity:`);
+                let category = prompt(`Input category:`).trim();
+                let book = {
+                    id,
+                    name,
+                    price,
+                    quantity,
+                    category
+                }
+                books.push(book);
+                alert(`Add book success`);
+            }
+            function searchBook(){
+                //Tim kiem sach theo ten hoac id
+                let input = prompt(`Input name or id:`).trim();
+                let check = books.filter(function(book)){
+                    return book.name.includes(input) || book.id === +input;
+                }
+                if(check.length === 0){
+                    console.log(`Empty`);
+                }else{
+                    console.table(check);
+                }
+            }
+        } while (choice !== 8);
+        // Yêu cầu:
+        // Hiển thị danh sách sách theo thể loại(Người dùng chọn thể loại để xem sách trong danh mục đó).
+        // Thêm sách mới vào kho
+        // Tìm kiếm sách theo tên hoặc id.
+        // Mua sách(Nhập id sách cần mua và số lượng, cập nhật lại kho).
+        // Sắp xếp sách theo giá:
+        // Tăng dần.
+        // Giảm dần.
+        // Tính tổng số lượng sách đã mua và in ra tổng tiền trong giỏ hàng
+        // Hiển thị tổng số lượng sách trong kho.
+        // Thoát chương trình.
+    </script>
 </body>
+
 </html>
