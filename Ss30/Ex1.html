@@ -120,15 +120,15 @@ function buyProduct(){
   console.log(`Buy success`);
 }
   function sortProduct(){
-    //Nhap vao lua chon sap xep.
+    //Nhap vao lua chon sx.
     let choiceSort = prompt(`Input choice(a or b):`).trim();
-    //Sap xep cac san pham trong cua hang theo gia tang dan.
+    //Sx cac sp trg cua hang theo gia tang dan.
     if(choiceSort===`a`){
       products.sort(function(a,b){
         return a.price - b.price;
       });
     }
-    //Sap xep cac san pham trong cua hang theo gia giam dan.
+    //Sx cac sp trg cua hang theo gia giam dan.
     if(choiceSort===`b`){
       products.sort(function(a,b){
         return b.price - a.price;
@@ -142,7 +142,7 @@ function buyProduct(){
     console.table(products);
   }
   function calculateTotal(){
-    //Tinh tong so tien thanh toan trong gio hang
+    //Tinh tong so tien ttoan trg gio hang
     let sum=0;
     for(let item of cart){
       sum += item.price * item.quantity;

@@ -86,15 +86,15 @@
                 case 4:
                     buyPhone();
                     break;
-                case 9:
+                case 5:
                     console.log(`Exit program`);
                     break;
                 default:
                     console.log(`Invalid`);
                     break;
             }
-        } while (choice !== 9);
-        //ham hien thi danh sach dien thoai theo hang
+        } while (choice !== 5);
+        //ham hthi danh sach dt theo hang
         function displayPhone() {
             let company1 = prompt(`Input phone company:`).trim();
             let result = phones.filter(function (phone) {
@@ -107,7 +107,7 @@
                 console.log(`Invalid`);
             }
         }
-        //ham them dien thoai moi vao cua hang
+        //ham them dt moi vao cua hang
         function addPhone() {
             let id = +prompt(`Input id:`);
             let name = prompt(`Input name:`).trim();
@@ -124,13 +124,13 @@
             phones.push(newPhone);
             alert(`Add phone success`);
         }
-        //ham tim kiem dien thoai theo ten hoac id
+        //ham tkiem dth theo ten hoac id
         function searchPhone() {
             let search = prompt(`Input name or id:`).trim();
             let result = phones.find(function (phone) {
                 return phone.name === search || phone.id === +search;
             });
-            //Kiem tra xem co tim thay hay ko
+            //Ktra xem co tim thay hay ko
             if (result) {
                 console.table(result);
             } else {
@@ -141,53 +141,41 @@
             let id = +prompt(`Input id:`);
             let quantity = +prompt(`Input quantity:`);
             //Tim dthoai trg mang phones
-            let phone2 = phones.find(function (phone)){
-                return phone.id=== id;
-        }
-        //Ktra xem co ton tai sp hay ko
-        if (phone2) {
-            //Kiem tra so luong con du ko
-            if (phone2.quantity >= quantity) {
-                phone2.quantity -= quantity;
-                //Tim xem dthoai da co trg gio hang chua
-                let index = cart.findIndex(function (phone)){
-                    return phone.id=== id;
+            let phone2 = phones.find(function (phone) {
+                return phone.id === id;
+            });
+            //Ktra xem co ton tai sp hay ko
+            if (phone2) {
+                //Kiem tra so luong con du ko
+                if (phone2.quantity < quantity) {
+                    alert(`Not enough quantity`);
+                } else {
+                    //Giam slg dt trg kho
+                    phone2.quantity -= quantity;
+                    //Tim dthoai trg gio hang
+                    let index = cart.find(function (phone) {
+                        return phone.id === id;
+                    });
+                    //Ktra xem co ton tai sp trong gio hang hay ko
+                    if (index) {
+                        index.quantity += quantity;
+                    } else {
+                        let newPhone = {
+                            id: phone2.id,
+                            name: phone2.name,
+                            price: phone2.price,
+                            quantity
+                        }
+                        cart.push(newPhone);
+                    }
+                    alert(`Buy phone success`);
+                    console.table(cart);
+                }
             }
-            if (index) {
-                //Neu da co tang slg trg gio hang
-                index.quantity += quantity;
-            } else {
-                //Neu chua co them ms vao gio hang
-                cart.push(phone2);
-            }
-            //Neu chua co them vao
-            //Them vao gio hang
-            //Kiem tra xem sp da co trong gio hang chua
-            //Neu co thi tang so luong
-            //Neu chua thi them vao
-            //findIndex tra ve vi tri cua phan tu trong mang
-            //Neu ko tim thay tra ve -1
-            //Neu tim thay tra ve vi tri cua phan tu
-            //dung findIndex de tim vi tri cua sp trong gio hang
-            //Neu tim thay thi tang so luong
-            //Neu ko tim thay thi them vao
-
-            //cap nhat lai so luong
-            // if (index !== -1) {
-            //     cart[index].quantity += quantity;
-            // } else {
-            //     cart.push(phone2);
-            // }
-            //Neu slg trg kho = 0 thi xoa sp do
-            if (phone2.quantity === 0) {
-                phones.splice(phones.indexOf(phone2), 1);
-            } else {
-                console.log(`Invalid`);
+            else {
+                alert(`Phone not found`);
             }
         }
-        }
-        }
-
     </script>
 </body>
 

@@ -8,10 +8,51 @@
 
 <body>
     <script>
-        //     Viết chương trình quản lý sách gồm các thông tin như sau:
+        // Viết chương trình quản lý sách gồm các thông tin như sau:
+        // Yêu cầu:
+        // Hiển thị danh sách sách theo thể loại(Người dùng chọn thể loại để xem sách trong danh mục đó).
+        // Thêm sách mới vào kho
+        // Tìm kiếm sách theo tên hoặc id.
+        // Mua sách(Nhập id sách cần mua và số lượng, cập nhật lại kho).
+        // Sắp xếp sách theo giá:
+        // Tăng dần.
+        // Giảm dần.
+        // Tính tổng số lượng sách đã mua và in ra tổng tiền trong giỏ hàng
+        // Hiển thị tổng số lượng sách trong kho.
+        // Thoát chương trình.
         // Khoi tao mang chua sach
-        let cart = []
+        let cart = [];
         let choice;
+        let books = [
+            {
+                id: 1,
+                name: `Harry Potter`,
+                price: 20000,
+                quantity: 20,
+                category: "Fantasy"
+            },
+            {
+                id: 2,
+                name: `Conan`,
+                price: 30000,
+                quantity: 30,
+                category: "Fantasy"
+            },
+            {
+                id: 3,
+                name: `Doremon`,
+                price: 40000,
+                quantity: 40,
+                category: "Mystery"
+            },
+            {
+                id: 4,
+                name: `One Piece`,
+                price: 50000,
+                quantity: 50,
+                category: "Fantasy"
+            }
+        ];
         //         id: number(mã sách)
         //         name: string(tên sách)
         //         price: number(giá sách)
@@ -34,49 +75,39 @@
                     displayBook();
                     break;
                 case 2:
+                    addBook();
+                    break;
+                case 3:
+                    searchBook();
+                    break;
+                case 4:
+                    buyBook();
+                    break;
+                case 5:
+                    sortBooks();
+                    break;
+                case 6:
+                    calculateCart();
+                    break;
+                case 7:
+                    totalStock();
+                    break;
+                case 8:
+                    console.log("Thoát chương trình");
                     break;
                 default:
                     console.log(`Invalid`);
                     break;
             }
-            function displayBook() {
-                let books = [
-                    {
-                        id: 1,
-                        name: `Harry Potter`,
-                        price: 20000,
-                        quantity: 20,
-                        category: "Fantasy"
-                    },
-                    {
-                        id: 2,
-                        name: `Conan`,
-                        price: 30000,
-                        quantity: 30,
-                        category: "Fantasy"
-                    },
-                    {
-                        id: 3,
-                        name: `Doremon`,
-                        price: 40000,
-                        quantity: 40,
-                        category: "Mystery"
-                    },
-                    {
-                        id: 4,
-                        name: `One Piece`,
-                        price: 50000,
-                        quantity: 50,
-                        category: "Fantasy"
-                    }
-                ]
-                //Nhap the loai sach
-                let categoryInput = prompt(`Input category:`).trim();
-                //Loc sach theo the loai
-                let check = books.filter(function (book)){
-                    return book.categoryInput=== category;
-                }
-            
+        } while (choice !== 8);
+
+        function displayBook() {
+            //Nhap the loai sach
+            let categoryInput = prompt(`Input category:`).trim();
+            //Loc sach theo the loai
+            let check = books.filter(function (book) {
+                return book.category === categoryInput;
+            });
             //In ra danh sach sach theo the loai
             if (check.length === 0) {
                 console.log(`Invalid`);
@@ -84,47 +115,106 @@
                 console.table(check);
             }
         }
-            function addBook(){
-                //Them sach moi vao kho
-                let id = +prompt(`Input id:`);
-                let name = prompt(`Input name:`).trim();
-                let price = +prompt(`Input price:`);
-                let quantity = +prompt(`Input quantity:`);
-                let category = prompt(`Input category:`).trim();
-                let book = {
-                    id,
-                    name,
-                    price,
-                    quantity,
-                    category
-                }
-                books.push(book);
-                alert(`Add book success`);
+
+        function addBook() {
+            //Them sach moi vao kho
+            let id = +prompt(`Input id:`);
+            let name = prompt(`Input name:`).trim();
+            let price = +prompt(`Input price:`);
+            let quantity = +prompt(`Input quantity:`);
+            let category = prompt(`Input category:`).trim();
+            let book = {
+                id,
+                name,
+                price,
+                quantity,
+                category
+            };
+            books.push(book);
+            alert(`Add book success`);
+        }
+
+        function searchBook() {
+            //Tim kiem sach theo ten hoac id
+            let input = prompt(`Input name or id:`).trim();
+            let check = books.filter(function (book) {
+                return book.name.includes(input) || book.id === +input;
+            });
+            if (check.length === 0) {
+                console.log(`Empty`);
+            } else {
+                console.table(check);
             }
-            function searchBook(){
-                //Tim kiem sach theo ten hoac id
-                let input = prompt(`Input name or id:`).trim();
-                let check = books.filter(function(book)){
-                    return book.name.includes(input) || book.id === +input;
-                }
-                if(check.length === 0){
-                    console.log(`Empty`);
-                }else{
-                    console.table(check);
-                }
+        }
+
+        function buyBook() {
+            let id = +prompt("Input book need buy:");
+            let book = books.find(function (b) {
+                return b.id === id;
+            });
+            if (!book) {
+                console.log("Not found.");
+                return;
             }
-        } while (choice !== 8);
-        // Yêu cầu:
-        // Hiển thị danh sách sách theo thể loại(Người dùng chọn thể loại để xem sách trong danh mục đó).
-        // Thêm sách mới vào kho
-        // Tìm kiếm sách theo tên hoặc id.
-        // Mua sách(Nhập id sách cần mua và số lượng, cập nhật lại kho).
-        // Sắp xếp sách theo giá:
-        // Tăng dần.
-        // Giảm dần.
-        // Tính tổng số lượng sách đã mua và in ra tổng tiền trong giỏ hàng
-        // Hiển thị tổng số lượng sách trong kho.
-        // Thoát chương trình.
+            let quantity = +prompt("Input quantity:");
+            if (book.quantity < quantity) {
+                console.log("Not du");
+                return;
+            }
+            book.quantity -= quantity;
+            let cartItem = cart.find(function (item) {
+                return item.id === id;
+            });
+            if (cartItem) {
+                cartItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: book.id,
+                    name: book.name,
+                    price: book.price,
+                    quantity: quantity,
+                    category: book.category
+                });
+            }
+            console.log(`Buy ${quantity} books ${book.name}`);
+        }
+
+        function sortBooks() {
+            let order = prompt("Input sort list(a or b):");
+            if (order === 'a') {
+                books.sort(function (a, b) {
+                    return a.price - b.price;
+                });
+                console.log("Books arranged ( a )by price:");
+            } else if (order === 'b') {
+                books.sort(function (a, b) {
+                    return b.price - a.price;
+                });
+                console.log("Books arranged(b)by price:");
+            } else {
+                console.log("Invalid.");
+                return;
+            }
+            console.table(books);
+        }
+
+        function calculateCart() {
+            let totalBooks = cart.reduce(function (sum, book) {
+                return sum + book.quantity;
+            }, 0);
+            let totalPrice = cart.reduce(function (sum, book) {
+                return sum + book.price * book.quantity;
+            }, 0);
+            console.log(`total purchased: ${totalBooks} books`);
+            console.log(`Total price: ${totalPrice} VNĐ`);
+        }
+
+        function totalStock() {
+            let total = books.reduce(function (sum, book) {
+                return sum + book.quantity;
+            }, 0);
+            console.log(`Total books in stock: ${total}`);
+        }
     </script>
 </body>
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //DOM-Document Object Model
+        //BOM-Browser Object Model
+        //document.getElementById('id') //div#id
+        console.log(div);
+        let element = document.getElementsByClassName('class'); //div.class
+        let div1 = element[0];//div dau tien
+        let b=element[1];//b cuoi cung trg danh sach HTMLCollection
+        //HtMLCollection: la 1 array-like object gom cac phan tu cua 1 class hoac tag nao do : div, p, h1, h2, h3, h4, h5, h6, a, img, ...
+        //No khong phai la 1 array, nhung co the truy cap vao cac phan tu cua no nhu 1 array
+        //HTMLCollection co the truy cap vao cac phan tu cua no bang cach su dung index hoac dung vong lap 
+        console.log(div1);
+        console.log(b);
+        cốnsole.log(element);
+        for(let i=0;i<=element.length-1;i=i+1)ơ{
+            console.log(element[i]);
+        }
+        
+        // document.getElementsByTagName('tag'); //
+    </script>
+</body>
+
+</html>
