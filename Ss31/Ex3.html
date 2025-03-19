@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <title>Change Background Color</title>
+    <style>
+        body {
+            text-align: center;
+            transition: background-color 0.3s;
+        }
 
-</script>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #box_red {
+            background-color: red;
+        }
+
+        #box_green {
+            background-color: green;
+        }
+
+        #box_yellow {
+            background-color: yellow;
+        }
+
+        #box_blue {
+            background-color: blue;
+        }
+
+        #box_purple {
+            background-color: purple;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Change Background Color</p>
+    <div class="container">
+        <div id="box_purple" class="box" onclick="changeColor('purple')"></div>
+        <div id="box_blue" class="box" onclick="changeColor('blue')"></div>
+        <div id="box_red" class="box" onclick="changeColor('red')"></div>
+        <div id="box_green" class="box" onclick="changeColor('green')"></div>
+        <div id="box_yellow" class="box" onclick="changeColor('yellow')"></div>
+    </div>
+    <p id="result">Màu nền hiện tại: Mặc định</p>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color; 
+            document.getElementById("result").textContent = `Màu nền hiện tại: ${color}`; 
+        }
+    </script>
 </body>
+
 </html>

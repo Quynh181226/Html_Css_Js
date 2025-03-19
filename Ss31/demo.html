@@ -4,10 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
+    <h1 id="id">Document Object Model</h1>
+    <div>Hello Word</div>
+    <b>Xin chào các bạn</b>
+    <i>Tôi tên là !!!</i>
+
     <script>
+        console.log(document);
+        let h1=document.getElementById("id");
+        console.log(h1);
+        
         //DOM-Document Object Model
         //BOM-Browser Object Model
         //document.getElementById('id') //div#id
@@ -20,12 +32,11 @@
         //HTMLCollection co the truy cap vao cac phan tu cua no bang cach su dung index hoac dung vong lap 
         console.log(div1);
         console.log(b);
-        cốnsole.log(element);
-        for(let i=0;i<=element.length-1;i=i+1)ơ{
+        console.log(element);
+        for(let i=0;i<=element.length-1;i=i+1){
             console.log(element[i]);
         }
-        
-        // document.getElementsByTagName('tag'); //
+       
     </script>
 </body>
 

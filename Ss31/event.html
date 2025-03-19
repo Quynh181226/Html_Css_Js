@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>demo event</title>
+</head>
+
+<body>
+    <button onclick="handleClick()" id="btn-click">Click me</button>
+
+    <button id="btn-click1">Click me 1</button>
+    <button id="btn-click2">Click me 2</button>
+
+    <input type="text" id="email" />
+</body>
+<script>
+
+    function handleClick() {
+        alert("da click");
+    }
+    // Lắng  nghe sự kiện ( cách 2)
+    const btnEl = document.querySelector("#btn-click1");
+    btnEl.onclick = function () {
+        alert("da click 1");
+    }
+    //Lắng nghe sự kiện (cách 3)
+    const btnEl2 = document.querySelector("#btn-click2");
+    btnEl2.addEventListener("dblclick", function () {
+        alert("da click 2");
+    });
+
+    // Lắng nghe sự kiện và lấy giá trị trong input
+    const inputEl = document.querySelector("#email");
+    inputEl.addEventListener("input", function (event) {
+        console.log("input changed: ", event.target.value);
+
+    });
+</script>
+
+</html>

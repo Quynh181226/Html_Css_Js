@@ -1,12 +1,64 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <div>
+        <p>Toggle Dark/Light Mode</p>
+        <p>Click the button to toggle between dark and light mode this page</p>
+        <button id="btn">Toggle dark mode</button>
+    </div>
 <script>
+let div=document.bpdy;
+let btn1=document.getElementById("btn");
+btn1.onclick=function(){
+    if(div.style.backgroundColor=="white"){
+        div.style.backgroundColor="black";
+    }
+}
+</script>
+</body>
+</html> -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ss31 cb2</title>
+</head>
+<style>
+    #btn-toggle {
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+    }
+    .toggle {
+        background-color: black;
+        color: white;
+    }
+    .toggle-btn {
+        background-color: white;
+        color: black;
+    }
+</style>
+<body>
+<p id="text">Toggle Dark/Light Mode</p>
+<p id="text">
+    Click the button to toggle between dark and light mode for this page
+</p>
+
+<button id="btn-toggle">Toggle dark mode</button>
+
+<script>
+    let btn = document.querySelector("#btn-toggle");
+
+    btn.addEventListener("click", function () {
+        document.body.classList.toggle("toggle");
+        btn.classList.toggle("toggle-btn");
+    });
 </script>
 </body>
 </html>

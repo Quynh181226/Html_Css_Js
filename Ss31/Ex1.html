@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
-<script>
-</script>
+  //vi p la ptu block => block, con flex thg dung cho container de sxep cho cac ptu con ko phai de an hien 1 doan vban
+  <p id="txt-change" style="font-size: 25px;">This is a text</p>
+  <button id="btn-hide">Hide text</button>
+  <button id="btn-show">Show text</button>
+  <script>
+     //C1
+    // document.getElementById("btn-hide").onclick = function () {
+    //   document.getElementById("txt-change").style.display = "none"
+    // }
+    // document.getElementById("btn-show").onclick = function () {
+    //   document.getElementById("txt-change").style.display = "block"
+    // }
+    //C2
+    let text=document.querySelector("#txt-change");
+    let btnHide=document.querySelector("#btn-hide");
+    let btnShow=document.querySelector("#btn-show");
+    btnHide.addEventListener("click",function(){
+      text.style.display="none";
+    });
+    btnShow.addEventListener("click", function(){
+      text.style.display="block";
+    });
+  </script>
 </body>
+
 </html>
