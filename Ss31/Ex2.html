@@ -1,27 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div>
-        <p>Toggle Dark/Light Mode</p>
-        <p>Click the button to toggle between dark and light mode this page</p>
-        <button id="btn">Toggle dark mode</button>
-    </div>
-<script>
-let div=document.bpdy;
-let btn1=document.getElementById("btn");
-btn1.onclick=function(){
-    if(div.style.backgroundColor=="white"){
-        div.style.backgroundColor="black";
-    }
-}
-</script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +9,7 @@ btn1.onclick=function(){
     #btn-toggle {
         padding: 10px;
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
     }
     .toggle {
         background-color: black;
@@ -46,15 +22,13 @@ btn1.onclick=function(){
 </style>
 <body>
 <p id="text">Toggle Dark/Light Mode</p>
-<p id="text">
+<p id="content">
     Click the button to toggle between dark and light mode for this page
 </p>
-
 <button id="btn-toggle">Toggle dark mode</button>
-
 <script>
+    //querySelector=getElementById
     let btn = document.querySelector("#btn-toggle");
-
     btn.addEventListener("click", function () {
         document.body.classList.toggle("toggle");
         btn.classList.toggle("toggle-btn");
