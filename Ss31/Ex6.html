@@ -33,11 +33,11 @@
         const checkInfo = () => {
             let check = true;
             if (username.value.trim() === "") {
-                errUsername.textContent = "Username không được trống!";
+                errUsername.textContent = "Username not empty";
                 check = false;
             }
             if (pass.value.trim() === "") {
-                errPass.textContent = "Pass không được trống!";
+                errPass.textContent = "Not empty";
                 check = false;
             }
             errUsername.style.display = "block";
@@ -55,8 +55,8 @@
 
                 username.value.trim() === usernameDefault &&
                     pass.value.trim() === passDefault
-                    ? console.log("Đăng nhập thành công")
-                    : console.log("Đăng nhập thất bại");
+                    ? console.log("Log in success")
+                    : console.log("Failure");
             }
         });
     </script>
