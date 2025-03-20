@@ -4,62 +4,92 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ss31 k6</title>
+    <title>Document</title>
+    <style>
+        div {
+            display: flex;
+            flex-direction: column;
+            /* padding-bottom: 5px; */
+            margin: 5px;
+            width: 50%;
+        }
+    </style>
 </head>
 
 <body>
-    <form action="#" method="post">
-        <label for="username">username</label><br />
-        <input type="text" id="username" name="username" /><br />
-        <span id="error-username"></span><br /><br />
-
-        <label for="password">password</label><br />
-        <input type="password" id="password" name="password" /><br />
-        <span id="error-pass"></span><br /><br />
-
-        <button id="btn-login">login</button>
-    </form>
-
+    <!-- //C1 -->
+    <div>
+        <input type="text" id="user" placeholder="User">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkUser()" id="btn_login">Login</button>
+    </div>
     <script>
-        let usernameDefault = "huanrose@gmail.com";
-        let passDefault = "123456";
-        let username = document.querySelector("#username");
-        let pass = document.querySelector("#password");
-        let btn = document.querySelector("#btn-login");
-
-        let errUsername = document.querySelector("#error-username");
-        let errPass = document.querySelector("#error-pass");
-
-        const checkInfo = () => {
-            let check = true;
-            if (username.value.trim() === "") {
-                errUsername.textContent = "Username not empty";
-                check = false;
+        function checkUser() {
+            let users = document.getElementById('user').value;
+            let passwords = document.getElementById("password").value;
+            if (users === "huanrose@gmail.com" && passwords === "123456") {
+                console.log("Login success");
+            } else {
+                console.log("Failure");
             }
-            if (pass.value.trim() === "") {
-                errPass.textContent = "Not empty";
-                check = false;
-            }
-            errUsername.style.display = "block";
-            errPass.style.display = "block";
-
-            return check;
-        };
-
-        btn.addEventListener("click", function (event) {
-            event.preventDefault();
-            let resultCheckInfo = checkInfo();
-            if (resultCheckInfo) {
-                errUsername.style.display = "none";
-                errPass.style.display = "none";
-
-                username.value.trim() === usernameDefault &&
-                    pass.value.trim() === passDefault
-                    ? console.log("Log in success")
-                    : console.log("Failure");
-            }
-        });
+        }
     </script>
+    <!-- //C2 -->
+    <!-- 
+    <body>
+        <form action="#" method="post">
+            <label for="username">username</label><br />
+            <input type="text" id="username" name="username" /><br />
+            <span id="error-username"></span><br /><br />
+
+            <label for="password">password</label><br />
+            <input type="password" id="password" name="password" /><br />
+            <span id="error-pass"></span><br /><br />
+
+            <button id="btn-login">login</button>
+        </form>
+
+        <script>
+            let usernameDefault = "huanrose@gmail.com";
+            let passDefault = "123456";
+            let username = document.querySelector("#username");
+            let pass = document.querySelector("#password");
+            let btn = document.querySelector("#btn-login");
+
+            let errUsername = document.querySelector("#error-username");
+            let errPass = document.querySelector("#error-pass");
+
+            const checkInfo = () => {
+                let check = true;
+                if (username.value.trim() === "") {
+                    errUsername.textContent = "Username not empty";
+                    check = false;
+                }
+                if (pass.value.trim() === "") {
+                    errPass.textContent = "Not empty";
+                    check = false;
+                }
+                errUsername.style.display = "block";
+                errPass.style.display = "block";
+
+                return check;
+            };
+
+            btn.addEventListener("click", function (event) {
+                event.preventDefault();
+                let resultCheckInfo = checkInfo();
+                if (resultCheckInfo) {
+                    errUsername.style.display = "none";
+                    errPass.style.display = "none";
+
+                    username.value.trim() === usernameDefault &&
+                        pass.value.trim() === passDefault
+                        ? console.log("Log in success")
+                        : console.log("Failure");
+                }
+            });
+        </script>
+    </body> -->
 </body>
 
 </html>
