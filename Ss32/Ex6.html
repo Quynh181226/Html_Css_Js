@@ -31,30 +31,30 @@
             color: white;
         }
 
-        .container {
+        /* .container {
             border: none;
             border-radius: 2px;
             height: 420px;
             width: 620px;
             background-color: #F7F7F7;
-        }
+        } */
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <!-- <div class="container"> -->
+    <div>
         <p id="text" style="font-size: 16px; font-family: Arial;">Change size text</p>
         <div>
             <button style="background-color: #4CAF50;" onclick="changeSize(1)">+</button>
             <button style="background-color: #F44336;" onclick="changeSize(-1)">-</button>
         </div>
     </div>
+    <!-- </div> -->
     <script>
         let size = 16;
         function changeSize(value) {
             size += value;
-            if (size < 2) size = 2;
-            if (size > 77) size = 77;
             document.getElementById('text').style.fontSize = size + 'px';
         }
     </script>
