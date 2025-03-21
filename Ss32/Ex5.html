@@ -1,12 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-</script>
+        h2 {
+            text-align: center;
+            margin: 0 0 20px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e3e1e1;
+            width: 88%;
+        }
+
+        button {
+            background-color: rgb(15, 135, 15);
+            color: white;
+            border: none;
+            border-radius: 2px;
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        input {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+
+        #container {
+            background: #f0ebeb;
+            width: 400px;
+            padding: 20px;
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        #content {
+            padding: 20px;
+            border-radius: 5px;
+            width: 350px;
+        }
+
+        .delete-btn {
+            color: white;
+            border: none;
+            background-color: red;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h2>To-Do List K24_PTIT</h2>
+        <div id="content">
+            <input type="text" id="duty" placeholder="Input task...">
+            <button id="btn" onclick="addTask()">Add</button>
+            <ul id="list"></ul>
+        </div>
+    </div>
+    <script>
+        function addTask() {
+            let list = document.querySelector('#list');
+            let Duty = document.querySelector('#duty').value.trim();
+            if (Duty === "") return;
+
+            let Ttu = document.createElement('li');
+            Ttu.innerHTML = `${Duty}<button class="delete-btn" onclick="deleteTask(this)">x</button>`;
+            list.appendChild(Ttu);
+            document.querySelector('#duty').value = '';
+        }
+
+        function deleteTask(btn) {
+            if (confirm('Your want to delete task???')) btn.parentElement.remove();
+        }
+    </script>
 </body>
+
 </html>

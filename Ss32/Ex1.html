@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi màu nền của ô vuông</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .box {
+            padding: 50px;
+            border: 1px solid black;
+            transition: background 0.3s;
+            position: relative;
+            width: 200px;
+            height: 100px;
+
+        }
+
+        button {
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 2px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
+
 <body>
-  <div>
-    <button class="colors">Doi mau nen</button>
-  </div>
-  <div>
-    <button class="colors">Doi mau nen</button>
-  </div>
-<script>
-</script>
+    <div id="container">
+        <div class="box">
+            <button class="btn_changeColor">Change bg</button>
+        </div>
+        <div class="box">
+            <button class="btn_changeColor">Change bg</button>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll(".btn_changeColor");
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const box = button.parentElement;
+                const color = randomColor();
+                box.style.background = color;
+            });
+        });
+        function randomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+    </script>
 </body>
+
 </html>

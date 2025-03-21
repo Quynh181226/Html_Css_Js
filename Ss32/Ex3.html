@@ -5,8 +5,25 @@
     <title>Title</title>
 </head>
 <body>
+    <div>
+        <input type="text" placeholder="Input name subject">
+        <button onclick="addSubject()">Add subject</button>
+    </div>
+    <ol id="stt"></ol>
 <script>
-
+    function addSubject(){
+        let Input = document.querySelector("input").value.trim();
+        let list = document.querySelector('#stt');
+        if(Input===""){
+            alert(`Inv...`);
+            return;
+        }else{
+            let stt=document.createElement('li');
+            stt.innerText=Input;
+            list.appendChild(stt);
+            document.querySelector("input").value="";
+        }
+    }
 </script>
 </body>
 </html>

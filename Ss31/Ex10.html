@@ -62,3 +62,137 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 8px;
+        }
+
+        #pagination {
+            margin-top: 10px;
+        }
+
+        #pagination button {
+            margin: 2px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+
+    <body>
+        <h2>Danh sách nhân viên Rikkei</h2>
+        <input type="text" id="name" placeholder="Tên nhân viên" />
+        <input type="text" id="position" placeholder="Chức vụ" />
+        <button id="addBtn">thêm nhân viên</button>
+
+        <table border="1" cellspacing="0">
+            <thead style="background-color: #dfdede;">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Chức vụ</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+
+        <div id="pagination"></div>
+        <script src="main.js"></script>
+    </body>
+
+    </html>
+    <script>
+        let staffList = [
+            { name: 'Nguyễn Văn A', position: 'Developer' },
+            { name: 'Trần Thị B', position: 'Designer' },
+            { name: 'Phạm Văn C', position: 'Project Manager' },
+            // Dương có thể thêm nhiều dòng để kiểm tra phân trang
+        ];
+
+        const rowPerPage = 3;
+        let currentPage = 1;
+
+        function renderTable(page) {
+            let start = (page - 1) * rowPerPage;
+            let end = start + rowPerPage;
+            let pageData = staffList.slice(start, end);
+
+            let tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            pageData.forEach((staff, index) => {
+                let row = `<tr>
+        <td>${start + index + 1}</td>
+        <td>${staff.name}</td>
+        <td>${staff.position}</td>
+      </tr>`;
+                tbody.innerHTML += row;
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            let totalPages = Math.ceil(staffList.length / rowPerPage);
+            let pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            let prev = `<button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Previous</button>`;
+            pagination.innerHTML += prev;
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.innerHTML += `<button ${i === currentPage ? 'style="background-color: blue; color: white"' : ''} onclick="changePage(${i})">${i}</button>`;
+            }
+
+            let next = `<button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>`;
+            pagination.innerHTML += next;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderTable(page);
+        }
+
+        document.getElementById('addBtn').onclick = function () {
+            let name = document.getElementById('name').value.trim();
+            let position = document.getElementById('position').value.trim();
+            if (name && position) {
+                staffList.push({ name, position });
+                let totalPages = Math.ceil(staffList.length / rowPerPage);
+                currentPage = totalPages; // nhảy đến trang cuối
+                renderTable(currentPage);
+                document.getElementById('name').value = '';
+                document.getElementById('position').value = '';
+            } else {
+                alert('Vui lòng nhập đủ thông tin!');
+            }
+        };
+
+        renderTable(currentPage);
+    </script>
+</body>
+
+</html>

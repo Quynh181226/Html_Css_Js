@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <title>Check Email</title>
 
-</script>
+</head>
+
+<body>
+    <input type="email" id="email">
+    <p id="result" style="font-size: 14px;"></p>
+    <button onclick="check()" id="btn">Check</button>
+    <script>
+        function check() {
+            let input = document.querySelector('#email').value.trim();
+            let result = document.querySelector('#result');
+            document.querySelector('input').value = '';
+
+            if (input.includes('@') && (input.endsWith('.com') || input.endsWith('.vn'))) {
+                result.textContent = 'Email valid', result.style.color = 'green';
+            } else {
+                result.textContent = 'Email invalid', result.style.color = 'red';
+            }
+        }
+    </script>
 </body>
+
 </html>
