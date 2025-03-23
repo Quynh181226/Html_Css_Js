@@ -1,12 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
 
-</script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1050px;
+            margin: auto;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        main {
+            width: 60%;
+        }
+
+        .heading {
+            text-align: center;
+            margin: 40px auto 20px auto;
+            font-weight: bold;
+            color: rgb(50, 50, 50);
+        }
+
+        img {
+            height: 9.5rem;
+            object-fit: cover;
+        }
+
+        .aside-cart {
+            width: 40%;
+            min-height: 100vh;
+        }
+
+        .cart {
+            width: 95%;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            padding: 1px 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .heading-cart {
+            text-align: center;
+            margin: 30px auto 20px auto;
+            font-weight: bold;
+            color: rgb(50, 50, 50);
+        }
+
+        .total {
+            text-align: end;
+            font-weight: bold;
+        }
+
+        #proInCart {
+            width: 100%;
+            height: fit-content;
+            /* background-color: aqua; */
+        }
+
+        #proInCart p {
+            color: gray;
+            text-align: center;
+        }
+
+        .item {
+            width: 100%;
+            height: fit-content;
+            border-bottom: 1px solid gray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info {
+            width: 60%;
+            height: fit-content;
+        }
+
+        .item-info p {
+            color: red;
+
+        }
+
+        .btn {
+            padding: 1px 8px 5px 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 class="heading">Cửa hàng Đơn giản</h2>
+    </header>
+
+    <div class="content">
+        <main>
+            <h4 class="heading">Sản phẩm</h4>
+
+            <div>
+                <div class="row row-cols-2 row-cols-md-2 g-2" id="listProducts"></div>
+            </div>
+        </main>
+
+        <aside class="aside-cart">
+            <div class="cart">
+                <h4 class="heading-cart">Giỏ hàng</h4>
+
+                <div id="proInCart"></div>
+
+                <h4 class="total">Tổng: <span id="totalAmout"></span></h4>
+
+                <button class="btn btn-primary" onclick="payCart()">
+                    Thanh toán
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: 'Điện thoại Samsung Galaxy A54',
+                price: 7490000,
+                image: 'https://phucanhcdn.com/media/product/50816_dien_thoai_thong_minh_samsung_galaxy_a54_tim_8.jpg'
+            },
+            {
+                id: 2,
+                name: 'Laptop Dell Inspiron 15',
+                price: 15990000,
+                image: 'https://laptopmedia.com/wp-content/uploads/2020/12/2-15-scaled-e1608035721279.jpg'
+            },
+            {
+                id: 3,
+                name: 'Tai nghe AirPods Pro',
+                price: 4990000,
+                image: 'https://product.hstatic.net/1000006608/product/tai_nghe_apple_airpods_pro__01_c5f0abf13a1b45c99947f44f2e828e0f_master.jpg'
+            },
+            {
+                id: 4,
+                name: 'Đồng hồ thông minh Apple Watch',
+                price: 8990000,
+                image: 'https://tse4.mm.bing.net/th?id=OIP.D9xo-9wqGzDM40vC-HU8IAHaE8&pid=Api&P=0&h=180'
+            },
+            {
+                id: 5,
+                name: 'Máy ảnh Canon EOS M50',
+                price: 12490000,
+                image: 'https://binhminhdigital.com/storedata/images/product/canon-eos-m50-kit-1545mm-den(2).jpg'
+            },
+            {
+                id: 6,
+                name: 'Loa Bluetooth JBL Flip 5',
+                price: 2190000,
+                image: 'https://cdn2.cellphones.com.vn/x/media/catalog/product/l/o/loa-jbl-flip-5-hong-3_1_1.jpg'
+            },
+            {
+                id: 7,
+                name: 'Bàn phím cơ Logitech G Pro',
+                price: 2490000,
+                image: 'https://1.bp.blogspot.com/-D3Tk_VL7ihw/Y4YB2Yl8oxI/AAAAAAABA4Q/dJJPWCtkvDAwk5rU1_jWL5rHdhFvoyPcgCNcBGAsYHQ/s0/GS.009392_FEATURE_104184.jpg'
+            },
+            {
+                id: 8,
+                name: 'Chuột không dây Logitech MX Master',
+                price: 1890000,
+                image: 'https://logitechvietnam.vn/uploads/images/san-pham/thiet-bi-hoi-nghi/chuot-khong-day-logitech-mx-master-2s-anh-sp-1.png'
+            }
+        ];
+
+        let carts = [];
+
+        let listProducts = document.querySelector("#listProducts");
+        let itemCart = document.querySelector("#proInCart");
+        let totalAmout = document.querySelector("#totalAmout");
+
+        const renderData = () => {
+            listProducts.innerHTML = "";
+
+            let htmls = products.map((item) => {
+                return `
+            <div class="col text-center">
+                <div class="card shadow" style="width: 18rem; height: 20rem">
+                    <img src="${item.image}" class="card-img-top" alt="img" />
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name}</h5>
+                        <p class="card-text"  style="color: red; font-weight: bold;">${convertMoney(item.price)} </p>
+                        <a href="#" onclick="addCart(${item.id})" class="btn btn-success" >Thêm vào giỏ hàng</a>
+                    </div>
+                </div>
+            </div>
+        `;
+            })
+
+            let converts = htmls.join("");
+            listProducts.innerHTML = converts;
+        }
+
+        renderData();
+        renderCart();
+
+
+        function addCart(id) {
+            let index = carts.findIndex(el => el.idProduct === id);
+
+            if (index === -1) {
+                let objCart = {
+                    idProduct: id,
+                    quantity: 1
+                }
+                carts.push(objCart);
+            } else {
+                carts[index].quantity++;
+            }
+
+            renderCart();
+        }
+
+        function renderCart() {
+            itemCart.innerHTML = "";
+            if (carts.length === 0) {
+                itemCart.innerHTML = "<p>Giỏ hàng trống</p>";
+                totalAmout.textContent = convertMoney(0);
+
+            } else {
+
+                let htmls = carts.map((item, index) => {
+                    for (let i = 0; i < products.length; i++) {
+                        if (products[i].id === item.idProduct) {
+
+                            return `
+                        <div class="item">
+                            <div class="item-info">
+                                <h5 class="card-title">${products[i].name}</h5>
+                                <p style="color: red; font-weight: bold; text-align: start;"><span>${convertMoney(products[i].price)}</span> X <span>${item.quantity}</span></p>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success" onclick="decreaseQuantity(${index})">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="btn btn-success" onclick="increaseQuantity(${index})">+</button>
+                                <button class="btn btn-danger" onclick="delCart(${index})">X</button>
+                            </div>
+                        </div>
+                    `;
+                        }
+                    }
+                });
+
+                let convert = htmls.join("");
+                itemCart.innerHTML = convert;
+
+                let sum = sumCart();
+                totalAmout.textContent = convertMoney(sum);
+            }
+        }
+
+        function sumCart() {
+            let sum = 0;
+            for (const objcart of carts) {
+                for (const objpro of products) {
+                    if (objcart.idProduct === objpro.id) {
+                        sum += objpro.price * objcart.quantity;
+                    }
+                }
+            }
+            return sum;
+        }
+
+        function convertMoney(money) {
+            return money.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+        }
+
+        function payCart() {
+            if (carts.length === 0) {
+                alert("Giỏ hàng trống!");
+            } else {
+
+                let sum = convertMoney(sumCart());
+                alert(`Cảm ơn bạn đã mua hàng \n Tổng giá trị đơn hàng: ${sum}`);
+
+                carts.length = 0;
+                renderCart();
+            }
+        }
+
+        function decreaseQuantity(index) {
+            carts[index].quantity--;
+
+            if (carts[index].quantity === 0) {
+                carts.splice(index, 1);
+            }
+            renderCart();
+        }
+
+        function increaseQuantity(index) {
+            carts[index].quantity++;
+            renderCart();
+        }
+
+        function delCart(index) {
+            let name = "";
+            for (const el of products) {
+                if (el.id === carts[index].idProduct) name = el.name;
+            }
+            let check = confirm(`Có chắn chắn xóa sản phẩm "${name}" khỏi giỏ hàng?`);
+            if (check) {
+                carts.splice(index, 1);
+                renderCart();
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
