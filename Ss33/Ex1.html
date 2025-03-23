@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ss33 cb1</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+    }
+
+    .inputPass {
+      border: none;
+      outline: none;
+    }
+
+    .boxPass {
+      width: 400px;
+      height: 40px;
+      margin: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #909090;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #icon:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
-<script>
-</script>
+  <div class="boxPass">
+    <input type="password" placeholder="Enter your password" id="inputPass" class="inputPass" />
+    <i id="icon" class="fa-solid fa-eye" style="color: #888888;" onclick="icons()"></i>
+  </div>
+  <script src="https://kit.fontawesome.com/e724c329aa.js" crossorigin="anonymous"></script>
+  <script>
+    let inputPass = document.querySelector("#inputPass");
+    function icons() {
+      if (inputPass.type === "password") {
+        inputPass.setAttribute("type", "text");
+      } else {
+        inputPass.setAttribute("type", "password");
+      }
+    }
+  </script>
 </body>
+
 </html>

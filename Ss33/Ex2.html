@@ -5,8 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+<textarea id="text" onchange="inputChar()"></textarea>
+<p id="cnt">Character: 0</p>
+<button type="button" id="btnCheck">Check</button>
 <script>
+    let counts = document.querySelector("#cnt");
+    let textInput = document.querySelector("#text");
 
+    function inputChar() {
+        counts.innerText = `Character: ${textInput.value.length}`;
+    }
 </script>
+
 </body>
 </html>

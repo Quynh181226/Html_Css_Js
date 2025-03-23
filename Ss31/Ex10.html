@@ -1,198 +1,283 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .input1 {
-            display: flex;
-            flex-direction: row;
-        }
-
-        #addEmployee {
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
         }
-    </style>
-</head>
 
-<body>
-    <div>
-        <p>Danh sách nhân viên Rikkei</p>
-        <p class="input1">tên nhân viên</p>
-        <input type="text">
-        <p class="input1">chức vụ</p>
-        <input type="text">
-    </div>
-    <button id="addEmployee">thêm nhân viên</button>
-    <table>
-        <tr>
-            <th>STT</th>
-            <th>Tên</th>
-            <th>Chức vụ</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Nguyễn văn A</td>
-            <td>Developer</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Trần Thị B</td>
-            <td>Project</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Phạm Văn C</td>
-            <td>Project Manager</td>
-        </tr>
-        <button>Previous</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>Next</button>
-    </table>
-    <script>
+        h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
 
-    </script>
-</body>
+        form {
+            margin-bottom: 20px;
+        }
 
-</html>
-<!DOCTYPE html>
-<html lang="en">
+        form div {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .btn-add{
+            margin-left: 180px;
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        table {
-            width: 100%;
-            margin-top: 10px;
+        table, th, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
             text-align: left;
         }
 
-        th,
-        td {
-            padding: 8px;
+        table {
+            width: 500px;
+            margin-bottom: 20px;
         }
 
-        #pagination {
-            margin-top: 10px;
+        th, td {
+            padding: 10px;
+            font-size: 14px;
         }
 
-        #pagination button {
-            margin: 2px;
-            padding: 5px 10px;
+        .table-light {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .btn button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .btn-active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .btn button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .headers{
+            padding: 10px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="main.css">
-    </head>
-
-    <body>
-        <h2>Danh sách nhân viên Rikkei</h2>
-        <input type="text" id="name" placeholder="Tên nhân viên" />
-        <input type="text" id="position" placeholder="Chức vụ" />
-        <button id="addBtn">thêm nhân viên</button>
-
-        <table border="1" cellspacing="0">
-            <thead style="background-color: #dfdede;">
-                <tr>
-                    <th>STT</th>
-                    <th>Tên</th>
-                    <th>Chức vụ</th>
-                </tr>
+<div class="container">
+    <h3>List employee</h3>
+    <form>
+        <div class="headers">
+            <label>Name</label>
+            <input type="text" id="name">
+            <label>Position</label>
+            <input type="text" id="role">
+        </div>
+        <button type="button" class="btn-add" onclick="addEmployee()">Add employee</button>
+    </form>
+    <div class="table-container">
+        <table>
+            <thead class="table-light">
+            <th>STT</th>
+            <th>Name</th>
+            <th>Position</th>
             </thead>
-            <tbody id="table-body"></tbody>
+            <tbody id="listData"></tbody>
         </table>
-
-        <div id="pagination"></div>
-        <script src="main.js"></script>
-    </body>
-
-    </html>
-    <script>
-        let staffList = [
-            { name: 'Nguyễn Văn A', position: 'Developer' },
-            { name: 'Trần Thị B', position: 'Designer' },
-            { name: 'Phạm Văn C', position: 'Project Manager' },
-            // Dương có thể thêm nhiều dòng để kiểm tra phân trang
-        ];
-
-        const rowPerPage = 3;
-        let currentPage = 1;
-
-        function renderTable(page) {
-            let start = (page - 1) * rowPerPage;
-            let end = start + rowPerPage;
-            let pageData = staffList.slice(start, end);
-
-            let tbody = document.getElementById('table-body');
-            tbody.innerHTML = '';
-
-            pageData.forEach((staff, index) => {
-                let row = `<tr>
-        <td>${start + index + 1}</td>
-        <td>${staff.name}</td>
-        <td>${staff.position}</td>
-      </tr>`;
-                tbody.innerHTML += row;
+    </div>
+    <div class="btn" id="btn-active">
+        <button id="btnPrev">Prev</button>
+        <div id="btnPages"></div>
+        <button id="btnNext">Next</button>
+    </div>
+</div>
+        <script>
+            const nameInput = document.querySelector("#name");
+            const roleInput = document.querySelector("#role");
+            //B1: Dlieu gia lap - Dsach nvien
+            let listEmployee = [
+                { id: 1, name: "Nguyen Van A", role: "dev" },
+                { id: 2, name: "Nguyen Van B", role: "design" },
+                { id: 3, name: "Nguyen Van C", role: "tester" },
+                { id: 4, name: "Nguyen Van D", role: "dev" },
+                { id: 5, name: "Nguyen Van E", role: "dev" },
+                { id: 6, name: "Nguyen Van F", role: "manage" },
+            ];
+            //B2: Lay cac ptu HTML can thao tac
+            const btnPagesElement = document.querySelector("#btnPages");
+            const btnPrevElement = document.querySelector("#btnPrev");
+            const btnNextElement = document.querySelector("#btnNext");
+            const listData = document.querySelector("#listData");
+            //B3: Khoi tao cac bien cho phan trang
+            //trang htai
+            //trang htai thi ko dc dung const vi chung se bi gan lai va thay doi
+            let currentPage = 1;
+            //so ban ghi tren 1 trang
+            const totalPerPage = 5;
+            const getTotalPage = () => Math.ceil(listEmployee.length / totalPerPage);
+            //hien thi ra danh sach trang (button)
+            //tinh tong so trang
+            //tong so trang = totalRecord/totalPerpage= 6 nvien/5 = 2 trang
+            const totalPage = Math.ceil(listEmployee.length / totalPerPage);
+            //B4: Ham hthi dlieu trg bang
+            const renderData = (data) => {
+                //clear ndung cu trg bang????
+                listData.innerHTML = "";
+                //hien thi table
+                //chuyen dlieu thanh HTML (tao cac hang <tr> cho bang)
+                //data nay la bien gia dinh a???
+                let htmls = data.map((item, index) => {
+                    return `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.role}</td>
+                </tr>
+            `;
+                });
+                //noi cac hang thanh bang va them vao chuoi
+                listData.innerHTML = htmls.join("");
+            };
+            //B5: Ham hthi nut phan trang va cap nhat dlieu
+            const renderPages = () => {
+                //cap nhat tong so trang vi listEm... co the thay doi sau khi add
+                const totalPage=getTotalPage();
+                //B5.1: Clear, lm rong kqua trc day di - xoa cac nut trang cu ????? why
+                btnPagesElement.innerHTML = "";
+                //B5.2: Tao nut cho tung trang
+                for (let i = 1; i <= totalPage; i++) {
+                    const btnElement = document.createElement("button");
+                    //gan tieu de cho button - so trang cho nut
+                    btnElement.textContent = i;
+                    //active cho button dc chon (trang htai)
+                    //neu la trang htai add class btn-active de lm noi bat
+                    if (currentPage === i) {
+                        btnElement.classList.add("btn-active");
+                    }
+                    //lang nghe skien khi click vao tung button
+                    //gan skien click cho tung nut trang
+                    btnElement.addEventListener("click", function () {
+                        //cap nhat trang htai
+                        //gan lai trang htai la gtri ma nut bam vao
+                        currentPage = i;
+                        //goi lai de cap nhat giao dien
+                        renderPages();
+                    });
+                    //them nut vao container
+                    btnPagesElement.appendChild(btnElement);
+                }
+                //B5.3: Tinh vtri bdau va kthuc cua dlieu trg trang htai
+                //Vtri bdau trg tung trang
+                //(Trang htai - 1)*So ban ghi/trang
+                const start = (currentPage - 1) * totalPerPage;
+                //vtri kthuc ko vuot qua do dai mang
+                const end = start+totalPerPage;
+                const result = listEmployee.slice(start, end);
+                //////
+                console.log("result:", result);
+                //B5.4: Hthi dlieu trg bang
+                renderData(result);
+                //B5.5: Vo hieu hoa nut prev, next neu o trang dau cuoi
+                //disable di cac button prev, next khi dk ko tman
+                //C1
+                // if(currentPage===1){
+                //     document.querySelector(#btnPrev).classList.add("#btn-disable");
+                // }else{
+                //     document.querySelector("#btnPrev").classList.remove("#btn-disable")
+                // }
+                // if(currentPage===totalPage){
+                //     document.querySelector(#btnNext).classList.add("#btn-disable");
+                // }else{
+                //     document.querySelector("#btnNext").classList.remove("#btn-disable")
+                // }
+                //C2
+                if (currentPage === 1) {
+                    document.querySelector("#btnPrev").setAttribute("disabled", "disabled");
+                } else {
+                    document.querySelector("#btnPrev").removeAttribute("disabled");
+                }
+                if (currentPage === totalPage) {
+                    document.querySelector("#btnNext").setAttribute("disabled", "disabled");
+                } else {
+                    document.querySelector("#btnNext").removeAttribute("disabled");
+                }
+                //C3:  btnPrev.disabled = currentPage === 1;
+                //     btnNext.disabled = currentPage === totalPage;
+            };
+            //B6: Gan skien click cho nut next
+            //Lang nghe skien khi click vao thi chuyen trang
+            //De chuyen trang dc ta phai tao 1 cai bien luu tru
+            //xem hien tai dang o trang nao thi ms chuyen dc
+            btnNextElement.addEventListener("click", function () {
+                // const totalPage = getTotalPage();
+                //tang trang htai len 1
+                //dk de tiep tuc tang: trang htai phải nhỏ hơn tổng số trang
+                //chi tang neu chua o trang cuoi
+                if (currentPage < totalPage) {
+                    //sau do ms tang trang htai len 1 dvi
+                    currentPage++;
+                    //cap nhat giao dien
+                    renderPages();
+                }
             });
-
-            renderPagination();
-        }
-
-        function renderPagination() {
-            let totalPages = Math.ceil(staffList.length / rowPerPage);
-            let pagination = document.getElementById('pagination');
-            pagination.innerHTML = '';
-
-            let prev = `<button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Previous</button>`;
-            pagination.innerHTML += prev;
-
-            for (let i = 1; i <= totalPages; i++) {
-                pagination.innerHTML += `<button ${i === currentPage ? 'style="background-color: blue; color: white"' : ''} onclick="changePage(${i})">${i}</button>`;
+            //B7: Gan skien click cho nut prev
+            btnPrevElement.addEventListener("click", function () {
+                //Giam trang htai di 1
+                //dkien de giam: trang htai > 1
+                //chi giam neu ko o trang dau
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPages();
+                }
+            })
+            //B8: Add employee
+            function addEmployee(value){
+                const name = nameInput.value.trim();
+                const role = roleInput.value.trim();
+                //Ktra gtri nhap vao
+                if(!name|| !role){
+                    alert(`Not empty`);
+                    return;
+                }
+                //tao nvien ms
+                const newEmployee={
+                    id: listEmployee.length + 1,
+                    name,
+                    role
+                };
+                listEmployee.push(newEmployee);
+                //xoa o input sau khi add
+                nameInput.value="";
+                roleInput.value="";
+                //dat lai currentPage ve 1 de hthi tu dau
+                currentPage = 1;
+                renderPages();
             }
-
-            let next = `<button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>`;
-            pagination.innerHTML += next;
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            renderTable(page);
-        }
-
-        document.getElementById('addBtn').onclick = function () {
-            let name = document.getElementById('name').value.trim();
-            let position = document.getElementById('position').value.trim();
-            if (name && position) {
-                staffList.push({ name, position });
-                let totalPages = Math.ceil(staffList.length / rowPerPage);
-                currentPage = totalPages; // nhảy đến trang cuối
-                renderTable(currentPage);
-                document.getElementById('name').value = '';
-                document.getElementById('position').value = '';
-            } else {
-                alert('Vui lòng nhập đủ thông tin!');
-            }
-        };
-
-        renderTable(currentPage);
-    </script>
+            renderPages();
+        </script>
 </body>
 
 </html>

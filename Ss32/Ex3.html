@@ -13,14 +13,14 @@
 <script>
     function addSubject(){
         let Input = document.querySelector("input").value.trim();
-        let list = document.querySelector('#stt');
+        let List = document.querySelector('#stt');
         if(Input===""){
             alert(`Inv...`);
             return;
         }else{
             let stt=document.createElement('li');
             stt.innerText=Input;
-            list.appendChild(stt);
+            List.appendChild(stt);
             document.querySelector("input").value="";
         }
     }

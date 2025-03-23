@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<script>
 
-</script>
+<body>
+    <from action="#">
+        <select id="listDish"></select>
+        <button id="btnFilter">Filter</button>
+    </from>
+    <ul>
+        <li id="listProduct"></li>
+    </ul>
+    <script>
+        let btnFilter = document.querySelector("#btnFilter");
+        let selectList = document.querySelector("#listDish");
+        let listPro = document.querySelector("#listProduct");
+        let arrProducts = [
+            { name: "Rau sạch", category: "Đồ ăn" },
+            { name: "Thịt lợn", category: "Đồ ăn" },
+            { name: "Pepsi không calo", category: "Nước" },
+            { name: "Cocacola", category: "Nước" },
+            { name: "Cờ lê", category: "Dụng cụ" },
+            { name: "Tua vít", category: "Dụng cụ" },
+        ];
+        function renderData(arr) {
+            listPro.innerHTML = "";
+            let result = arr.map(function (item) {
+                listPro.innerHTML = "";
+                return `
+            <li>
+                <b>Dish name: </b><span id="dishName">${item.name}</span>
+                <b>- Category: </b><span id="nameCate">${item.category}</span>
+            </li>`;
+            });
+            listPro.innerHTML = result.join("");
+        }
+        renderData(arrProducts);
+        function renderSelect() {
+            selectList.innerHTML = "";
+            let arrCate = [];
+            let result = arrProducts.map(function (item) {
+                if (!arrCate.includes(item.category)) {
+                    arrCate.push(item.category);
+                    return `
+                      <option value="${item.category}">${item.category}</option>
+                  `;
+                } else {
+                    return"";
+                }
+            });
+            selectList.innerHTML = ("<option>--- Lựa chọn danh mục ---</option>" + result.join(""));
+        }
+        renderSelect();
+        btnFilter.addEventListener("click", function (event) {
+            event.preventDefault();
+            let valueChecked = selectList.value;
+
+            if (valueChecked === "") {
+                renderData(arrProducts);
+            } else {
+                let result = arrProducts.filter(
+                    (item) => item.category === valueChecked
+                );
+                renderData(result);
+            }
+        });
+    </script>
 </body>
+
 </html>
