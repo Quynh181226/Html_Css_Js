@@ -92,65 +92,73 @@
   <h2>To-do List K24_PTIT</h2>
   <div class="box">
     <form action="#" class="form">
-      <input type="text" id="inputValue" placeholder="Nhập nhiệm vụ" class="inputText" />
+      <input type="text" id="inputValue" class="inputText" placeholder="Input task/>
       <button id="btnAdd" class="btn-add">Thêm</button>
     </form>
-
-    <ul id="listData">
-      <!-- list render -->
-      <!-- <li>
-          <span>btn-del</span>
-
-          <div>
-            <button id="btnEdit" class="btn" onclick="editItem()">Sửa</button>
-            <button id="btnDel" class="btn" onclick="delItem()">Xóa</button>
-          </div>
-        </li> -->
-    </ul>
+    <ul id="listData"></ul>
   </div>
   <script>
-    let inputText = document.querySelector("#inputValue");
-    let btnAdd = document.querySelector("#btnAdd");
-    let listTask = document.querySelector("#listData");
-    let arrTask = [];
-
-    const renderData = () => {
-      listTask.innerHTML = "";
-
-      const htmls = arrTask.map((item, index) => {
-        return `<li><span>${item}</span> <div>
-            <button id="btnEdit" class="btn" onclick="editItem('${item}',${index})">Sửa</button>
-            <button id="btnDel" class="btn" onclick="delItem(${index})">Xóa</button>
-          </div></li>`;
+    let inputValue=document.getElementById('inputValue');
+    let btnAdd=document.getElementById('btnAdd');
+    let listTask=document.getElementById('listData');
+    let arrTask=[];
+    function renderData(){
+      listTask.innerHTML="";
+      const dataTask=arrTask.map(function (value, index){
+        return `<li>
+<span>${value}</span>
+<div>
+<button id="btnEdit" class="btn" onclick="editItem('${value}', ${index})">Edit</button>
+<button id="btnDele" class="btn" onclick="deleItem(`${value}
       });
-      const convertArrayToString = htmls.join("");
-      listTask.innerHTML = convertArrayToString;
-    };
-
-    btnAdd.addEventListener("click", function (event) {
-      event.preventDefault();
-      if (!inputText.value.trim()) {
-        alert("Dữ liệu rỗng");
-        inputText.value = "";
-      } else {
-        let inputValue = inputText.value.trim();
-        arrTask.push(inputValue);
-        renderData();
-        inputText.value = "";
-      }
-    });
-
-    function delItem(index) {
-      arrTask.splice(index, 1);
-      renderData();
     }
-    function editItem(item, index) {
-      let newValue = prompt("Chỉnh sửa công việc: ", item)?.trim();
-      if (newValue) {
-        arrTask[index] = newValue;
-        renderData();
-      }
-    }
+
+
+
+
+
+    // let inputText = document.querySelector("#inputValue");
+    // let btnAdd = document.querySelector("#btnAdd");
+    // let listTask = document.querySelector("#listData");
+    // let arrTask = [];
+    //
+    // const renderData = () => {
+    //   listTask.innerHTML = "";
+    //
+    //   const htmls = arrTask.map((item, index) => {
+    //     return `<li><span>${item}</span> <div>
+    //         <button id="btnEdit" class="btn" onclick="editItem('${item}',${index})">Sửa</button>
+    //         <button id="btnDel" class="btn" onclick="delItem(${index})">Xóa</button>
+    //       </div></li>`;
+    //   });
+    //   const convertArrayToString = htmls.join("");
+    //   listTask.innerHTML = convertArrayToString;
+    // };
+    //
+    // btnAdd.addEventListener("click", function (event) {
+    //   event.preventDefault();
+    //   if (!inputText.value.trim()) {
+    //     alert("Dữ liệu rỗng");
+    //     inputText.value = "";
+    //   } else {
+    //     let inputValue = inputText.value.trim();
+    //     arrTask.push(inputValue);
+    //     renderData();
+    //     inputText.value = "";
+    //   }
+    // });
+    //
+    // function delItem(index) {
+    //   arrTask.splice(index, 1);
+    //   renderData();
+    // }
+    // function editItem(item, index) {
+    //   let newValue = prompt("Chỉnh sửa công việc: ", item)?.trim();
+    //   if (newValue) {
+    //     arrTask[index] = newValue;
+    //     renderData();
+    //   }
+    // }
   </script>
 </body>
 
