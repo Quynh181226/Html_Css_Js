@@ -1,12 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
 
-</script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ss34 cb5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial,sans-serif;
+        }
+
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .formAdd {
+            margin-top: 20px;
+        }
+
+        .btn-add {
+            margin-top: 10px;
+        }
+
+        .btn-add:hover {
+            cursor: pointer;
+        }
+
+        input {
+            width: 300px;
+            height: 26px;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+        .table-container {
+            width: 90%;
+            margin: 10px auto;
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        .table {
+            width: 100%;
+            border: 1;
+        }
+
+        th {
+            background-color: rgb(226, 226, 226);
+            padding: 5px 0;
+        }
+
+        td {
+            padding: 5px 0;
+        }
+        h3{
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>List employee</h3>
+    <form action="#" class="formAdd">
+        <div>
+            <label>Name</label>
+            <input type="text" id="userName"/>
+            <label>Position</label>
+            <input type="text" id="role"/>
+        </div>
+        <button id="btnAdd" class="btn-add">Add emplyee</button>
+    </form>
+
+    <div class="table-container">
+        <table class="table">
+            <thead class="table-light">
+                <th>STT</th>
+                <th>Name</th>
+                <th>Position</th>
+            </thead>
+            <tbody id="listData">
+                <!-- <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let inputName = document.querySelector("#userName");
+        let inputRole = document.querySelector("#role");
+        let btnAdd = document.querySelector("#btnAdd");
+        let listData = document.querySelector("#listData");
+
+        let arrUsers = JSON.parse(localStorage.getItem("ss34Cb5")) || [];
+
+        const renderData = () => {
+            listData.innerHTML = "";
+
+            let htmls = arrUsers.map((item, index) => {
+                return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.role}</td>
+                </tr>
+            `;
+            });
+            let convertArr = htmls.join("");
+            listData.innerHTML = convertArr;
+        };
+        renderData();
+
+        btnAdd.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            let valueName = inputName.value.trim();
+            let valueRole = inputRole.value.trim();
+
+            if (valueName && valueRole) {
+                let objUser = {
+                    id: arrUsers.length + 1,
+                    name: valueName,
+                    role: valueRole,
+                };
+
+                arrUsers.push(objUser);
+
+                renderData();
+                localStorage.setItem("ss34Cb5", JSON.stringify(arrUsers));
+            } else {
+                alert("Dữ liệu rỗng");
+            }
+        });
+    </script>
 </body>
+
 </html>

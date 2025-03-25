@@ -144,11 +144,11 @@
             const totalPage = Math.ceil(listEmployee.length / totalPerPage);
             //B4: Ham hthi dlieu trg bang
             const renderData = (data) => {
-                //clear ndung cu trg bang????
+                //clear ndung cu trg bang
                 listData.innerHTML = "";
                 //hien thi table
                 //chuyen dlieu thanh HTML (tao cac hang <tr> cho bang)
-                //data nay la bien gia dinh a???
+                //data nay la bien gia dinh
                 let htmls = data.map((item, index) => {
                     return `
                 <tr>

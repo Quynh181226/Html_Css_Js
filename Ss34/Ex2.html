@@ -1,12 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
-<script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-</script>
+        #btnAdd {
+            background-color: rgb(52, 101, 169);
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        #btnAdd:hover {
+            opacity: 0.5;
+            transition: 0.2s;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group button {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* margin: auto; */
+        }
+        th,
+        td{
+            text-align:start;
+            padding-bottom: 5px;
+            margin-top: 5px;
+            border-bottom: 1px solid #e6e5e5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Task Management</h2>
+        <header>
+            <div class="form-group">
+                <input type="text" placeholder="Content" id="content" />
+                <input type="date" id="date" />
+                <select id="status">
+                    <option value="">Choose status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <input type="text" placeholder="Username" id="userName" />
+                <button type="submit" id="btnAdd">Submit</button>
+            </div>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Content</th>
+                    <th>Due date</th>
+                    <th>Status</th>
+                    <th>Assigned to</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="listData"></tbody>
+        </table>
+    </div>
 </body>
+<script>
+    const courses = [
+        {
+            id: 1,
+            content: 'Learn Javascript Session 01',
+            dueDate: '2023-04-17',
+            status: 'Pending',
+            assignedTo: 'Anh Bách',
+        },
+        {
+            id: 2,
+            content: 'Learn Javascript Session 2',
+            dueDate: '2023-04-17',
+            status: 'Pending',
+            assignedTo: 'Lâm th`',
+        },
+        {
+            id: 3,
+            content: 'Learn CSS Session 1',
+            dueDate: '2023-04-17',
+            status: 'Pending',
+            assignedTo: 'Hiếu Ci Ớt Ớt',
+        }
+    ];
+
+    let inputContent = document.querySelector("#content");
+    let inputDate = document.querySelector("#date");
+    let inputStatus = document.querySelector("#status");
+    let inputUserName = document.querySelector("#userName");
+
+    let btnAdd = document.querySelector("#btnAdd");
+    let btnEdit = document.querySelector("#btnEdit");
+    let btnDel = document.querySelector("#btnDel");
+    let listData = document.querySelector("#listData");
+
+
+    const renderData = () => {
+        listData.innerHTML = "";
+
+        let htmls = courses.map((item, index) => {
+            return `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.content}</td>
+                <td>${item.dueDate}</td>
+                <td>${item.status}</td>
+                <td>${item.assignedTo}</td>
+                <td>
+                <button class="action-btn" id="btnEdit" onclick="editItem(${index})">
+                    Sửa
+                </button>
+                <button class="action-btn" id="btnDel" onclick="delItem(${index})">
+                    Xóa
+                </button>
+                </td>
+            </tr>
+        `;
+        })
+        listData.innerHTML = htmls.join("");
+    }
+    renderData();
+
+    btnAdd.addEventListener("click", function () {
+        if (checkData()) {
+            let newObj = {
+                id: courses.length + 1,
+                content: inputContent.value.trim(),
+                dueDate: inputDate.value,
+                status: inputStatus.value,
+                assignedTo: inputUserName.value.trim()
+            }
+
+            courses.push(newObj);
+            localStorage.setItem("courses", JSON.stringify(courses));
+            renderData();
+
+        } else {
+            alert("Not empty");
+        }
+    })
+
+    function checkData() {
+        if (!inputContent.value?.trim() || !inputDate.value || inputStatus.value === "" || !inputUserName.value?.trim()) {
+            return false;
+        }
+        return true;
+    }
+
+    function editItem(index) {
+        if (checkData()) {
+            let newObj = {
+                id: courses.length + 1,
+                content: inputContent.value.trim(),
+                dueDate: inputDate.value,
+                status: inputStatus.value,
+                assignedTo: inputUserName.value.trim()
+            }
+            courses[index] = newObj;
+            localStorage.setItem("courses", JSON.stringify(courses));
+            renderData();
+
+        } else {
+            alert("Not empty");
+        }
+
+    }
+
+    function delItem(index) {
+        let check = confirm("You sure want to delete ???");
+        if (check) {
+            courses.splice(index, 1);
+            localStorage.setItem("courses", JSON.stringify(courses));
+            renderData();
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
 </html>
