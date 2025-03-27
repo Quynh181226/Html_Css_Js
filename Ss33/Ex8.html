@@ -1,114 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>-->
+<!--<html lang="en">-->
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
 
-<body>
-    <header>
-        <h2 class="head">Store</h2>
-    </header>
-    <div class="content">
-        <main>
-            <h4 class="head">Product</h4>
-            <div>
-                <div class="row row-cols-md-2 g-2" id="listProducts"></div>
-            </div>
-        </main>
-        <aside class="asideCart">
-            <div class="cart">Shopping cart</div>
-            <div id="proInCart"></div>
-            <h4 class="total">Total:<span class="totalAmout"></span></h4>
-            <button class="btn btn-primary" onclick="payCart()">Pay</button>
-        </aside>
-    </div>
-    <script>
-        const products = [
-            {
-                id: 1,
-                name: 'Điện thoại Samsung Galaxy A54',
-                price: 7490000,
-                image: 'https://phucanhcdn.com/media/product/50816_dien_thoai_thong_minh_samsung_galaxy_a54_tim_8.jpg'
-            },
-            {
-                id: 2,
-                name: 'Laptop Dell Inspiron 15',
-                price: 15990000,
-                image: 'https://laptopmedia.com/wp-content/uploads/2020/12/2-15-scaled-e1608035721279.jpg'
-            },
-            {
-                id: 3,
-                name: 'Tai nghe AirPods Pro',
-                price: 4990000,
-                image: 'https://product.hstatic.net/1000006608/product/tai_nghe_apple_airpods_pro__01_c5f0abf13a1b45c99947f44f2e828e0f_master.jpg'
-            },
-            {
-                id: 4,
-                name: 'Đồng hồ thông minh Apple Watch',
-                price: 8990000,
-                image: 'https://tse4.mm.bing.net/th?id=OIP.D9xo-9wqGzDM40vC-HU8IAHaE8&pid=Api&P=0&h=180'
-            },
-            {
-                id: 5,
-                name: 'Máy ảnh Canon EOS M50',
-                price: 12490000,
-                image: 'https://binhminhdigital.com/storedata/images/product/canon-eos-m50-kit-1545mm-den(2).jpg'
-            },
-            {
-                id: 6,
-                name: 'Loa Bluetooth JBL Flip 5',
-                price: 2190000,
-                image: 'https://cdn2.cellphones.com.vn/x/media/catalog/product/l/o/loa-jbl-flip-5-hong-3_1_1.jpg'
-            },
-            {
-                id: 7,
-                name: 'Bàn phím cơ Logitech G Pro',
-                price: 2490000,
-                image: 'https://1.bp.blogspot.com/-D3Tk_VL7ihw/Y4YB2Yl8oxI/AAAAAAABA4Q/dJJPWCtkvDAwk5rU1_jWL5rHdhFvoyPcgCNcBGAsYHQ/s0/GS.009392_FEATURE_104184.jpg'
-            },
-            {
-                id: 8,
-                name: 'Chuột không dây Logitech MX Master',
-                price: 1890000,
-                image: 'https://logitechvietnam.vn/uploads/images/san-pham/thiet-bi-hoi-nghi/chuot-khong-day-logitech-mx-master-2s-anh-sp-1.png'
-            }
-        ];
-        let carts = [];
-        let listProducts = document.getElementById("listProducts");
-        let proInCart = document.getElementById("proInCart");
-        let totalAmout = document.querySelector("#totalAmout");
-        function renderCart() {
-            //giải thích tại so phải cho listProducts rỗng vs innerHTML
-            listProducts.innerHTML = "";
-            let content = products.map(function (item) {
-                //giải thích tại sao là `` mà ko phải là "" nếu là "" thì dùng như thế nào
-                return `
-                //giải thích tại sao lại phải thao tác vs HTML trong Js trong tường hợp này
-                <div class="col text-center">
-                    <div class="card shadow" style="width: 18px; height: 20px;">
-                        <img src="${item.image}" class="card-img-top">
-                        <div class="card-body">
-                            //tại sao có cái lại ở trong<$> có cái lại ở ngoài <>$<> như thế này
-                            <h5 class="cardTitle" ${item.name}></h5>
-                            <p class="cardText" style="color: red; font-weight: bold;">${convertMoney(item.price)}</p>//convertMoney : là gì
-                            <a href="#" onclick="addCart(${item.id})" class="btn btn-success">Add cart</a>//onclick="addCart(${item.id}): giải thích
-                        </div>
-                    </div>
-                </div>
-            `;
-            });
-            //giải thích cái này để làm gì
-            listProducts.innerHTML=content.join("")
-        }
-        //giải thích kỹ cả chỗ này nữa
-        rederData();
-        renderCart();
-        function addCart(){
+<!--<body>-->
+<!--    <header>-->
+<!--        <h2 class="head">Store</h2>-->
+<!--    </header>-->
+<!--    <div class="content">-->
+<!--        <main>-->
+<!--            <h4 class="head">Product</h4>-->
+<!--            <div>-->
+<!--                <div class="row row-cols-md-2 g-2" id="listProducts"></div>-->
+<!--            </div>-->
+<!--        </main>-->
+<!--        <aside class="asideCart">-->
+<!--            <div class="cart">Shopping cart</div>-->
+<!--            <div id="proInCart"></div>-->
+<!--            <h4 class="total">Total:<span class="totalAmout"></span></h4>-->
+<!--            <button class="btn btn-primary" onclick="payCart()">Pay</button>-->
+<!--        </aside>-->
+<!--    </div>-->
+<!--    <script>-->
+<!--        const products = [-->
+<!--            {-->
+<!--                id: 1,-->
+<!--                name: 'Điện thoại Samsung Galaxy A54',-->
+<!--                price: 7490000,-->
+<!--                image: 'https://phucanhcdn.com/media/product/50816_dien_thoai_thong_minh_samsung_galaxy_a54_tim_8.jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 2,-->
+<!--                name: 'Laptop Dell Inspiron 15',-->
+<!--                price: 15990000,-->
+<!--                image: 'https://laptopmedia.com/wp-content/uploads/2020/12/2-15-scaled-e1608035721279.jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 3,-->
+<!--                name: 'Tai nghe AirPods Pro',-->
+<!--                price: 4990000,-->
+<!--                image: 'https://product.hstatic.net/1000006608/product/tai_nghe_apple_airpods_pro__01_c5f0abf13a1b45c99947f44f2e828e0f_master.jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 4,-->
+<!--                name: 'Đồng hồ thông minh Apple Watch',-->
+<!--                price: 8990000,-->
+<!--                image: 'https://tse4.mm.bing.net/th?id=OIP.D9xo-9wqGzDM40vC-HU8IAHaE8&pid=Api&P=0&h=180'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 5,-->
+<!--                name: 'Máy ảnh Canon EOS M50',-->
+<!--                price: 12490000,-->
+<!--                image: 'https://binhminhdigital.com/storedata/images/product/canon-eos-m50-kit-1545mm-den(2).jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 6,-->
+<!--                name: 'Loa Bluetooth JBL Flip 5',-->
+<!--                price: 2190000,-->
+<!--                image: 'https://cdn2.cellphones.com.vn/x/media/catalog/product/l/o/loa-jbl-flip-5-hong-3_1_1.jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 7,-->
+<!--                name: 'Bàn phím cơ Logitech G Pro',-->
+<!--                price: 2490000,-->
+<!--                image: 'https://1.bp.blogspot.com/-D3Tk_VL7ihw/Y4YB2Yl8oxI/AAAAAAABA4Q/dJJPWCtkvDAwk5rU1_jWL5rHdhFvoyPcgCNcBGAsYHQ/s0/GS.009392_FEATURE_104184.jpg'-->
+<!--            },-->
+<!--            {-->
+<!--                id: 8,-->
+<!--                name: 'Chuột không dây Logitech MX Master',-->
+<!--                price: 1890000,-->
+<!--                image: 'https://logitechvietnam.vn/uploads/images/san-pham/thiet-bi-hoi-nghi/chuot-khong-day-logitech-mx-master-2s-anh-sp-1.png'-->
+<!--            }-->
+<!--        ];-->
+<!--        let carts = [];-->
+<!--        let listProducts = document.getElementById("listProducts");-->
+<!--        let proInCart = document.getElementById("proInCart");-->
+<!--        let totalAmout = document.querySelector("#totalAmout");-->
+<!--        function renderCart() {-->
+<!--            //giải thích tại so phải cho listProducts rỗng vs innerHTML-->
+<!--            listProducts.innerHTML = "";-->
+<!--            let content = products.map(function (item) {-->
+<!--                //giải thích tại sao là `` mà ko phải là "" nếu là "" thì dùng như thế nào-->
+<!--                return `-->
+<!--                //giải thích tại sao lại phải thao tác vs HTML trong Js trong tường hợp này-->
+<!--                <div class="col text-center">-->
+<!--                    <div class="card shadow" style="width: 18px; height: 20px;">-->
+<!--                        <img src="${item.image}" class="card-img-top">-->
+<!--                        <div class="card-body">-->
+<!--                            //tại sao có cái lại ở trong<$> có cái lại ở ngoài <>$<> như thế này-->
+<!--                            <h5 class="cardTitle" ${item.name}></h5>-->
+<!--                            <p class="cardText" style="color: red; font-weight: bold;">${convertMoney(item.price)}</p>//convertMoney : là gì-->
+<!--                            <a href="#" onclick="addCart(${item.id})" class="btn btn-success">Add cart</a>//onclick="addCart(${item.id}): giải thích-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            `;-->
+<!--            });-->
+<!--            //giải thích cái này để làm gì-->
+<!--            listProducts.innerHTML=content.join("")-->
+<!--        }-->
+<!--        //giải thích kỹ cả chỗ này nữa-->
+<!--        rederData();-->
+<!--        renderCart();-->
+<!--        function addCart(){-->
 
-        }
-    </script>
-</body>
+<!--        }-->
+<!--    </script>-->
+<!--</body>-->
 
-</html>
+<!--</html> -->

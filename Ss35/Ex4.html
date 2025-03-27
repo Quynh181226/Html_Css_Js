@@ -1,12 +1,265 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
 
-</script>
+        h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form div {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add {
+            margin-left: 180px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        table {
+            width: 500px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .table-light {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .btn button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .btn button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .headers {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>List employee</h3>
+        <form>
+            <div class="headers">
+                <label>Name</label>
+                <input type="text" id="name">
+                <label>Position</label>
+                <input type="text" id="role">
+            </div>
+            <button type="button" class="btn-add" onclick="addEmployee()">Add employee</button>
+        </form>
+        <div class="table-container">
+            <table>
+                <thead class="table-light">
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                </thead>
+                <tbody id="listData"></tbody>
+            </table>
+        </div>
+        <div class="btn" id="btn-active">
+            <button id="btnPrev">Prev</button>
+            <div id="btnPages"></div>
+            <button id="btnNext">Next</button>
+        </div>
+    </div>
+    <script>
+        const nameInput = document.querySelector("#name");
+        const roleInput = document.querySelector("#role");
+        let listEmployee = JSON.parse(localStorage.getItem("employees")) || [
+            {
+                id: 1,
+                name: "Nguyen Van A",
+                role: "dev"
+            },
+            {
+                id: 2,
+                name: "Nguyen Van B",
+                role: "design"
+            },
+            {
+                id: 3,
+                name: "Nguyen Van C",
+                role: "tester"
+            },
+            {
+                id: 4,
+                name: "Nguyen Van D",
+                role: "dev"
+            },
+            {
+                id: 5,
+                name: "Nguyen Van E",
+                role: "dev"
+            },
+            {
+                id: 6,
+                name: "Nguyen Van F",
+                role: "manage"
+            },
+        ];
+        if (!localStorage.getItem("employees")) {
+            localStorage.setItem("employees", JSON.stringify(listEmployee));
+        }
+        const btnPagesElement = document.querySelector("#btnPages");
+        const btnPrevElement = document.querySelector("#btnPrev");
+        const btnNextElement = document.querySelector("#btnNext");
+        const listData = document.querySelector("#listData");
+        let currentPage = 1;
+        const totalPerPage = 3;
+        const getTotalPage = () => Math.ceil(listEmployee.length / totalPerPage);
+        const totalPage = Math.ceil(listEmployee.length / totalPerPage);
+        const renderData = (data) => {
+            listData.innerHTML = "";
+            let htmls = data.map((item, index) => {
+                return `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.role}</td>
+                </tr>
+            `;
+            });
+            listData.innerHTML = htmls.join("");
+        };
+        const renderPages = () => {
+            const totalPage = getTotalPage();
+            btnPagesElement.innerHTML = "";
+            for (let i = 1; i <= totalPage; i++) {
+                const btnElement = document.createElement("button");
+                btnElement.textContent = i;
+                if (currentPage === i) {
+                    btnElement.classList.add("btn-active");
+                }
+                btnElement.addEventListener("click", function () {
+                    currentPage = i;
+                    renderPages();
+                });
+                btnPagesElement.appendChild(btnElement);
+            }
+            const start = (currentPage - 1) * totalPerPage;
+            const end = start + totalPerPage;
+            const result = listEmployee.slice(start, end);
+            console.log("result:", result);
+            renderData(result);
+            //B5.5: Vo hieu hoa nut prev, next neu o trang dau cuoi
+            //disable di cac button prev, next khi dk ko tman
+            //C1
+            // if(currentPage===1){
+            //     document.querySelector(#btnPrev).classList.add("#btn-disable");
+            // }else{
+            //     document.querySelector("#btnPrev").classList.remove("#btn-disable")
+            // }
+            // if(currentPage===totalPage){
+            //     document.querySelector(#btnNext).classList.add("#btn-disable");
+            // }else{
+            //     document.querySelector("#btnNext").classList.remove("#btn-disable")
+            // }
+            //C2
+            if (currentPage === 1) {
+                document.querySelector("#btnPrev").setAttribute("disabled", "disabled");
+            } else {
+                document.querySelector("#btnPrev").removeAttribute("disabled");
+            }
+            if (currentPage === totalPage) {
+                document.querySelector("#btnNext").setAttribute("disabled", "disabled");
+            } else {
+                document.querySelector("#btnNext").removeAttribute("disabled");
+            }
+            //C3:  btnPrev.disabled = currentPage === 1;
+            //     btnNext.disabled = currentPage === totalPage;
+        };
+        btnNextElement.addEventListener("click", function () {
+            if (currentPage < totalPage) {
+                currentPage++;
+                renderPages();
+            }
+        });
+        btnPrevElement.addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPages();
+            }
+        });
+        function addEmployee(value) {
+            const name = nameInput.value.trim();
+            const role = roleInput.value.trim();
+            if (!name || !role) {
+                alert(`Not empty`);
+                return;
+            }
+            const newEmployee = {
+                id: listEmployee.length + 1,
+                name,
+                role
+            };
+            listEmployee.push(newEmployee);
+            localStorage.setItem("employees", JSON.stringify(listEmployee));
+            nameInput.value = "";
+            roleInput.value = "";
+            currentPage = 1;
+            renderPages();
+        }
+        renderPages();
+    </script>
 </body>
+
 </html>

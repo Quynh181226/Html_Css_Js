@@ -1,12 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-</script>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input {
+            width: 500px;
+            height: 40px;
+            border-radius: 5px;
+            padding: 5px;
+            border: 1px solid #7c59b0;
+        }
+
+        #btn {
+            border-radius: 5px;
+        }
+
+        #head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 200px;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
+            background-color: #7c59b0;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: #ffffff;
+        }
+
+        #thead {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        #form {
+            display: none;
+            flex-direction: column;
+        }
+
+        label {
+            color: #7c59b0;
+        }
+
+        #thead button {
+            color: #ffffff;
+            margin-top: 10px;
+            width: 50px;
+            height: 30px;
+            border: 0;
+            background-color: #7c59b0;
+        }
+
+        #head button {
+            background-color: #7c59b0;
+            color: #ffffff;
+            font-size: 20px;
+            border: none;
+        }
+
+        #title {
+            border: none;
+            background-color: rgba(22, 20, 20, 0.833);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 100px;
+        }
+
+        .tbody {
+            border: none;
+            background-color: rgba(22, 20, 20, 0.833);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tbody img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="title">Add Bookmark</div>
+        <div id="list"></div>
+        <div id="form">
+            <div id="head">
+                <div><b>Add Bookmark</b></div>
+                <button id="close"><b>x</b></button>
+            </div>
+            <div id="thead">
+                <div>
+                    <div><label>Website Name:</label></div>
+                    <input type="text" id="webName">
+                </div>
+                <div>
+                    <div><label>Website URL:</label></div>
+                    <input type="text" id="webUrl">
+                </div>
+                <button id="btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let addBtn = document.getElementById("title");
+        let form = document.getElementById("form");
+        let Close = document.getElementById("close");
+        let btn = document.getElementById("btn");
+        let list = document.getElementById("list");
+
+        let arr = JSON.parse(localStorage.getItem('items')) || [];
+
+        function localSet() {
+            localStorage.setItem('items', JSON.stringify(arr));
+        }
+        function renderData() {
+            list.innerHTML = "";
+            arr.forEach(item => {
+                list.innerHTML += `
+                    <div class="tbody">
+                        <img src="${item.url}" alt="${item.name}">
+                        <span>${item.name}</span>
+                    </div>`;
+            });
+        }
+        renderData();
+
+        addBtn.onclick = function () {
+            form.style.display = "flex";
+            document.body.style.backgroundColor = "gray";
+        };
+
+        Close.onclick = function () {
+            form.style.display = "none";
+            document.body.style.backgroundColor = "#ffffff";
+        };
+
+        btn.onclick = function () {
+            let webName = document.getElementById("webName").value.trim();
+            let webUrl = document.getElementById("webUrl").value.trim();
+
+            if (webName && webUrl) {
+                arr.push({ name: webName, url: webUrl });
+                localSet();
+                renderData();
+                document.getElementById("webName").value = "";
+                document.getElementById("webUrl").value = "";
+                form.style.display = "none";
+                document.body.style.backgroundColor = "#ffffff";
+            } else {
+                alert("Invalid");
+            }
+        };
+    </script>
 </body>
+
 </html>

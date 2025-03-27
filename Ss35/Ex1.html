@@ -6,159 +6,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      background-color: aliceblue;
-      text-align: center;
-    }
-
-    h2 {
-      margin: 20px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
 
     .box {
-      width: 600px;
-      min-height: 300px;
-      border: 1px solid rgb(202, 202, 202);
-      background-color: white;
-      border-radius: 10px;
-      margin: auto;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .form {
-      margin: 10px auto;
-      width: 98%;
+      display: flex;
+      margin-bottom: 20px;
+      width: 60%;
+      margin: 0 auto;
     }
 
     .inputText {
-      width: 70%;
-      height: 30px;
-      padding-left: 10px;
-      border: 1px solid rgb(220, 220, 220);
-      border-radius: 6px;
+      /* padding: 8px; */
+      margin-right: 5px;
+      flex: 1;
     }
 
     .btn-add {
-      height: 30px;
-      width: 70px;
-      margin-left: 10px;
-      background-color: rgb(50, 173, 69);
-      color: white;
-      border: none;
-      border-radius: 6px;
+      /* padding: 8px 15px; */
+      cursor: pointer;
     }
 
-    ul {
-      list-style: none;
-      margin: 10px 20px;
+    #listData {
+      padding: 0;
     }
 
-    ul li {
+    li {
       display: flex;
       justify-content: space-between;
-      height: 23px;
       align-items: center;
-      margin: 5px 0;
-      border-bottom: 1px solid rgb(174, 174, 174);
+      list-style: none;
+      padding: 10px 10px;
+      background-color: #F4F4F4;
+      width: 140%;
+      margin-bottom: 5px;
+    }
+
+    span {
+      flex: 1;
+    }
+
+    #btnTwo {
+      display: flex;
+      justify-content: flex-end;
+      width: auto;
     }
 
     .btn {
-      background-color: rgb(22, 0, 165);
-      padding: 3px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      border: none;
-      color: white;
-    }
-
-    .btn:hover {
-      opacity: 0.5;
+      padding: 2px 6px;
+      margin-left: 5px;
+      /* border: none; */
       cursor: pointer;
     }
 
-    .btn-add:hover {
-      opacity: 0.5;
-      cursor: pointer;
+    h2 {
+      /* display: flex;
+      text-align: center;
+      justify-content: center; */
+      margin-left: 90px;
+    }
+
+    form {
+      width: 50%;
     }
   </style>
 </head>
 
 <body>
-  <h2>To-do List K24_PTIT</h2>
+  <h2>To-do List K24</h2>
   <div class="box">
     <form action="#" class="form">
-      <input type="text" id="inputValue" class="inputText" placeholder="Input task/>
-      <button id="btnAdd" class="btn-add">Thêm</button>
+      <input type="text" id="inputValue" class="inputText" placeholder="Input task" />
+      <button id="btnAdd" class="btn-add">Add</button>
     </form>
     <ul id="listData"></ul>
   </div>
   <script>
-    let inputValue=document.getElementById('inputValue');
-    let btnAdd=document.getElementById('btnAdd');
-    let listTask=document.getElementById('listData');
-    let arrTask=[];
-    function renderData(){
-      listTask.innerHTML="";
-      const dataTask=arrTask.map(function (value, index){
-        return `<li>
+    let inputValue = document.getElementById('inputValue');
+    let btnAdd = document.getElementById('btnAdd');
+    let listTask = document.getElementById('listData');
+    let arrTask = JSON.parse(localStorage.getItem('tasks')) || [];
+    function renderData() {
+      listTask.innerHTML = "";
+      const dataTask = arrTask.map(function (value, index) {
+        return `
+<li>
 <span>${value}</span>
-<div>
+<div id="btnTwo">
 <button id="btnEdit" class="btn" onclick="editItem('${value}', ${index})">Edit</button>
-<button id="btnDele" class="btn" onclick="deleItem(`${value}
+<button id="btnDele" class="btn" onclick="deleItem(${index})">Delete</button>
+</div>
+</li>`;
       });
+      listTask.innerHTML = dataTask.join("");
+
     }
-
-
-
-
-
-    // let inputText = document.querySelector("#inputValue");
-    // let btnAdd = document.querySelector("#btnAdd");
-    // let listTask = document.querySelector("#listData");
-    // let arrTask = [];
-    //
-    // const renderData = () => {
-    //   listTask.innerHTML = "";
-    //
-    //   const htmls = arrTask.map((item, index) => {
-    //     return `<li><span>${item}</span> <div>
-    //         <button id="btnEdit" class="btn" onclick="editItem('${item}',${index})">Sửa</button>
-    //         <button id="btnDel" class="btn" onclick="delItem(${index})">Xóa</button>
-    //       </div></li>`;
-    //   });
-    //   const convertArrayToString = htmls.join("");
-    //   listTask.innerHTML = convertArrayToString;
-    // };
-    //
-    // btnAdd.addEventListener("click", function (event) {
-    //   event.preventDefault();
-    //   if (!inputText.value.trim()) {
-    //     alert("Dữ liệu rỗng");
-    //     inputText.value = "";
-    //   } else {
-    //     let inputValue = inputText.value.trim();
-    //     arrTask.push(inputValue);
-    //     renderData();
-    //     inputText.value = "";
-    //   }
-    // });
-    //
-    // function delItem(index) {
-    //   arrTask.splice(index, 1);
-    //   renderData();
-    // }
-    // function editItem(item, index) {
-    //   let newValue = prompt("Chỉnh sửa công việc: ", item)?.trim();
-    //   if (newValue) {
-    //     arrTask[index] = newValue;
-    //     renderData();
-    //   }
-    // }
+    renderData();
+    btnAdd.addEventListener('click', function (n) {
+      n.preventDefault();
+      if (!inputValue.value.trim()) {
+        alert(`Empty`);
+        inputValue.value = "";
+      } else {
+        let inputValue1 = inputValue.value.trim();
+        arrTask.push(inputValue1);
+        localStorage.setItem('tasks', JSON.stringify(arrTask));
+        renderData();
+        inputValue.value = "";
+      }
+    });
+    function editItem(value, index) {
+      let newValue = prompt(`Edit task:`, value)?.trim();
+      if (newValue) {
+        arrTask[index] = newValue;
+        localStorage.setItem('tasks', JSON.stringify(arrTask));
+        renderData();
+      }
+    }
+    function deleItem(index) {
+      arrTask.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(arrTask));
+      renderData();
+    }
   </script>
 </body>
 
