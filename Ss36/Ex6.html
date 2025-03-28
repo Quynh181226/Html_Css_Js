@@ -108,7 +108,7 @@
 
     <script>
         const stars = document.querySelectorAll(".stars");
-            const selectedRating = document.querySelector("#selected-rating");
+            const start = document.querySelector("#selected-rating");
             const commentInput = document.querySelector("#comment-input");
             const commentList = document.querySelector("#comment-list");
             let rating = 0;
@@ -118,7 +118,7 @@
                 star.onclick = () => {
                     rating = star.dataset.value;
                     stars.forEach(s => s.classList.toggle("active", s.dataset.value <= rating));
-                    selectedRating.textContent = `Bạn đã đánh giá: ${"★".repeat(rating)}`;
+                    start.textContent = `Bạn đã đánh giá: ${"★".repeat(rating)}`;
                 };
             });
             function submitReview() {
@@ -132,7 +132,7 @@
                 addReview(rating, comment);
                 rating = 0;
                 stars.forEach(s => s.classList.remove("active"));
-                selectedRating.textContent = "Bạn chưa đánh giá.";
+                start.textContent = "Bạn chưa đánh giá.";
                 commentInput.value = "";
             }
             function addReview(rating, comment) {
