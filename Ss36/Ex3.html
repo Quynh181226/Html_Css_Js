@@ -1,12 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-</script>
+        body {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .container div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            width: 100px;
+            height: 60px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            color: azure;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        #btn_red {
+            font-weight: 500;
+            font-size: 16px;
+            background-color: #E74C3C;
+        }
+
+        #btn_yellow {
+            font-weight: 500;
+            font-size: 16px;
+            background-color: #FFC107;
+        }
+
+        #btn_blue {
+            font-weight: 500;
+            font-size: 16px;
+            background-color: #3498DB;
+        }
+
+        #btn_purple {
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #AB47BC;
+        }
+
+        #text {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            margin-top: 20px;
+            color: #84768B;
+            font-weight: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Choose your favorite background color</h1>
+    <div class="container">
+        <div id="btn_purple" class="box" onclick="changeColor('#FFCDD2')">Purple</div>
+        <div id="btn_blue" class="box" onclick="changeColor('#BBDEFB')">Blue</div>
+        <div id="btn_red" class="box" onclick="changeColor('#FFF9C4')">Red</div>
+        <div id="btn_yellow" class="box" onclick="changeColor('#E1BEE7')">Yellow</div>
+    </div>
+    <p id="text">Trang se ghi nho mau bn da choice ke ca khi tai lai !!!</p>
+
+    <script>
+        document.body.style.backgroundColor = localStorage.getItem("color") || "";
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            localStorage.setItem("color", color);
+        }
+    </script>
 </body>
+
 </html>

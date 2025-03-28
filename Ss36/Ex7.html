@@ -1,12 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script>
+    <title>Login System</title>
+    <style>
+        .cardSignUp,
+        .cardLognIn,
+        .cardHome {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
 
-</script>
+        .cardSignUp,
+        .cardHome {
+            display: none;
+        }
+
+        input {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 5px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 5px 15px;
+        }
+
+        p {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="cardSignUp">
+            <input type="text" id="NameSignUp" placeholder="Username" required>
+            <input type="password" id="PassSignUp" placeholder="Password" required>
+            <button id="btnSignUp">Sign Up</button>
+            <p id="backlgIn">Go back to Login</p>
+        </div>
+        <div class="cardLognIn">
+            <input type="text" id="NameLognIn" placeholder="Username" required>
+            <input type="password" id="PassLognIn" placeholder="Password" required>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formCheck" checked>
+                <label class="form-check-label">Remember me</label>
+            </div>
+            <button id="btnLognIn">Login</button>
+            <p id="SignUp">Don't have an account yet? Sign Up</p>
+        </div>
+        <div class="cardHome" id="homePage">
+            <h2 id="name"></h2>
+            <p>Welcome to the mini System</p>
+            <button id="btnLogout">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        //Kbao 
+        //local
+        //Display
+        //function-Sign_logn_in-logn_out-registration
+        const NameSignUp = document.querySelector("#NameSignUp").value.trim();
+        const PassSignUp = document.querySelector("#PassSignUp").value.trim();
+        const btnSignUp = document.querySelector("#btnSignUp");
+        const backlgIn = document.querySelector("#backlgIn");
+        const NameLognIn = document.querySelector("#NameLognIn").value.trim();
+        const PassLognIn = document.querySelector("#PassLognIn").value.trim();
+        const formCheck = document.querySelector("#formCheck");
+        const btnLognIn = document.querySelector("#btnLognIn");
+        const SignUp = document.querySelector("#SignUp");
+        const nameDisplay = document.querySelector("#name");
+        const btnLogout = document.querySelector("#btnLogout");
+
+        let arr = JSON.parse(localStorage.getItem("arr")) || [];
+        const localSet = () => localStorage.setItem("arr", JSON.stringify(arr));
+
+        const showLogin = () => {
+            document.querySelector(".cardLognIn").style.display = "block";
+            document.querySelector(".cardSignUp").style.display = "none";
+            document.querySelector(".cardHome").style.display = "none";
+        };
+        const showSignup = () => {
+            document.querySelector(".cardLognIn").style.display = "none";
+            document.querySelector(".cardSignUp").style.display = "block";
+            document.querySelector(".cardHome").style.display = "none";
+        };
+
+        const showHome = (username) => {
+            document.querySelector(".cardLognIn").style.display = "none";
+            document.querySelector(".cardSignUp").style.display = "none";
+            document.querySelector(".cardHome").style.display = "block";
+            nameDisplay.textContent = `Hello, Laila${username}👋`;
+        };
+        btnSignUp.addEventListener("click", function () {
+            if (!NameSignUp || !PassSignUp) return;
+            const newUser = {
+                name: NameSignUp,
+                pass: PassSignUp
+            }
+            arr.push(newUser);
+            localSet();
+            NameSignUp.value = "";
+            PassSignUp.value = "";
+            showLogin();
+        });
+        btnLognIn.addEventListener("click", function () {
+            const user = arr.find(function (item) {
+                return item.name === NameLognIn && item.pass === PassLognIn;
+            });
+            if (user) {
+                if (formCheck.checked) {
+                    localStorage.setItem("arrCheck", NameLognIn);
+                }
+                showHome(NameLognIn);
+                NameLognIn.value = "";
+                PassLognIn.value = "";
+                formCheck.checked = false;
+            }
+        });
+
+        btnLogout.addEventListener("click", function () {
+            localStorage.removeItem("arrCheck");
+            showLogin();
+        });
+
+        backlgIn.addEventListener("click", showLogin);
+        SignUp.addEventListener("click", showSignup);
+
+        window.onload = () => {
+            const arrCheck = localStorage.getItem("arrCheck");
+            if (arrCheck && arr.some(item => item.name === arrCheck)) {
+                showHome(arrCheck);
+            }
+        };
+    </script>
 </body>
+
 </html>
